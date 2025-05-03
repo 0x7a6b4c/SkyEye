@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSIoTWirelessFullPublishAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTWirelessFullPublishAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:DescribeEndpoint",
+        "iot:Publish"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

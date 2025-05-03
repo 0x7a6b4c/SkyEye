@@ -1,0 +1,10 @@
+{
+  "PolicyName": "AWSElementalMediaLiveFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaLiveFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "medialive:*",
+    "Resource": "*"
+  }
+}

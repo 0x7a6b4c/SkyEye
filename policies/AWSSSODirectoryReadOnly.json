@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSSSODirectoryReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSSODirectoryReadOnly",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Sid": "AWSSSODirectoryReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "sso-directory:Search*",
+        "sso-directory:Describe*",
+        "sso-directory:List*",
+        "sso-directory:Get*",
+        "identitystore:Describe*",
+        "identitystore:List*",
+        "identitystore-auth:ListSessions",
+        "identitystore-auth:BatchGetSession"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

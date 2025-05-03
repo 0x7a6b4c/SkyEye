@@ -1,0 +1,15 @@
+{
+  "PolicyName": "CloudWatchEventsInvocationAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/CloudWatchEventsInvocationAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "CloudWatchEventsInvocationAccess",
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:PutRecord"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

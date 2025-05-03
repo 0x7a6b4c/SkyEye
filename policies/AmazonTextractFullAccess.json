@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonTextractFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonTextractFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "textract:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "GroundTruthSyntheticConsoleFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/GroundTruthSyntheticConsoleFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker-groundtruth-synthetic:*",
+        "s3:ListBucket"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

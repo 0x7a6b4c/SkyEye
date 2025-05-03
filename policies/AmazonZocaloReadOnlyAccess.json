@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonZocaloReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonZocaloReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "zocalo:Describe*",
+        "ds:DescribeDirectories",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

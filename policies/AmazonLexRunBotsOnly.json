@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonLexRunBotsOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonLexRunBotsOnly",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lex:PostContent",
+        "lex:PostText",
+        "lex:PutSession",
+        "lex:GetSession",
+        "lex:DeleteSession",
+        "lex:RecognizeText",
+        "lex:RecognizeUtterance",
+        "lex:StartConversation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

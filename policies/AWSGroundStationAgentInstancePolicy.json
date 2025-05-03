@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSGroundStationAgentInstancePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSGroundStationAgentInstancePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "groundstation:RegisterAgent",
+        "groundstation:UpdateAgentStatus",
+        "groundstation:GetAgentConfiguration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

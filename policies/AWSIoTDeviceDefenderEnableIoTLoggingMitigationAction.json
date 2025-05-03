@@ -1,0 +1,32 @@
+{
+  "PolicyName": "AWSIoTDeviceDefenderEnableIoTLoggingMitigationAction",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSIoTDeviceDefenderEnableIoTLoggingMitigationAction",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:SetV2LoggingOptions"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": [
+            "iot.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

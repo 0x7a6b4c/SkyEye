@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonS3TablesReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonS3TablesReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3tables:Get*",
+        "s3tables:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

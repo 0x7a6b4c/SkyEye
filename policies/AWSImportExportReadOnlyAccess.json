@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSImportExportReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSImportExportReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "importexport:ListJobs",
+        "importexport:GetStatus"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

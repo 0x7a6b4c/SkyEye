@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSCloudHSMReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudHSMReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudhsm:Get*",
+        "cloudhsm:List*",
+        "cloudhsm:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

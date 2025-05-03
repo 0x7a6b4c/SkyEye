@@ -1,0 +1,16 @@
+{
+  "PolicyName": "CloudWatchSyntheticsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "synthetics:Describe*",
+        "synthetics:Get*",
+        "synthetics:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

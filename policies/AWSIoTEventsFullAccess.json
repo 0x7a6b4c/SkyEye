@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoTEventsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTEventsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotevents:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

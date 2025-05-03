@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSXrayFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSXrayFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AWSXrayFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "xray:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

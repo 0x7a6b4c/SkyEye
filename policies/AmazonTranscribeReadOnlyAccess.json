@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonTranscribeReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonTranscribeReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "transcribe:Get*",
+        "transcribe:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

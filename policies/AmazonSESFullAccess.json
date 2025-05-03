@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonSESFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSESFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ses:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSDirectConnectFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDirectConnectFullAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "directconnect:*",
+        "ec2:DescribeVpnGateways",
+        "ec2:DescribeTransitGateways"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

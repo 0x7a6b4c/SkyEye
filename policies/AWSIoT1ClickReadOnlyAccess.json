@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSIoT1ClickReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoT1ClickReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "iot1click:Describe*",
+        "iot1click:Get*",
+        "iot1click:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

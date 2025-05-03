@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSAppSyncInvokeFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAppSyncInvokeFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "appsync:GraphQL",
+        "appsync:GetGraphqlApi",
+        "appsync:ListGraphqlApis",
+        "appsync:ListApiKeys"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

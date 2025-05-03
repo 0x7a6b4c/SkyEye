@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSCloudFormationFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

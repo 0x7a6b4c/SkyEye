@@ -1,0 +1,41 @@
+{
+  "PolicyName": "AmazonEMRReadOnlyAccessPolicy_v2",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEMRReadOnlyAccessPolicy_v2",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "ElasticMapReduceActions",
+      "Effect": "Allow",
+      "Action": [
+        "elasticmapreduce:DescribeCluster",
+        "elasticmapreduce:DescribeEditor",
+        "elasticmapreduce:DescribeJobFlows",
+        "elasticmapreduce:DescribeSecurityConfiguration",
+        "elasticmapreduce:DescribeStep",
+        "elasticmapreduce:DescribeReleaseLabel",
+        "elasticmapreduce:GetBlockPublicAccessConfiguration",
+        "elasticmapreduce:GetManagedScalingPolicy",
+        "elasticmapreduce:GetAutoTerminationPolicy",
+        "elasticmapreduce:ListBootstrapActions",
+        "elasticmapreduce:ListClusters",
+        "elasticmapreduce:ListEditors",
+        "elasticmapreduce:ListInstanceFleets",
+        "elasticmapreduce:ListInstanceGroups",
+        "elasticmapreduce:ListInstances",
+        "elasticmapreduce:ListSecurityConfigurations",
+        "elasticmapreduce:ListSteps",
+        "elasticmapreduce:ListSupportedInstanceTypes",
+        "elasticmapreduce:ViewEventsFromAllClustersInConsole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ViewMetricsInEMRConsole",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:GetMetricStatistics"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

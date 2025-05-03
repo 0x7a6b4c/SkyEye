@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonCloudWatchRUMReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCloudWatchRUMReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rum:GetAppMonitor",
+        "rum:GetAppMonitorData",
+        "rum:ListAppMonitors",
+        "rum:ListRumMetricsDestinations",
+        "rum:BatchGetRumMetricDefinitions"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AWSSecurityIncidentResponseReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSecurityIncidentResponseReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "SecurityIRReadAccess",
+      "Effect": "Allow",
+      "Action": [
+        "security-ir:BatchGetMemberAccountDetails",
+        "security-ir:GetMembership",
+        "security-ir:ListMemberships",
+        "security-ir:GetCase",
+        "security-ir:ListCases",
+        "security-ir:GetCaseAttachmentDownloadUrl",
+        "security-ir:ListComments",
+        "security-ir:ListCaseEdits",
+        "security-ir:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

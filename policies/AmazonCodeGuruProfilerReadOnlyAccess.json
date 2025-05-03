@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AmazonCodeGuruProfilerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeGuruProfilerReadOnlyAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Action": [
+        "codeguru:Get*",
+        "codeguru-profiler:BatchGet*",
+        "codeguru-profiler:Describe*",
+        "codeguru-profiler:Get*",
+        "codeguru-profiler:List*",
+        "iam:ListRoles",
+        "iam:ListUsers"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

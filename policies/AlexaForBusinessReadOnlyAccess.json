@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AlexaForBusinessReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AlexaForBusinessReadOnlyAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "a4b:Get*",
+        "a4b:List*",
+        "a4b:Search*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "PolicyName": "AmazonEventBridgeSchemasReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgeSchemasReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AmazonEventBridgeSchemasReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "schemas:ListDiscoverers",
+        "schemas:DescribeDiscoverer",
+        "schemas:ListRegistries",
+        "schemas:DescribeRegistry",
+        "schemas:SearchSchemas",
+        "schemas:ListSchemas",
+        "schemas:ListSchemaVersions",
+        "schemas:DescribeSchema",
+        "schemas:GetDiscoveredSchema",
+        "schemas:DescribeCodeBinding",
+        "schemas:GetCodeBindingSource",
+        "schemas:ListTagsForResource",
+        "schemas:GetResourcePolicy"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

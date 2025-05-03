@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonSumerianFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSumerianFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sumerian:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

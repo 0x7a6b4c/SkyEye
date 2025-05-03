@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonRoute53RecoveryControlConfigFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53RecoveryControlConfigFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53-recovery-control-config:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

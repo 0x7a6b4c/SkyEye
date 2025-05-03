@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AmazonGlacierReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonGlacierReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "glacier:DescribeJob",
+        "glacier:DescribeVault",
+        "glacier:GetDataRetrievalPolicy",
+        "glacier:GetJobOutput",
+        "glacier:GetVaultAccessPolicy",
+        "glacier:GetVaultLock",
+        "glacier:GetVaultNotifications",
+        "glacier:ListJobs",
+        "glacier:ListMultipartUploads",
+        "glacier:ListParts",
+        "glacier:ListTagsForVault",
+        "glacier:ListVaults"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

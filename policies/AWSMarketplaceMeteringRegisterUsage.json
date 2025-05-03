@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSMarketplaceMeteringRegisterUsage",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "aws-marketplace:RegisterUsage"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

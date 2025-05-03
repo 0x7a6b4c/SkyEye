@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonRoute53RecoveryClusterFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53RecoveryClusterFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53-recovery-cluster:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

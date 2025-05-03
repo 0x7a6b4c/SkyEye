@@ -1,0 +1,13 @@
+{
+  "PolicyName": "AWSIoTOTAUpdate",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSIoTOTAUpdate",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": [
+      "iot:CreateJob",
+      "signer:DescribeSigningJob"
+    ],
+    "Resource": "*"
+  }
+}

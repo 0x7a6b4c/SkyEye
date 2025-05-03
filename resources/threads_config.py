@@ -1,0 +1,1 @@
+MAX_THREADS = 10

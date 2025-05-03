@@ -1,0 +1,18 @@
+{
+  "PolicyName": "QBusinessQuicksightPluginPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/QBusinessQuicksightPluginPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "QBusinessToQuickSightPredictQAResultsInvocation",
+      "Effect": "Allow",
+      "Action": [
+        "quicksight:PredictQAResults"
+      ],
+      "Resource": [
+        "arn:aws:quicksight:*:*:topic/*",
+        "arn:aws:quicksight:*:*:dashboard/*"
+      ]
+    }
+  ]
+}

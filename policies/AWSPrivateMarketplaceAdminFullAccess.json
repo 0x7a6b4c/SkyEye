@@ -1,0 +1,60 @@
+{
+  "PolicyName": "AWSPrivateMarketplaceAdminFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSPrivateMarketplaceAdminFullAccess",
+  "DefaultVersionId": "v6",
+  "Statement": [
+    {
+      "Sid": "PrivateMarketplaceRequestPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:AssociateProductsWithPrivateMarketplace",
+        "aws-marketplace:DisassociateProductsFromPrivateMarketplace",
+        "aws-marketplace:ListPrivateMarketplaceRequests",
+        "aws-marketplace:DescribePrivateMarketplaceRequests"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "PrivateMarketplaceCatalogAPIPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:ListEntities",
+        "aws-marketplace:DescribeEntity",
+        "aws-marketplace:StartChangeSet",
+        "aws-marketplace:ListChangeSets",
+        "aws-marketplace:DescribeChangeSet",
+        "aws-marketplace:CancelChangeSet"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "PrivateMarketplaceCatalogTaggingPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:TagResource",
+        "aws-marketplace:UntagResource",
+        "aws-marketplace:ListTagsForResource"
+      ],
+      "Resource": "arn:aws:aws-marketplace:*:*:AWSMarketplace/*"
+    },
+    {
+      "Sid": "PrivateMarketplaceOrganizationPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:DescribeOrganization",
+        "organizations:DescribeOrganizationalUnit",
+        "organizations:DescribeAccount",
+        "organizations:ListRoots",
+        "organizations:ListParents",
+        "organizations:ListOrganizationalUnitsForParent",
+        "organizations:ListAccountsForParent",
+        "organizations:ListAccounts",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListDelegatedAdministrators"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

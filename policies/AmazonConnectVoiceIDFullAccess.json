@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonConnectVoiceIDFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonConnectVoiceIDFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "voiceid:*",
+      "Resource": "*"
+    }
+  ]
+}

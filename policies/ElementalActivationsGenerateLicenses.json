@@ -1,0 +1,17 @@
+{
+  "PolicyName": "ElementalActivationsGenerateLicenses",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalActivationsGenerateLicenses",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-activations:Get*",
+        "elemental-activations:GenerateLicenses",
+        "elemental-activations:StartFileUpload",
+        "elemental-activations:CompleteFileUpload"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

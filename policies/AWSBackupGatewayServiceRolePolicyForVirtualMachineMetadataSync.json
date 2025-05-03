@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AWSBackupGatewayServiceRolePolicyForVirtualMachineMetadataSync",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSBackupGatewayServiceRolePolicyForVirtualMachineMetadataSync",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "ListVmTags",
+      "Effect": "Allow",
+      "Action": [
+        "backup-gateway:ListTagsForResource"
+      ],
+      "Resource": "arn:aws:backup-gateway:*:*:vm/*"
+    },
+    {
+      "Sid": "VMTagPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "backup-gateway:TagResource",
+        "backup-gateway:UntagResource"
+      ],
+      "Resource": "arn:aws:backup-gateway:*:*:vm/*"
+    }
+  ]
+}

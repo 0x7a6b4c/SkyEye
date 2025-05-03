@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonCognitoUnauthenticatedIdentities",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCognitoUnauthenticatedIdentities",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "rum:PutRumEvents",
+      "Resource": "*"
+    }
+  ]
+}

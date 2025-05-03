@@ -1,0 +1,26 @@
+{
+  "PolicyName": "AWSVendorInsightsAssessorReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSVendorInsightsAssessorReadOnly",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "vendor-insights:ListEntitledSecurityProfiles",
+        "vendor-insights:GetEntitledSecurityProfileSnapshot",
+        "vendor-insights:ListEntitledSecurityProfileSnapshots"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "artifact:GetReport",
+        "artifact:GetReportMetadata",
+        "artifact:GetTermForReport",
+        "artifact:ListReports"
+      ],
+      "Resource": "arn:aws:artifact:*::report/*"
+    }
+  ]
+}

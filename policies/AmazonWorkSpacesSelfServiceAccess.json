@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonWorkSpacesSelfServiceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkSpacesSelfServiceAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "workspaces:RebootWorkspaces",
+        "workspaces:RebuildWorkspaces",
+        "workspaces:ModifyWorkspaceProperties"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

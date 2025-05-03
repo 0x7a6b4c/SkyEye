@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSNetworkManagerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSNetworkManagerReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "networkmanager:Describe*",
+        "networkmanager:Get*",
+        "networkmanager:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

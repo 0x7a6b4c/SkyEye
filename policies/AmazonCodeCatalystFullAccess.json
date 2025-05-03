@@ -1,0 +1,32 @@
+{
+  "PolicyName": "AmazonCodeCatalystFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeCatalystFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "CodeCatalystResourceAccess",
+      "Effect": "Allow",
+      "Action": [
+        "codecatalyst:*",
+        "iam:ListRoles"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CodeCatalystAssociateIAMRole",
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": [
+            "codecatalyst.amazonaws.com",
+            "codecatalyst-runner.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

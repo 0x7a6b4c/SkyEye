@@ -1,0 +1,41 @@
+{
+  "PolicyName": "AmazonEC2ContainerServiceforEC2Role",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role",
+  "DefaultVersionId": "v7",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeTags",
+        "ecs:CreateCluster",
+        "ecs:DeregisterContainerInstance",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:Poll",
+        "ecs:RegisterContainerInstance",
+        "ecs:StartTelemetrySession",
+        "ecs:UpdateContainerInstancesState",
+        "ecs:Submit*",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ecs:TagResource",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:CreateAction": [
+            "CreateCluster",
+            "RegisterContainerInstance"
+          ]
+        }
+      }
+    }
+  ]
+}

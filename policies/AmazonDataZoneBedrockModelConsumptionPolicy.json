@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AmazonDataZoneBedrockModelConsumptionPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonDataZoneBedrockModelConsumptionPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "InvokeDomainInferenceProfiles",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": "arn:aws:bedrock:*:*:application-inference-profile/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/AmazonDataZoneDomain": "${datazone:domainId}",
+          "aws:ResourceAccount": "${aws:PrincipalAccount}"
+        },
+        "Null": {
+          "aws:ResourceTag/AmazonDataZoneProject": "true"
+        }
+      }
+    }
+  ]
+}

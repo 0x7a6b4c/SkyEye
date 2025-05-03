@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonRDSDirectoryServiceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonRDSDirectoryServiceAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "ds:DescribeDirectories",
+        "ds:AuthorizeApplication",
+        "ds:UnauthorizeApplication",
+        "ds:GetAuthorizedApplicationDetails"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

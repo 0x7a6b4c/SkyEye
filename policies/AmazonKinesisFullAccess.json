@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonKinesisFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "kinesis:*",
+      "Resource": "*"
+    }
+  ]
+}

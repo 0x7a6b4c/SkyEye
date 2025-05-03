@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AmazonWorkMailReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkMailReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ses:Describe*",
+        "ses:Get*",
+        "workmail:Describe*",
+        "workmail:Get*",
+        "workmail:List*",
+        "workmail:Search*",
+        "lambda:ListFunctions",
+        "iam:ListRoles",
+        "logs:DescribeLogGroups",
+        "cloudwatch:GetMetricData"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

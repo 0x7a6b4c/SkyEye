@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonCloudDirectoryFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCloudDirectoryFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "clouddirectory:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

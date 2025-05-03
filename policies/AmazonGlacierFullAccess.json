@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonGlacierFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonGlacierFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": "glacier:*",
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

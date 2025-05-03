@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AWSStepFunctionsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSStepFunctionsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "states:*",
+      "Resource": "*"
+    }
+  ]
+}

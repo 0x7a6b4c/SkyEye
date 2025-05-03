@@ -1,0 +1,38 @@
+{
+  "PolicyName": "AWSBudgetsActions_RolePolicyForResourceAdministrationWithSSM",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSBudgetsActions_RolePolicyForResourceAdministrationWithSSM",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstanceStatus",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "rds:DescribeDBInstances",
+        "rds:StartDBInstance",
+        "rds:StopDBInstance"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:CalledVia": [
+            "ssm.amazonaws.com"
+          ]
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:StartAutomationExecution"
+      ],
+      "Resource": [
+        "arn:aws:ssm:*:*:automation-definition/AWS-StartEC2Instance:*",
+        "arn:aws:ssm:*:*:automation-definition/AWS-StopEC2Instance:*",
+        "arn:aws:ssm:*:*:automation-definition/AWS-StartRdsInstance:*",
+        "arn:aws:ssm:*:*:automation-definition/AWS-StopRdsInstance:*"
+      ]
+    }
+  ]
+}

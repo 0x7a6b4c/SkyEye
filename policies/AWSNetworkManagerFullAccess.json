@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AWSNetworkManagerFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSNetworkManagerFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "networkmanager:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": [
+            "networkmanager.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "PolicyName": "AWSOpsWorksRegisterCLI_EC2",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSOpsWorksRegisterCLI_EC2",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "opsworks:AssignInstance",
+        "opsworks:CreateLayer",
+        "opsworks:DeregisterInstance",
+        "opsworks:DescribeInstances",
+        "opsworks:DescribeStackProvisioningParameters",
+        "opsworks:DescribeStacks",
+        "opsworks:UnassignInstance"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "PolicyName": "ElementalSupportCenterFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalSupportCenterFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-support-cases:*",
+        "elemental-support-content:*",
+        "elemental-activations:CompleteAccountRegistration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

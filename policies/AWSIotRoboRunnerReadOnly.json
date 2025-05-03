@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AWSIotRoboRunnerReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIotRoboRunnerReadOnly",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotroborunner:GetSite",
+        "iotroborunner:GetWorker",
+        "iotroborunner:ListWorkerFleets",
+        "iotroborunner:ListSites",
+        "iotroborunner:ListWorkers",
+        "iotroborunner:GetDestination",
+        "iotroborunner:GetWorkerFleet",
+        "iotroborunner:ListDestinations"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

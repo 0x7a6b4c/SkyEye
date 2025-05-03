@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AmazonSQSReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSQSReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Sid": "AmazonSQSReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl",
+        "sqs:ListDeadLetterSourceQueues",
+        "sqs:ListQueues",
+        "sqs:ListMessageMoveTasks",
+        "sqs:ListQueueTags"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

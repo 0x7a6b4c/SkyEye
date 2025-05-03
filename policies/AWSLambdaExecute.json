@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSLambdaExecute",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSLambdaExecute",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:*"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::*"
+    }
+  ]
+}

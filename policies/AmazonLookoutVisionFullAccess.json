@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonLookoutVisionFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonLookoutVisionFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "LookoutVisionFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "lookoutvision:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

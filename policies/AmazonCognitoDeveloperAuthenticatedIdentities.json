@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonCognitoDeveloperAuthenticatedIdentities",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cognito-identity:GetOpenIdTokenForDeveloperIdentity",
+        "cognito-identity:LookupDeveloperIdentity",
+        "cognito-identity:MergeDeveloperIdentities",
+        "cognito-identity:UnlinkDeveloperIdentity"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

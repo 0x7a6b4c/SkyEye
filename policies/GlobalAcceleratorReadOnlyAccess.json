@@ -1,0 +1,15 @@
+{
+  "PolicyName": "GlobalAcceleratorReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/GlobalAcceleratorReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "globalaccelerator:Describe*",
+        "globalaccelerator:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

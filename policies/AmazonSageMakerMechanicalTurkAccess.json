@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonSageMakerMechanicalTurkAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSageMakerMechanicalTurkAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:*FlowDefinition",
+        "sagemaker:*FlowDefinitions"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

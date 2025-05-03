@@ -1,0 +1,20 @@
+{
+  "PolicyName": "CloudWatchLambdaInsightsExecutionRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "logs:CreateLogGroup",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda-insights:*"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "PolicyName": "AWSDiscoveryContinuousExportFirehosePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDiscoveryContinuousExportFirehosePolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetTableVersions"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:AbortMultipartUpload",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::aws-application-discovery-service-*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:log-group:/aws/application-discovery-service/firehose:log-stream:*"
+      ]
+    }
+  ]
+}

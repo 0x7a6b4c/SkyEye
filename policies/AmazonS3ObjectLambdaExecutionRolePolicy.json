@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonS3ObjectLambdaExecutionRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonS3ObjectLambdaExecutionRolePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "s3-object-lambda:WriteGetObjectResponse"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonCodeGuruReviewerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeGuruReviewerReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AmazonCodeGuruReviewerReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "codeguru:Get*",
+        "codeguru-reviewer:List*",
+        "codeguru-reviewer:Describe*",
+        "codeguru-reviewer:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

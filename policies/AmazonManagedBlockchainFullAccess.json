@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonManagedBlockchainFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonManagedBlockchainFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "managedblockchain:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

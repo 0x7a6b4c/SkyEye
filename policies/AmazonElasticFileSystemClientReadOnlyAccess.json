@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonElasticFileSystemClientReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elasticfilesystem:ClientMount",
+        "elasticfilesystem:DescribeMountTargets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonHealthLakeReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonHealthLakeReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "healthlake:ListFHIRDatastores",
+        "healthlake:DescribeFHIRDatastore",
+        "healthlake:DescribeFHIRImportJob",
+        "healthlake:DescribeFHIRExportJob",
+        "healthlake:GetCapabilities",
+        "healthlake:ReadResource",
+        "healthlake:SearchWithGet",
+        "healthlake:SearchWithPost"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

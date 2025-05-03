@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSPriceListServiceFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSPriceListServiceFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AWSPriceListServiceFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "pricing:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

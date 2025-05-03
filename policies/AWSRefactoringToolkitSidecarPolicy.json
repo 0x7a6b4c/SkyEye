@@ -1,0 +1,39 @@
+{
+  "PolicyName": "AWSRefactoringToolkitSidecarPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSRefactoringToolkitSidecarPolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "SsmMessagesAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:OpenDataChannel",
+        "ssmmessages:CreateDataChannel"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "S3GetObjectAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::*/refactoringtoolkit*"
+    },
+    {
+      "Sid": "S3ListBucketAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Resource": "arn:aws:s3:::*",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": "refactoringtoolkit*"
+        }
+      }
+    }
+  ]
+}

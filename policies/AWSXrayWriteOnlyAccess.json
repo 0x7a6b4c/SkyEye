@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AWSXrayWriteOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords",
+        "xray:GetSamplingRules",
+        "xray:GetSamplingTargets",
+        "xray:GetSamplingStatisticSummaries"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

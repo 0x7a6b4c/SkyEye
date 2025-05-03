@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSElasticBeanstalkRoleCWL",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkRoleCWL",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AllowCWL",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:DeleteLogGroup",
+        "logs:PutRetentionPolicy"
+      ],
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*"
+    }
+  ]
+}

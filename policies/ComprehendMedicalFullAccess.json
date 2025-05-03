@@ -1,0 +1,14 @@
+{
+  "PolicyName": "ComprehendMedicalFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ComprehendMedicalFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "comprehendmedical:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

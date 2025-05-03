@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonWorkDocsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkDocsReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "workdocs:Describe*",
+        "ds:DescribeDirectories",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

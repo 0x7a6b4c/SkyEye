@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSDeviceFarmFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDeviceFarmFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "devicefarm:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

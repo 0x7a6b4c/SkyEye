@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonKinesisReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:Get*",
+        "kinesis:List*",
+        "kinesis:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

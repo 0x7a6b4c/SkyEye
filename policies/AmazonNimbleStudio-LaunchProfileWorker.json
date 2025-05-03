@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AmazonNimbleStudio-LaunchProfileWorker",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonNimbleStudio-LaunchProfileWorker",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "fsx:DescribeFileSystems",
+        "ds:DescribeDirectories"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:CalledViaLast": "nimble.amazonaws.com"
+        }
+      },
+      "Sid": "GetLaunchProfileInitializationDependencies"
+    }
+  ]
+}

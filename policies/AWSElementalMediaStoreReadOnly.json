@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AWSElementalMediaStoreReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaStoreReadOnly",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "mediastore:Get*",
+        "mediastore:List*",
+        "mediastore:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "true"
+        }
+      }
+    }
+  ]
+}

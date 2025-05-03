@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonElasticTranscoder_JobsSubmitter",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElasticTranscoder_JobsSubmitter",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "elastictranscoder:Read*",
+        "elastictranscoder:List*",
+        "elastictranscoder:*Job",
+        "elastictranscoder:*Preset",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "iam:ListRoles",
+        "sns:ListTopics"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

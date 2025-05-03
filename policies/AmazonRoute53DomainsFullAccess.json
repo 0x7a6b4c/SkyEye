@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonRoute53DomainsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53DomainsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:CreateHostedZone",
+        "route53domains:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

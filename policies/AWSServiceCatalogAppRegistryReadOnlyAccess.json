@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AWSServiceCatalogAppRegistryReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSServiceCatalogAppRegistryReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "servicecatalog:GetApplication",
+        "servicecatalog:ListApplications",
+        "servicecatalog:GetAssociatedResource",
+        "servicecatalog:ListAssociatedResources",
+        "servicecatalog:ListAssociatedAttributeGroups",
+        "servicecatalog:GetAttributeGroup",
+        "servicecatalog:ListAttributeGroups",
+        "servicecatalog:ListTagsForResource",
+        "servicecatalog:ListAttributeGroupsForApplication",
+        "servicecatalog:GetConfiguration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSCloudTrail_ReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudTrail_ReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudtrail:Get*",
+        "cloudtrail:Describe*",
+        "cloudtrail:List*",
+        "cloudtrail:LookupEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

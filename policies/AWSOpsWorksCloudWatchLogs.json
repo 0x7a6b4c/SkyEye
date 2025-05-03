@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSOpsWorksCloudWatchLogs",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSOpsWorksCloudWatchLogs",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:*"
+      ]
+    }
+  ]
+}

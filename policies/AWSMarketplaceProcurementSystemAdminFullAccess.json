@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSMarketplaceProcurementSystemAdminFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSMarketplaceProcurementSystemAdminFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:PutProcurementSystemConfiguration",
+        "aws-marketplace:DescribeProcurementSystemConfiguration",
+        "organizations:Describe*",
+        "organizations:List*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

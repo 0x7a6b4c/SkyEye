@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSConfigRoleForOrganizations",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListAccounts",
+        "organizations:DescribeOrganization",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListDelegatedAdministrators"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

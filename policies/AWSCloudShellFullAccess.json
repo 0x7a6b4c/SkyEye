@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSCloudShellFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudShellFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "cloudshell:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

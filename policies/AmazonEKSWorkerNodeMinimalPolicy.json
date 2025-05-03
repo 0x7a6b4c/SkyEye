@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonEKSWorkerNodeMinimalPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodeMinimalPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "WorkerNodePermissions",
+      "Effect": "Allow",
+      "Action": [
+        "eks-auth:AssumeRoleForPodIdentity"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

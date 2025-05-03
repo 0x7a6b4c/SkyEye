@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AmazonConnectReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonConnectReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Sid": "AllowConnectReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "connect:Get*",
+        "connect:Describe*",
+        "connect:List*",
+        "ds:DescribeDirectories"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyConnectEmergencyAccess",
+      "Effect": "Deny",
+      "Action": "connect:AdminGetEmergencyAccessToken",
+      "Resource": "*"
+    }
+  ]
+}

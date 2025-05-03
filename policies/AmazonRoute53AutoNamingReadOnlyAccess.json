@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonRoute53AutoNamingReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53AutoNamingReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "servicediscovery:Get*",
+        "servicediscovery:List*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

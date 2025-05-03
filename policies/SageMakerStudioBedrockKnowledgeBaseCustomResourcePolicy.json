@@ -1,0 +1,37 @@
+{
+  "PolicyName": "SageMakerStudioBedrockKnowledgeBaseCustomResourcePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/SageMakerStudioBedrockKnowledgeBaseCustomResourcePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "OpenSearchServerlessPermissions",
+      "Effect": "Allow",
+      "Action": "aoss:APIAccessAll",
+      "Resource": "arn:aws:aoss:*:*:collection/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "${aws:PrincipalAccount}"
+        },
+        "StringLike": {
+          "aoss:collection": "bedrock*"
+        }
+      }
+    },
+    {
+      "Sid": "BedrockKnowledgeBasePermissions",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:GetIngestionJob",
+        "bedrock:ListIngestionJobs",
+        "bedrock:StartIngestionJob"
+      ],
+      "Resource": "arn:aws:bedrock:*:*:knowledge-base/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "${aws:PrincipalAccount}",
+          "aws:ResourceTag/AmazonDataZoneProject": "${aws:PrincipalTag/AmazonDataZoneProject}"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "PolicyName": "ApplicationAutoScalingForAmazonAppStreamAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/ApplicationAutoScalingForAmazonAppStreamAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "appstream:UpdateFleet",
+        "appstream:DescribeFleets"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:DescribeAlarms"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AWSConfigUserAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSConfigUserAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "config:Get*",
+        "config:Describe*",
+        "config:Deliver*",
+        "config:List*",
+        "config:Select*",
+        "tag:GetResources",
+        "tag:GetTagKeys",
+        "cloudtrail:DescribeTrails",
+        "cloudtrail:GetTrailStatus",
+        "cloudtrail:LookupEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

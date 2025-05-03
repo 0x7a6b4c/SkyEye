@@ -1,0 +1,27 @@
+{
+  "PolicyName": "AmazonSageMakerCanvasForecastAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonSageMakerCanvasForecastAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::sagemaker-*/Canvas*",
+        "arn:aws:s3:::sagemaker-*/canvas*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::sagemaker-*"
+      ]
+    }
+  ]
+}

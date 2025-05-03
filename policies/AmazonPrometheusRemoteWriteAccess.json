@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonPrometheusRemoteWriteAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "aps:RemoteWrite"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

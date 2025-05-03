@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSAppSyncPushToCloudWatchLogs",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSAppSyncPushToCloudWatchLogs",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

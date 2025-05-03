@@ -1,0 +1,21 @@
+{
+  "PolicyName": "Ec2ImageBuilderCrossAccountDistributionAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/Ec2ImageBuilderCrossAccountDistributionAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:CreateTags",
+      "Resource": "arn:aws:ec2:*::image/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeImages",
+        "ec2:CopyImage",
+        "ec2:ModifyImageAttribute"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSIoTSiteWiseReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTSiteWiseReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotsitewise:Describe*",
+        "iotsitewise:List*",
+        "iotsitewise:Get*",
+        "iotsitewise:BatchGet*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

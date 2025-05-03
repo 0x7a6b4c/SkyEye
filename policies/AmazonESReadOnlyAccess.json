@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonESReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonESReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "es:Describe*",
+        "es:List*",
+        "es:Get*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

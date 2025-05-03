@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonPrometheusQueryAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "aps:GetLabels",
+        "aps:GetMetricMetadata",
+        "aps:GetSeries",
+        "aps:QueryMetrics"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

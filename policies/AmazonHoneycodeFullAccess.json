@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonHoneycodeFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonHoneycodeFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "honeycode:*"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}

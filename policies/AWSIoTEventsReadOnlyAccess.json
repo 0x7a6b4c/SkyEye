@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSIoTEventsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTEventsReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotevents:Describe*",
+        "iotevents:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

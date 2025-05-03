@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonCodeGuruSecurityScanAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeGuruSecurityScanAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AmazonCodeGuruSecurityScanAccess",
+      "Effect": "Allow",
+      "Action": [
+        "codeguru-security:CreateScan",
+        "codeguru-security:CreateUploadUrl",
+        "codeguru-security:GetScan",
+        "codeguru-security:GetFindings"
+      ],
+      "Resource": "arn:aws:codeguru-security:*:*:scans/*"
+    }
+  ]
+}

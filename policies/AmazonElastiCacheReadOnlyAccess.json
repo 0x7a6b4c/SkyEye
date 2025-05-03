@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonElastiCacheReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElastiCacheReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "elasticache:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

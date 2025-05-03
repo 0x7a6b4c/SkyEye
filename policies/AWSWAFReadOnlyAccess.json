@@ -1,0 +1,28 @@
+{
+  "PolicyName": "AWSWAFReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSWAFReadOnlyAccess",
+  "DefaultVersionId": "v8",
+  "Statement": [
+    {
+      "Action": [
+        "waf:Get*",
+        "waf:List*",
+        "waf-regional:Get*",
+        "waf-regional:List*",
+        "wafv2:Get*",
+        "wafv2:List*",
+        "wafv2:Describe*",
+        "wafv2:CheckCapacity",
+        "cognito-idp:ListResourcesForWebACL",
+        "cognito-idp:GetWebACLForResource",
+        "apprunner:DescribeWebAclForService",
+        "apprunner:ListServices",
+        "apprunner:ListAssociatedServicesForWebAcl",
+        "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
+        "ec2:GetVerifiedAccessInstanceWebAcl"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

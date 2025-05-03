@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AWSCloudHSMFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudHSMFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "cloudhsm:*",
+      "Resource": "*"
+    }
+  ]
+}

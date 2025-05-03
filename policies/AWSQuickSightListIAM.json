@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSQuickSightListIAM",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSQuickSightListIAM",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonMachineLearningManageRealTimeEndpointOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMachineLearningManageRealTimeEndpointOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "machinelearning:CreateRealtimeEndpoint",
+        "machinelearning:DeleteRealtimeEndpoint"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

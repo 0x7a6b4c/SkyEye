@@ -1,0 +1,31 @@
+{
+  "PolicyName": "AWSTransferFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSTransferFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "transfer:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "transfer.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeVpcEndpoints",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeAddresses"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

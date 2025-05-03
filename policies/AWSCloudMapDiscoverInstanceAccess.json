@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSCloudMapDiscoverInstanceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudMapDiscoverInstanceAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "servicediscovery:DiscoverInstances",
+        "servicediscovery:DiscoverInstancesRevision"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

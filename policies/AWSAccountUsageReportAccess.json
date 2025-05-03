@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSAccountUsageReportAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAccountUsageReportAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "aws-portal:ViewUsage"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

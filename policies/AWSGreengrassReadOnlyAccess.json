@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSGreengrassReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSGreengrassReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "greengrass:List*",
+        "greengrass:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

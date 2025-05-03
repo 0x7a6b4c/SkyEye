@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonCloudWatchEvidentlyReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCloudWatchEvidentlyReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "evidently:GetExperiment",
+        "evidently:GetFeature",
+        "evidently:GetLaunch",
+        "evidently:GetProject",
+        "evidently:ListExperiments",
+        "evidently:ListFeatures",
+        "evidently:ListLaunches",
+        "evidently:ListProjects"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

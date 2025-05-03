@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonKendraReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKendraReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kendra:Describe*",
+        "kendra:List*",
+        "kendra:Query",
+        "kendra:GetQuerySuggestions"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

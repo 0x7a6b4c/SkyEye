@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AmazonElasticContainerRegistryPublicReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr-public:GetAuthorizationToken",
+        "sts:GetServiceBearerToken",
+        "ecr-public:BatchCheckLayerAvailability",
+        "ecr-public:GetRepositoryPolicy",
+        "ecr-public:DescribeRepositories",
+        "ecr-public:DescribeRegistries",
+        "ecr-public:DescribeImages",
+        "ecr-public:DescribeImageTags",
+        "ecr-public:GetRepositoryCatalogData",
+        "ecr-public:GetRegistryCatalogData"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

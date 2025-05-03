@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSElementalMediaConvertReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaConvertReadOnly",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mediaconvert:Get*",
+        "mediaconvert:List*",
+        "mediaconvert:DescribeEndpoints",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

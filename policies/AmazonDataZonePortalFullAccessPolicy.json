@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonDataZonePortalFullAccessPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonDataZonePortalFullAccessPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "datazonecontrol:*",
+      "Resource": "*"
+    }
+  ]
+}

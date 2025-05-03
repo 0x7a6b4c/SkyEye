@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSBillingConductorFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSBillingConductorFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "billingconductor:*",
+        "organizations:ListAccounts",
+        "pricing:DescribeServices"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

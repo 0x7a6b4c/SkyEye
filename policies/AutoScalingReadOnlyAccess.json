@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AutoScalingReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AutoScalingReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "autoscaling:Describe*",
+      "Resource": "*"
+    }
+  ]
+}

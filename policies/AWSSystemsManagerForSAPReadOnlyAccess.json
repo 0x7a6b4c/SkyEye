@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSSystemsManagerForSAPReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSystemsManagerForSAPReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm-sap:get*",
+        "ssm-sap:list*"
+      ],
+      "Resource": "arn:*:ssm-sap:*:*:*"
+    }
+  ]
+}

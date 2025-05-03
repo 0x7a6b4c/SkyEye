@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSCodePipelineApproverAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Action": [
+        "codepipeline:GetPipeline",
+        "codepipeline:GetPipelineState",
+        "codepipeline:GetPipelineExecution",
+        "codepipeline:ListPipelineExecutions",
+        "codepipeline:ListPipelines",
+        "codepipeline:PutApprovalResult"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

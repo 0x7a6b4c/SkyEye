@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSSecurityHubReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSecurityHubReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Sid": "AWSSecurityHubReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "securityhub:Get*",
+        "securityhub:List*",
+        "securityhub:BatchGet*",
+        "securityhub:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonS3ReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:List*",
+        "s3:Describe*",
+        "s3-object-lambda:Get*",
+        "s3-object-lambda:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonOmicsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOmicsReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "omics:Get*",
+        "omics:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

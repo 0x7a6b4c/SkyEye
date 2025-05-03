@@ -1,0 +1,28 @@
+{
+  "PolicyName": "AWSOrganizationsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSOrganizationsReadOnlyAccess",
+  "DefaultVersionId": "v6",
+  "Statement": [
+    {
+      "Sid": "AWSOrganizationsReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:Describe*",
+        "organizations:List*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AWSOrganizationsReadOnlyAccount",
+      "Effect": "Allow",
+      "Action": [
+        "account:GetAlternateContact",
+        "account:GetContactInformation",
+        "account:ListRegions",
+        "account:GetRegionOptStatus",
+        "account:GetPrimaryEmail"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

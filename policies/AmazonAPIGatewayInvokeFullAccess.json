@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonAPIGatewayInvokeFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "execute-api:Invoke",
+        "execute-api:ManageConnections"
+      ],
+      "Resource": "arn:aws:execute-api:*:*:*"
+    }
+  ]
+}

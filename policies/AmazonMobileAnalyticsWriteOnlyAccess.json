@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonMobileAnalyticsWriteOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMobileAnalyticsWriteOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "mobileanalytics:PutEvents",
+      "Resource": "*"
+    }
+  ]
+}

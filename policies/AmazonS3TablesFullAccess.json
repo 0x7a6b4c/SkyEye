@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonS3TablesFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonS3TablesFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3tables:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

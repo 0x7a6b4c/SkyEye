@@ -1,0 +1,41 @@
+{
+  "PolicyName": "IAMAccessAnalyzerFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/IAMAccessAnalyzerFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "access-analyzer:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "access-analyzer.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "organizations:DescribeAccount",
+        "organizations:DescribeOrganization",
+        "organizations:DescribeOrganizationalUnit",
+        "organizations:ListAccounts",
+        "organizations:ListAccountsForParent",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListChildren",
+        "organizations:ListDelegatedAdministrators",
+        "organizations:ListOrganizationalUnitsForParent",
+        "organizations:ListParents",
+        "organizations:ListRoots"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonSSMAutomationApproverAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSSMAutomationApproverAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:DescribeAutomationExecutions",
+        "ssm:GetAutomationExecution",
+        "ssm:SendAutomationSignal"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

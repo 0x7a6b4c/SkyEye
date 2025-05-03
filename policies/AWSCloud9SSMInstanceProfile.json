@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSCloud9SSMInstanceProfile",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloud9SSMInstanceProfile",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel",
+        "ssm:UpdateInstanceInformation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

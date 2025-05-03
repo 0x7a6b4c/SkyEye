@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AWSAccountManagementFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAccountManagementFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "account:*",
+      "Resource": "*"
+    }
+  ]
+}

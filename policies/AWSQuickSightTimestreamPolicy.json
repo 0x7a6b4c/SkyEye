@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSQuickSightTimestreamPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSQuickSightTimestreamPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "timestream:Select",
+        "timestream:CancelQuery",
+        "timestream:ListTables",
+        "timestream:ListDatabases",
+        "timestream:ListMeasures",
+        "timestream:DescribeTable",
+        "timestream:DescribeDatabase",
+        "timestream:SelectValues",
+        "timestream:DescribeEndpoints"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSMarketplaceMeteringFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSMarketplaceMeteringFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "aws-marketplace:MeterUsage"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

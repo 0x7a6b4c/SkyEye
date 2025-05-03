@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonOpenSearchServiceFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "es:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

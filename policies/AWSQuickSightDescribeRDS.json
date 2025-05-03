@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSQuickSightDescribeRDS",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSQuickSightDescribeRDS",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "rds:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

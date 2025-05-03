@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonHoneycodeTeamAssociationFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonHoneycodeTeamAssociationFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "honeycode:ListTeamAssociations",
+        "honeycode:ApproveTeamAssociation",
+        "honeycode:RejectTeamAssociation"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}

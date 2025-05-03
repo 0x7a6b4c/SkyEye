@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSElementalMediaStoreFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaStoreFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "mediastore:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "true"
+        }
+      }
+    }
+  ]
+}

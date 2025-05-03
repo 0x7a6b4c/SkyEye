@@ -1,0 +1,15 @@
+{
+  "PolicyName": "ElementalActivationsDownloadSoftwareAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalActivationsDownloadSoftwareAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-activations:Get*",
+        "elemental-activations:Download*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

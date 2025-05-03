@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AWSApplicationMigrationMGHAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSApplicationMigrationMGHAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mgh:AssociateCreatedArtifact",
+        "mgh:CreateProgressUpdateStream",
+        "mgh:DisassociateCreatedArtifact",
+        "mgh:GetHomeRegion",
+        "mgh:ImportMigrationTask",
+        "mgh:NotifyMigrationTaskState",
+        "mgh:PutResourceAttributes"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

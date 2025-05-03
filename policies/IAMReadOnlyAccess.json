@@ -1,0 +1,19 @@
+{
+  "PolicyName": "IAMReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/IAMReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:GenerateCredentialReport",
+        "iam:GenerateServiceLastAccessedDetails",
+        "iam:Get*",
+        "iam:List*",
+        "iam:SimulateCustomPolicy",
+        "iam:SimulatePrincipalPolicy"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

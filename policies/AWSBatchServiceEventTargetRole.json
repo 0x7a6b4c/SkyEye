@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSBatchServiceEventTargetRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSBatchServiceEventTargetRole",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "batch:SubmitJob"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

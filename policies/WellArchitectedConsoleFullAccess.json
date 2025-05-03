@@ -1,0 +1,14 @@
+{
+  "PolicyName": "WellArchitectedConsoleFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/WellArchitectedConsoleFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "wellarchitected:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

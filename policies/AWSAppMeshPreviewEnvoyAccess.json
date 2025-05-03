@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSAppMeshPreviewEnvoyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAppMeshPreviewEnvoyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "appmesh-preview:StreamAggregatedResources"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSSupportAppReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSupportAppReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "support:DescribeCases",
+        "support:DescribeCommunications"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonTextractServiceRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonTextractServiceRole",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "arn:aws:sns:*:*:AmazonTextract*"
+    }
+  ]
+}

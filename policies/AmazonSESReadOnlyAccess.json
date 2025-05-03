@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonSESReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSESReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "SESReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ses:Get*",
+        "ses:List*",
+        "ses:BatchGetMetricData"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSResourceAccessManagerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSResourceAccessManagerReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "ram:Get*",
+        "ram:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

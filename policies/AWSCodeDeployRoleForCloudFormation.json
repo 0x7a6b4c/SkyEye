@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSCodeDeployRoleForCloudFormation",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForCloudFormation",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "lambda:InvokeFunction"
+      ],
+      "Resource": "arn:aws:lambda:*:*:function:CodeDeployHook_*",
+      "Effect": "Allow"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "PolicyName": "CloudWatchLogsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "CloudWatchLogsFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "logs:*",
+        "cloudwatch:GenerateQuery"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

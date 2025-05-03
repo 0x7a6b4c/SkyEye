@@ -1,0 +1,43 @@
+{
+  "PolicyName": "AmazonQDeveloperAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonQDeveloperAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "AllowAmazonQDeveloperAccess",
+      "Effect": "Allow",
+      "Action": [
+        "q:StartConversation",
+        "q:SendMessage",
+        "q:GetConversation",
+        "q:ListConversations",
+        "q:PassRequest",
+        "q:StartTroubleshootingAnalysis",
+        "q:StartTroubleshootingResolutionExplanation",
+        "q:GetTroubleshootingResults",
+        "q:UpdateTroubleshootingCommandResult",
+        "q:GetIdentityMetaData",
+        "q:GenerateCodeFromCommands",
+        "q:UsePlugin"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowCloudControlReadAccess",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:GetResource",
+        "cloudformation:ListResources"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowSetTrustedIdentity",
+      "Effect": "Allow",
+      "Action": [
+        "sts:SetContext"
+      ],
+      "Resource": "arn:aws:sts::*:self"
+    }
+  ]
+}

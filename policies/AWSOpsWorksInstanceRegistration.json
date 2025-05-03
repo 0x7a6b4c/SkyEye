@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSOpsWorksInstanceRegistration",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSOpsWorksInstanceRegistration",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "opsworks:DescribeStackProvisioningParameters",
+        "opsworks:DescribeStacks",
+        "opsworks:RegisterInstance"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

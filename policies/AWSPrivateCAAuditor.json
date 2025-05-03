@@ -1,0 +1,29 @@
+{
+  "PolicyName": "AWSPrivateCAAuditor",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSPrivateCAAuditor",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "acm-pca:CreateCertificateAuthorityAuditReport",
+        "acm-pca:DescribeCertificateAuthority",
+        "acm-pca:DescribeCertificateAuthorityAuditReport",
+        "acm-pca:GetCertificateAuthorityCsr",
+        "acm-pca:GetCertificateAuthorityCertificate",
+        "acm-pca:GetCertificate",
+        "acm-pca:GetPolicy",
+        "acm-pca:ListPermissions",
+        "acm-pca:ListTags"
+      ],
+      "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "acm-pca:ListCertificateAuthorities"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "PolicyName": "ResourceGroupsandTagEditorReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ResourceGroupsandTagEditorReadOnlyAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "tag:getResources",
+        "tag:getTagKeys",
+        "tag:getTagValues",
+        "resource-groups:Get*",
+        "resource-groups:List*",
+        "resource-groups:Search*",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ListStackResources",
+        "cloudformation:ListStacks"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

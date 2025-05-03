@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AmazonElasticTranscoder_ReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElasticTranscoder_ReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "elastictranscoder:Read*",
+        "elastictranscoder:List*",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "iam:ListRoles",
+        "sns:ListTopics"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

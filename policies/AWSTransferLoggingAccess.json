@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSTransferLoggingAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSTransferLoggingAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:CreateLogGroup",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

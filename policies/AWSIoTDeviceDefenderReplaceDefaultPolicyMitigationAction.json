@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSIoTDeviceDefenderReplaceDefaultPolicyMitigationAction",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSIoTDeviceDefenderReplaceDefaultPolicyMitigationAction",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:CreatePolicyVersion"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

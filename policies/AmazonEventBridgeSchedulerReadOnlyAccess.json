@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonEventBridgeSchedulerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgeSchedulerReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "scheduler:ListSchedules",
+        "scheduler:ListScheduleGroups",
+        "scheduler:GetSchedule",
+        "scheduler:GetScheduleGroup",
+        "scheduler:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

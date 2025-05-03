@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSEntityResolutionConsoleReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSEntityResolutionConsoleReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "EntityResolutionRead",
+      "Effect": "Allow",
+      "Action": [
+        "entityresolution:Get*",
+        "entityresolution:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "PolicyName": "AWSSecurityHubFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSecurityHubFullAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "SecurityHubAllowAll",
+      "Effect": "Allow",
+      "Action": "securityhub:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "SecurityHubServiceLinkedRole",
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "securityhub.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "OtherServicePermission",
+      "Effect": "Allow",
+      "Action": [
+        "guardduty:GetDetector",
+        "guardduty:ListDetectors",
+        "inspector2:BatchGetAccountStatus",
+        "pricing:GetProducts"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

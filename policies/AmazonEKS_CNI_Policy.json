@@ -1,0 +1,36 @@
+{
+  "PolicyName": "AmazonEKS_CNI_Policy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  "DefaultVersionId": "v5",
+  "Statement": [
+    {
+      "Sid": "AmazonEKSCNIPolicy",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:AttachNetworkInterface",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeSubnets",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:UnassignPrivateIpAddresses"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AmazonEKSCNIPolicyENITag",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:network-interface/*"
+      ]
+    }
+  ]
+}

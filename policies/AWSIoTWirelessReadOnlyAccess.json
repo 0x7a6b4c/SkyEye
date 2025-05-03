@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSIoTWirelessReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTWirelessReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotwireless:List*",
+        "iotwireless:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

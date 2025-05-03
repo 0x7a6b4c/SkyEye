@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonESFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonESFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "es:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoTSiteWiseFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTSiteWiseFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotsitewise:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

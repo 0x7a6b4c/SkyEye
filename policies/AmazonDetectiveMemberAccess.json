@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonDetectiveMemberAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonDetectiveMemberAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "detective:AcceptInvitation",
+        "detective:BatchGetMembershipDatasources",
+        "detective:DisassociateMembership",
+        "detective:GetFreeTrialEligibility",
+        "detective:GetPricingInformation",
+        "detective:GetUsageInformation",
+        "detective:ListInvitations",
+        "detective:RejectInvitation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

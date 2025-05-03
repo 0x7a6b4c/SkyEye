@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSElementalMediaTailorReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaTailorReadOnly",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": [
+      "mediatailor:List*",
+      "mediatailor:Describe*",
+      "mediatailor:Get*"
+    ],
+    "Resource": "*"
+  }
+}

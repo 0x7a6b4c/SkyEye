@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AWSIncidentManagerIncidentAccessServiceRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIncidentManagerIncidentAccessServiceRolePolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "IncidentAccessPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:DescribeStackResources",
+        "codedeploy:BatchGetDeployments",
+        "codedeploy:ListDeployments",
+        "codedeploy:ListDeploymentTargets",
+        "autoscaling:DescribeAutoScalingInstances"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

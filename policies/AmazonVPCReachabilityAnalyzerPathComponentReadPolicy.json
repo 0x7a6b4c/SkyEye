@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonVPCReachabilityAnalyzerPathComponentReadPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonVPCReachabilityAnalyzerPathComponentReadPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "NetworkFirewallPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "network-firewall:Describe*",
+        "network-firewall:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

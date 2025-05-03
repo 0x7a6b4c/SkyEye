@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonChimeReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonChimeReadOnly",
+  "DefaultVersionId": "v10",
+  "Statement": [
+    {
+      "Action": [
+        "chime:List*",
+        "chime:Get*",
+        "chime:Describe*",
+        "chime:SearchAvailablePhoneNumbers"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

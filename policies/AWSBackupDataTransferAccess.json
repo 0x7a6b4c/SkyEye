@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AWSBackupDataTransferAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSBackupDataTransferAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "backup-storage:StartObject",
+        "backup-storage:PutChunk",
+        "backup-storage:GetChunk",
+        "backup-storage:ListChunks",
+        "backup-storage:ListObjects",
+        "backup-storage:GetObjectMetadata",
+        "backup-storage:NotifyObjectComplete"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "ElementalActivationsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalActivationsReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-activations:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

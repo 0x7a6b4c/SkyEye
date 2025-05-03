@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AWSElasticDisasterRecoveryConversionServerPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticDisasterRecoveryConversionServerPolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "DRSConversionServerPolicy1",
+      "Effect": "Allow",
+      "Action": [
+        "drs:SendClientMetricsForDrs",
+        "drs:SendClientLogsForDrs"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DRSConversionServerPolicy2",
+      "Effect": "Allow",
+      "Action": [
+        "drs:GetChannelCommandsForDrs",
+        "drs:SendChannelCommandResultForDrs"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

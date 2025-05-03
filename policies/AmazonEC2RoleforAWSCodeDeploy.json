@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonEC2RoleforAWSCodeDeploy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "s3:GetObject",
+        "s3:GetObjectVersion",
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

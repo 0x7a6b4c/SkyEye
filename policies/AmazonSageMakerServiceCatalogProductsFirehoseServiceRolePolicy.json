@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonSageMakerServiceCatalogProductsFirehoseServiceRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsFirehoseServiceRolePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "firehose:PutRecord",
+        "firehose:PutRecordBatch"
+      ],
+      "Resource": "arn:aws:firehose:*:*:deliverystream/sagemaker-*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "ElementalAppliancesSoftwareReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalAppliancesSoftwareReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-appliances-software:List*",
+        "elemental-appliances-software:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

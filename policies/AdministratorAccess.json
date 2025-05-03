@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AdministratorAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "*",
+      "Resource": "*"
+    }
+  ]
+}

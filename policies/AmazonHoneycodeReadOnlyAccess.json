@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonHoneycodeReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonHoneycodeReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "honeycode:List*",
+        "honeycode:Get*",
+        "honeycode:Describe*",
+        "honeycode:Query*"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}

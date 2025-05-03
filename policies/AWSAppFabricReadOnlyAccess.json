@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSAppFabricReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAppFabricReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "appfabric:GetAppAuthorization",
+        "appfabric:GetAppBundle",
+        "appfabric:GetIngestion",
+        "appfabric:GetIngestionDestination",
+        "appfabric:ListAppAuthorizations",
+        "appfabric:ListAppBundles",
+        "appfabric:ListIngestionDestinations",
+        "appfabric:ListIngestions",
+        "appfabric:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

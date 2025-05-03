@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSArtifactAccountSync",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSArtifactAccountSync",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListAccounts",
+        "organizations:DescribeOrganization"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

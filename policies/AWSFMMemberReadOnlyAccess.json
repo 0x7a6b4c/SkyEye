@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSFMMemberReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSFMMemberReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "fms:GetAdminAccount",
+        "waf:Get*",
+        "waf:List*",
+        "waf-regional:Get*",
+        "waf-regional:List*",
+        "organizations:DescribeOrganization"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

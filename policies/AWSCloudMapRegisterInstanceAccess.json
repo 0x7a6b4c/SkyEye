@@ -1,0 +1,29 @@
+{
+  "PolicyName": "AWSCloudMapRegisterInstanceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudMapRegisterInstanceAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:GetHostedZone",
+        "route53:ListHostedZonesByName",
+        "route53:ChangeResourceRecordSets",
+        "route53:CreateHealthCheck",
+        "route53:GetHealthCheck",
+        "route53:DeleteHealthCheck",
+        "route53:UpdateHealthCheck",
+        "servicediscovery:Get*",
+        "servicediscovery:List*",
+        "servicediscovery:RegisterInstance",
+        "servicediscovery:DeregisterInstance",
+        "servicediscovery:DiscoverInstances",
+        "servicediscovery:DiscoverInstancesRevision",
+        "ec2:DescribeInstances"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

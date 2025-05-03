@@ -1,0 +1,15 @@
+{
+  "PolicyName": "ElementalAppliancesSoftwareFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalAppliancesSoftwareFullAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-appliances-software:*",
+        "elemental-activations:CompleteAccountRegistration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

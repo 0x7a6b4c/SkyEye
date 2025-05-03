@@ -1,0 +1,28 @@
+{
+  "PolicyName": "AmazonGuardDutyReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonGuardDutyReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "guardduty:Describe*",
+        "guardduty:Get*",
+        "guardduty:List*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListDelegatedAdministrators",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:DescribeOrganizationalUnit",
+        "organizations:DescribeAccount",
+        "organizations:DescribeOrganization",
+        "organizations:ListAccounts"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

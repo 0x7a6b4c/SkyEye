@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AWSDeadlineCloud-WorkerHost",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDeadlineCloud-WorkerHost",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "JoinFleetPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "deadline:CreateWorker",
+        "deadline:AssumeFleetRoleForWorker"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalAccount": "${aws:ResourceAccount}"
+        }
+      }
+    }
+  ]
+}

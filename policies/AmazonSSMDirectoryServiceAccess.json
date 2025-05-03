@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonSSMDirectoryServiceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSSMDirectoryServiceAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ds:CreateComputer",
+        "ds:DescribeDirectories"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

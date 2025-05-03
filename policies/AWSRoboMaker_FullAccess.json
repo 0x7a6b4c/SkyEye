@@ -1,0 +1,52 @@
+{
+  "PolicyName": "AWSRoboMaker_FullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSRoboMaker_FullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "robomaker:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:CalledViaFirst": "robomaker.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ecr:BatchGetImage",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:CalledViaFirst": "robomaker.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ecr-public:DescribeImages",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:CalledViaFirst": "robomaker.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "robomaker.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

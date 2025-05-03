@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonMacieServiceRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonMacieServiceRole",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Resource": "*",
+      "Action": [
+        "s3:Get*",
+        "s3:List*"
+      ]
+    }
+  ]
+}

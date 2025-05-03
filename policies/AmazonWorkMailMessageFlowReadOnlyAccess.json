@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonWorkMailMessageFlowReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkMailMessageFlowReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "workmailmessageflow:Get*"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}

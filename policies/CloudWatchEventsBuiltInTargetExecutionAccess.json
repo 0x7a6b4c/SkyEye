@@ -1,0 +1,19 @@
+{
+  "PolicyName": "CloudWatchEventsBuiltInTargetExecutionAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/CloudWatchEventsBuiltInTargetExecutionAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "CloudWatchEventsBuiltInTargetExecutionAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Describe*",
+        "ec2:RebootInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances",
+        "ec2:CreateSnapshot"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

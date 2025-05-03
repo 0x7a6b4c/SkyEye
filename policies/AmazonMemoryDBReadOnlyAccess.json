@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonMemoryDBReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMemoryDBReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "memorydb:Describe*",
+        "memorydb:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

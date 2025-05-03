@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonAppStreamReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonAppStreamReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "appstream:Get*",
+        "appstream:List*",
+        "appstream:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

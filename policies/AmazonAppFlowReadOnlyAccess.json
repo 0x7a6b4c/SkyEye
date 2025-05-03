@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AmazonAppFlowReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonAppFlowReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "appflow:DescribeConnector",
+        "appflow:DescribeConnectors",
+        "appflow:DescribeConnectorProfiles",
+        "appflow:DescribeFlows",
+        "appflow:DescribeFlowExecution",
+        "appflow:DescribeConnectorFields",
+        "appflow:ListConnectors",
+        "appflow:ListConnectorFields",
+        "appflow:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "PolicyName": "PowerUserAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/PowerUserAccess",
+  "DefaultVersionId": "v6",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "NotAction": [
+        "iam:*",
+        "organizations:*",
+        "account:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "account:GetAccountInformation",
+        "account:GetPrimaryEmail",
+        "account:ListRegions",
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:ListRoles",
+        "organizations:DescribeOrganization"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

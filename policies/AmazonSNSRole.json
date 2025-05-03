@@ -1,0 +1,20 @@
+{
+  "PolicyName": "AmazonSNSRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonSNSRole",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:PutMetricFilter",
+        "logs:PutRetentionPolicy"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

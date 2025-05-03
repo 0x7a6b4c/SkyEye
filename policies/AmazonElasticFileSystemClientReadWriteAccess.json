@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonElasticFileSystemClientReadWriteAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elasticfilesystem:ClientMount",
+        "elasticfilesystem:ClientWrite",
+        "elasticfilesystem:DescribeMountTargets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

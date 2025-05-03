@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSCodePipelineCustomActionAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCodePipelineCustomActionAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "codepipeline:AcknowledgeJob",
+        "codepipeline:GetJobDetails",
+        "codepipeline:PollForJobs",
+        "codepipeline:PutJobFailureResult",
+        "codepipeline:PutJobSuccessResult"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

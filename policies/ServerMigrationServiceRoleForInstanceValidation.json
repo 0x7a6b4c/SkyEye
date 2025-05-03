@@ -1,0 +1,17 @@
+{
+  "PolicyName": "ServerMigrationServiceRoleForInstanceValidation",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/ServerMigrationServiceRoleForInstanceValidation",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::sms-app-*/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "sms:NotifyAppValidationOutput",
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSDeepRacerAccountAdminAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDeepRacerAccountAdminAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "DeepRacerAdminAccessStatement",
+      "Effect": "Allow",
+      "Action": [
+        "deepracer:*"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Condition": {
+        "Null": {
+          "deepracer:UserToken": "true"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "PolicyName": "AWSElasticDisasterRecoveryCrossAccountReplicationPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticDisasterRecoveryCrossAccountReplicationPolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "CrossAccountPolicy1",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeVolumes",
+        "ec2:DescribeVolumeAttribute",
+        "ec2:DescribeInstances",
+        "drs:DescribeSourceServers",
+        "drs:DescribeReplicationConfigurationTemplates",
+        "drs:CreateSourceServerForDrs"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CrossAccountPolicy2",
+      "Effect": "Allow",
+      "Action": [
+        "drs:TagResource"
+      ],
+      "Resource": "arn:aws:drs:*:*:source-server/*",
+      "Condition": {
+        "StringEquals": {
+          "drs:CreateAction": "CreateSourceServerForDrs"
+        }
+      }
+    }
+  ]
+}

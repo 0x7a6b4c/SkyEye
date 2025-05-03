@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AmazonEKSWorkerNodePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "WorkerNodePermissions",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeVolumesModifications",
+        "ec2:DescribeVpcs",
+        "eks:DescribeCluster",
+        "eks-auth:AssumeRoleForPodIdentity"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

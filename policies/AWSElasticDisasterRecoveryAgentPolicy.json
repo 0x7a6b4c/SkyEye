@@ -1,0 +1,33 @@
+{
+  "PolicyName": "AWSElasticDisasterRecoveryAgentPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticDisasterRecoveryAgentPolicy",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "DRSAgentPolicy1",
+      "Effect": "Allow",
+      "Action": [
+        "drs:SendAgentMetricsForDrs",
+        "drs:SendAgentLogsForDrs",
+        "drs:UpdateAgentSourcePropertiesForDrs",
+        "drs:UpdateAgentReplicationInfoForDrs",
+        "drs:UpdateAgentConversionInfoForDrs",
+        "drs:GetAgentCommandForDrs",
+        "drs:GetAgentConfirmedResumeInfoForDrs",
+        "drs:GetAgentRuntimeConfigurationForDrs",
+        "drs:UpdateAgentBacklogForDrs",
+        "drs:GetAgentReplicationInfoForDrs",
+        "drs:IssueAgentCertificateForDrs"
+      ],
+      "Resource": "arn:aws:drs:*:*:source-server/${aws:SourceIdentity}"
+    },
+    {
+      "Sid": "DRSAgentPolicy2",
+      "Effect": "Allow",
+      "Action": [
+        "drs:GetAgentInstallationAssetsForDrs"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

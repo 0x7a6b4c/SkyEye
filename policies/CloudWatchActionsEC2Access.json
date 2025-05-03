@@ -1,0 +1,18 @@
+{
+  "PolicyName": "CloudWatchActionsEC2Access",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchActionsEC2Access",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:Describe*",
+        "ec2:Describe*",
+        "ec2:RebootInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonWorkMailMessageFlowFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkMailMessageFlowFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "workmailmessageflow:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

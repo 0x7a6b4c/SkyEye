@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonManagedBlockchainReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonManagedBlockchainReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "managedblockchain:Get*",
+        "managedblockchain:List*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

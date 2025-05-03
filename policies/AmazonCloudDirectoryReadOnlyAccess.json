@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AmazonCloudDirectoryReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCloudDirectoryReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "clouddirectory:List*",
+        "clouddirectory:Get*",
+        "clouddirectory:LookupPolicy",
+        "clouddirectory:BatchRead"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

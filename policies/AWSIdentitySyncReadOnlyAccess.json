@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSIdentitySyncReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIdentitySyncReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "identity-sync:GetSyncProfile",
+        "identity-sync:ListSyncFilters",
+        "identity-sync:GetSyncTarget"
+      ],
+      "Resource": "arn:*:identity-sync:*:*:*/*"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AWSXRayDaemonWriteAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AWSXRayDaemonWriteAccess",
+      "Effect": "Allow",
+      "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords",
+        "xray:GetSamplingRules",
+        "xray:GetSamplingTargets",
+        "xray:GetSamplingStatisticSummaries"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

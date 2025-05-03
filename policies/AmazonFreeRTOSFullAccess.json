@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonFreeRTOSFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonFreeRTOSFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "freertos:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

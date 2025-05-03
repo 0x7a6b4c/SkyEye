@@ -1,0 +1,28 @@
+{
+  "PolicyName": "VMImportExportRoleForAWSConnector",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/VMImportExportRoleForAWSConnector",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::import-to-ec2-*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ModifySnapshotAttribute",
+        "ec2:CopySnapshot",
+        "ec2:RegisterImage",
+        "ec2:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "PolicyName": "AmazonCodeCatalystSupportAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonCodeCatalystSupportAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "support:DescribeAttachment",
+        "support:DescribeCaseAttributes",
+        "support:DescribeCases",
+        "support:DescribeCommunications",
+        "support:DescribeIssueTypes",
+        "support:DescribeServices",
+        "support:DescribeSeverityLevels",
+        "support:DescribeSupportLevel",
+        "support:SearchForCases",
+        "support:AddAttachmentsToSet",
+        "support:AddCommunicationToCase",
+        "support:CreateCase",
+        "support:InitiateCallForCase",
+        "support:InitiateChatForCase",
+        "support:PutCaseAttributes",
+        "support:RateCaseCommunication",
+        "support:ResolveCase"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSDirectConnectReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDirectConnectReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "directconnect:Describe*",
+        "directconnect:List*",
+        "ec2:DescribeVpnGateways",
+        "ec2:DescribeTransitGateways"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSQuickSightDescribeRedshift",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSQuickSightDescribeRedshift",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "redshift:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

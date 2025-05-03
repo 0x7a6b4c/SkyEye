@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonMachineLearningRealTimePredictionOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMachineLearningRealTimePredictionOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "machinelearning:Predict"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

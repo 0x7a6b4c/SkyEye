@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AmazonLookoutVisionReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonLookoutVisionReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "LookoutVisionReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "lookoutvision:DescribeDataset",
+        "lookoutvision:DescribeModel",
+        "lookoutvision:DescribeProject",
+        "lookoutvision:DescribeModelPackagingJob",
+        "lookoutvision:ListDatasetEntries",
+        "lookoutvision:ListModels",
+        "lookoutvision:ListProjects",
+        "lookoutvision:ListTagsForResource",
+        "lookoutvision:ListModelPackagingJobs"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

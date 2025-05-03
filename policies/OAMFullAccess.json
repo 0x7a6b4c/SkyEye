@@ -1,0 +1,14 @@
+{
+  "PolicyName": "OAMFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/OAMFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oam:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "PolicyName": "AWSElasticDisasterRecoveryStagingAccountPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticDisasterRecoveryStagingAccountPolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "DRSStagingAccountPolicy1",
+      "Effect": "Allow",
+      "Action": [
+        "drs:DescribeSourceServers",
+        "drs:DescribeRecoverySnapshots",
+        "drs:CreateConvertedSnapshotForDrs",
+        "drs:GetReplicationConfiguration",
+        "drs:DescribeJobs",
+        "drs:DescribeJobLogItems"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DRSStagingAccountPolicy2",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ModifySnapshotAttribute"
+      ],
+      "Resource": "arn:aws:ec2:*:*:snapshot/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:Add/userId": "${aws:SourceIdentity}"
+        },
+        "Null": {
+          "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
+        }
+      }
+    }
+  ]
+}

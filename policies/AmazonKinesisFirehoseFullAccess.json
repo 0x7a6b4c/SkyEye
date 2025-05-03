@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonKinesisFirehoseFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisFirehoseFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "firehose:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

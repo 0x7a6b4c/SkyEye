@@ -1,0 +1,54 @@
+{
+  "PolicyName": "AWSApplicationDiscoveryServiceFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSApplicationDiscoveryServiceFullAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Action": [
+        "mgh:*",
+        "discovery:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:GetRole"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/continuousexport.discovery.amazonaws.com/AWSServiceRoleForApplicationDiscoveryServiceContinuousExport*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "continuousexport.discovery.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetServiceLinkedRoleDeletionStatus"
+      ],
+      "Resource": "arn:aws:iam::*:role/aws-service-role/continuousexport.discovery.amazonaws.com/AWSServiceRoleForApplicationDiscoveryServiceContinuousExport*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": [
+            "migrationhub.amazonaws.com",
+            "dmsintegration.migrationhub.amazonaws.com",
+            "smsintegration.migrationhub.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

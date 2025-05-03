@@ -1,0 +1,14 @@
+{
+  "PolicyName": "CloudSearchFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudSearchFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "cloudsearch:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

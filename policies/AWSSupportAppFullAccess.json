@@ -1,0 +1,34 @@
+{
+  "PolicyName": "AWSSupportAppFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSupportAppFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "servicequotas:GetRequestedServiceQuotaChange",
+        "servicequotas:GetServiceQuota",
+        "servicequotas:RequestServiceQuotaIncrease",
+        "support:AddAttachmentsToSet",
+        "support:AddCommunicationToCase",
+        "support:CreateCase",
+        "support:DescribeCases",
+        "support:DescribeCommunications",
+        "support:DescribeSeverityLevels",
+        "support:InitiateChatForCase",
+        "support:ResolveCase"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "servicequotas.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

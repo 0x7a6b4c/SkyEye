@@ -1,0 +1,14 @@
+{
+  "PolicyName": "ElementalActivationsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ElementalActivationsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elemental-activations:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

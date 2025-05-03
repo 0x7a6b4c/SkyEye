@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonRoute53ReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:Get*",
+        "route53:List*",
+        "route53:TestDNSAnswer"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

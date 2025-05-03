@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonKinesisFirehoseReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisFirehoseReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "firehose:Describe*",
+        "firehose:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

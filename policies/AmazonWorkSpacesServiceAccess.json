@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonWorkSpacesServiceAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkSpacesServiceAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeNetworkInterfaces"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

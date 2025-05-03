@@ -1,0 +1,39 @@
+{
+  "PolicyName": "AWSWAFConsoleReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSWAFConsoleReadOnlyAccess",
+  "DefaultVersionId": "v7",
+  "Statement": [
+    {
+      "Action": [
+        "apigateway:GET",
+        "cloudfront:ListDistributions",
+        "cloudfront:ListDistributionsByWebACLId",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:GetMetricStatistics",
+        "cloudwatch:ListMetrics",
+        "ec2:DescribeRegions",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "appsync:ListGraphqlApis",
+        "waf-regional:Get*",
+        "waf-regional:List*",
+        "waf:Get*",
+        "waf:List*",
+        "wafv2:Describe*",
+        "wafv2:Get*",
+        "wafv2:List*",
+        "wafv2:CheckCapacity",
+        "cognito-idp:ListUserPools",
+        "cognito-idp:ListResourcesForWebACL",
+        "cognito-idp:GetWebACLForResource",
+        "apprunner:DescribeWebAclForService",
+        "apprunner:ListServices",
+        "apprunner:ListAssociatedServicesForWebAcl",
+        "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
+        "ec2:GetVerifiedAccessInstanceWebAcl",
+        "ec2:DescribeVerifiedAccessInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

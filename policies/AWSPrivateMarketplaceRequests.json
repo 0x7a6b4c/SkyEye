@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSPrivateMarketplaceRequests",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSPrivateMarketplaceRequests",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:CreatePrivateMarketplaceRequests",
+        "aws-marketplace:ListPrivateMarketplaceRequests",
+        "aws-marketplace:DescribePrivateMarketplaceRequests"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

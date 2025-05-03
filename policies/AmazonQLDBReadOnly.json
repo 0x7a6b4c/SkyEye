@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AmazonQLDBReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonQLDBReadOnly",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "qldb:ListLedgers",
+        "qldb:DescribeLedger",
+        "qldb:ListJournalS3Exports",
+        "qldb:ListJournalS3ExportsForLedger",
+        "qldb:DescribeJournalS3Export",
+        "qldb:DescribeJournalKinesisStream",
+        "qldb:ListJournalKinesisStreamsForLedger",
+        "qldb:GetBlock",
+        "qldb:GetDigest",
+        "qldb:GetRevision",
+        "qldb:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

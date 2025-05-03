@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonCodeCatalystReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeCatalystReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codecatalyst:Get*",
+        "codecatalyst:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

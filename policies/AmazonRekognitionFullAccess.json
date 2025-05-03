@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonRekognitionFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRekognitionFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rekognition:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

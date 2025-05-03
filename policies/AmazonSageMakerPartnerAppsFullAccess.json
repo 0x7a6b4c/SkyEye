@@ -1,0 +1,28 @@
+{
+  "PolicyName": "AmazonSageMakerPartnerAppsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSageMakerPartnerAppsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AmazonSageMakerPartnerListAppsPermission",
+      "Effect": "Allow",
+      "Action": "sagemaker:ListPartnerApps",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AmazonSageMakerPartnerAppsPermission",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:CreatePartnerAppPresignedUrl",
+        "sagemaker:DescribePartnerApp",
+        "sagemaker:CallPartnerAppApi"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "${aws:PrincipalAccount}"
+        }
+      },
+      "Resource": "arn:aws:sagemaker:*:*:partner-app/*"
+    }
+  ]
+}

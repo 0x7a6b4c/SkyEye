@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AWSKeyManagementServicePowerUser",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:CreateAlias",
+        "kms:CreateKey",
+        "kms:DeleteAlias",
+        "kms:Describe*",
+        "kms:GenerateRandom",
+        "kms:Get*",
+        "kms:List*",
+        "kms:TagResource",
+        "kms:UntagResource",
+        "iam:ListGroups",
+        "iam:ListRoles",
+        "iam:ListUsers"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

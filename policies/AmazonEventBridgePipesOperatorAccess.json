@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonEventBridgePipesOperatorAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgePipesOperatorAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "pipes:DescribePipe",
+        "pipes:ListPipes",
+        "pipes:ListTagsForResource",
+        "pipes:StartPipe",
+        "pipes:StopPipe"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

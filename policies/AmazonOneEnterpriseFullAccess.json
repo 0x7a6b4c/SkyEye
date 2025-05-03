@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonOneEnterpriseFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOneEnterpriseFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "FullAccessStatementID",
+      "Effect": "Allow",
+      "Action": [
+        "one:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

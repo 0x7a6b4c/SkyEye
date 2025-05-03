@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSIoTFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:*",
+        "iotjobsdata:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

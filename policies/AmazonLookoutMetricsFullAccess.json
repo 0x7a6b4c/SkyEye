@@ -1,0 +1,26 @@
+{
+  "PolicyName": "AmazonLookoutMetricsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonLookoutMetricsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lookoutmetrics:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::*:role/*LookoutMetrics*",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "lookoutmetrics.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

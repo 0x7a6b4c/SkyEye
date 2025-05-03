@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AWSWickrFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSWickrFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "wickr:*",
+      "Resource": "*"
+    }
+  ]
+}

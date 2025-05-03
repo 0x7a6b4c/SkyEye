@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonCodeGuruSecurityFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCodeGuruSecurityFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AmazonCodeGuruSecurityFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "codeguru-security:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

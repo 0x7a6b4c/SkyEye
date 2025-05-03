@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonMechanicalTurkFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMechanicalTurkFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mechanicalturk:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

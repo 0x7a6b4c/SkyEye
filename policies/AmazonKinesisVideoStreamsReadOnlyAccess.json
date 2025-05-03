@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonKinesisVideoStreamsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisVideoStreamsReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kinesisvideo:Describe*",
+        "kinesisvideo:Get*",
+        "kinesisvideo:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AmazonWorkspacesPCAAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkspacesPCAAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "acm-pca:IssueCertificate",
+        "acm-pca:GetCertificate",
+        "acm-pca:DescribeCertificateAuthority"
+      ],
+      "Resource": "arn:*:acm-pca:*:*:*",
+      "Condition": {
+        "StringLike": {
+          "aws:ResourceTag/euc-private-ca": "*"
+        }
+      }
+    }
+  ]
+}

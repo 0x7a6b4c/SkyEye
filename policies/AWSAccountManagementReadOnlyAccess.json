@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSAccountManagementReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAccountManagementReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "account:Get*",
+        "account:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

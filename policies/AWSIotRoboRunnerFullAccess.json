@@ -1,0 +1,22 @@
+{
+  "PolicyName": "AWSIotRoboRunnerFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIotRoboRunnerFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iotroborunner:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/iotroborunner.amazonaws.com/AWSServiceRoleForIoTRoboRunner",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "iotroborunner.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "PolicyName": "IAMUserSSHKeys",
+  "PolicyArn": "arn:aws:iam::aws:policy/IAMUserSSHKeys",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:DeleteSSHPublicKey",
+        "iam:GetSSHPublicKey",
+        "iam:ListSSHPublicKeys",
+        "iam:UpdateSSHPublicKey",
+        "iam:UploadSSHPublicKey"
+      ],
+      "Resource": "arn:aws:iam::*:user/${aws:username}"
+    }
+  ]
+}

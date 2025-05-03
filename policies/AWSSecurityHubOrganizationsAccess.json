@@ -1,0 +1,48 @@
+{
+  "PolicyName": "AWSSecurityHubOrganizationsAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSecurityHubOrganizationsAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "OrganizationPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListAccounts",
+        "organizations:DescribeOrganization",
+        "organizations:ListRoots",
+        "organizations:ListDelegatedAdministrators",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListOrganizationalUnitsForParent",
+        "organizations:ListAccountsForParent",
+        "organizations:DescribeAccount",
+        "organizations:DescribeOrganizationalUnit"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "OrganizationPermissionsEnable",
+      "Effect": "Allow",
+      "Action": "organizations:EnableAWSServiceAccess",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "organizations:ServicePrincipal": "securityhub.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "OrganizationPermissionsDelegatedAdmin",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:RegisterDelegatedAdministrator",
+        "organizations:DeregisterDelegatedAdministrator"
+      ],
+      "Resource": "arn:aws:organizations::*:account/o-*/*",
+      "Condition": {
+        "StringEquals": {
+          "organizations:ServicePrincipal": "securityhub.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "OAMReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/OAMReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oam:Get*",
+        "oam:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "PolicyName": "AWSElasticDisasterRecoveryFailbackInstallationPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElasticDisasterRecoveryFailbackInstallationPolicy",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "DRSFailbackInstallationPolicy1",
+      "Effect": "Allow",
+      "Action": [
+        "drs:SendClientLogsForDrs",
+        "drs:SendClientMetricsForDrs",
+        "drs:DescribeRecoveryInstances",
+        "drs:DescribeSourceServers"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DRSFailbackInstallationPolicy2",
+      "Effect": "Allow",
+      "Action": [
+        "drs:TagResource",
+        "drs:IssueAgentCertificateForDrs",
+        "drs:AssociateFailbackClientToRecoveryInstanceForDrs",
+        "drs:GetSuggestedFailbackClientDeviceMappingForDrs",
+        "drs:UpdateAgentReplicationInfoForDrs",
+        "drs:UpdateFailbackClientDeviceMappingForDrs"
+      ],
+      "Resource": "arn:aws:drs:*:*:recovery-instance/*"
+    }
+  ]
+}

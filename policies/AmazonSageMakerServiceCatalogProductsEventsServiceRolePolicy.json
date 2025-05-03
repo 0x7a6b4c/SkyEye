@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonSageMakerServiceCatalogProductsEventsServiceRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsEventsServiceRolePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "codepipeline:StartPipelineExecution",
+      "Resource": "arn:aws:codepipeline:*:*:sagemaker-*"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonEC2ContainerRegistryPullOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchImportUpstreamImage"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

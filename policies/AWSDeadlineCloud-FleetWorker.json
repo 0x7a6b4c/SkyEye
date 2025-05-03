@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AWSDeadlineCloud-FleetWorker",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSDeadlineCloud-FleetWorker",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "RunTasksPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "deadline:AssumeFleetRoleForWorker",
+        "deadline:UpdateWorker",
+        "deadline:UpdateWorkerSchedule",
+        "deadline:BatchGetJobEntity",
+        "deadline:AssumeQueueRoleForWorker"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalAccount": "${aws:ResourceAccount}"
+        }
+      }
+    }
+  ]
+}

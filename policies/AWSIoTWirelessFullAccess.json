@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoTWirelessFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTWirelessFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotwireless:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

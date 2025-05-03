@@ -1,0 +1,10 @@
+{
+  "PolicyName": "AWSElementalMediaTailorFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaTailorFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "mediatailor:*",
+    "Resource": "*"
+  }
+}

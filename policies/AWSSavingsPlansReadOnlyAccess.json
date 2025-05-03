@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSSavingsPlansReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSavingsPlansReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "savingsplans:Describe*",
+        "savingsplans:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

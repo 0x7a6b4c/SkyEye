@@ -1,0 +1,41 @@
+{
+  "PolicyName": "AWSBugBustPlayerAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSBugBustPlayerAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "CodeGuruReviewerPermission",
+      "Effect": "Allow",
+      "Action": [
+        "codeguru-reviewer:DescribeCodeReview",
+        "codeguru-reviewer:ListRecommendations"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CodeGuruProfilerPermission",
+      "Effect": "Allow",
+      "Action": [
+        "codeguru-profiler:DescribeProfilingGroup"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AWSBugBustPlayerAccess",
+      "Effect": "Allow",
+      "Action": [
+        "bugbust:ListBugs",
+        "bugbust:ListProfilingGroups",
+        "bugbust:JoinEvent",
+        "bugbust:GetEvent",
+        "bugbust:ListEvents",
+        "bugbust:GetJoinEventStatus",
+        "bugbust:ListEventScores",
+        "bugbust:ListEventParticipants",
+        "bugbust:UpdateWorkItem",
+        "bugbust:ListPullRequests"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

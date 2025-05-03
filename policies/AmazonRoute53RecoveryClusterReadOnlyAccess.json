@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonRoute53RecoveryClusterReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53RecoveryClusterReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53-recovery-cluster:GetRoutingControlState",
+        "route53-recovery-cluster:ListRoutingControls"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

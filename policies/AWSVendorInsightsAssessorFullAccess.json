@@ -1,0 +1,45 @@
+{
+  "PolicyName": "AWSVendorInsightsAssessorFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSVendorInsightsAssessorFullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "vendor-insights:GetProfileAccessTerms",
+        "vendor-insights:ListEntitledSecurityProfiles",
+        "vendor-insights:GetEntitledSecurityProfileSnapshot",
+        "vendor-insights:ListEntitledSecurityProfileSnapshots"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "aws-marketplace:CreateAgreementRequest",
+        "aws-marketplace:GetAgreementRequest",
+        "aws-marketplace:AcceptAgreementRequest",
+        "aws-marketplace:CancelAgreementRequest",
+        "aws-marketplace:ListAgreementRequests",
+        "aws-marketplace:SearchAgreements",
+        "aws-marketplace:CancelAgreement"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws-marketplace:AgreementType": "VendorInsightsAgreement"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "artifact:GetReport",
+        "artifact:GetReportMetadata",
+        "artifact:GetTermForReport",
+        "artifact:ListReports"
+      ],
+      "Resource": "arn:aws:artifact:*::report/*"
+    }
+  ]
+}

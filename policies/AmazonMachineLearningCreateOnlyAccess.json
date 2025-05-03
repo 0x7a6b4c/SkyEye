@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonMachineLearningCreateOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMachineLearningCreateOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "machinelearning:Add*",
+        "machinelearning:Create*",
+        "machinelearning:Delete*",
+        "machinelearning:Describe*",
+        "machinelearning:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

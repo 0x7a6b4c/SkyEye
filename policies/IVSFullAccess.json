@@ -1,0 +1,16 @@
+{
+  "PolicyName": "IVSFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/IVSFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "IVSFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ivs:*",
+        "ivschat:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

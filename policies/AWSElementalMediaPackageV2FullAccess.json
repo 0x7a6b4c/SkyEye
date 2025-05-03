@@ -1,0 +1,10 @@
+{
+  "PolicyName": "AWSElementalMediaPackageV2FullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaPackageV2FullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "mediapackagev2:*",
+    "Resource": "*"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AmazonOpenSearchIngestionReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOpenSearchIngestionReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "osis:GetPipeline",
+        "osis:GetPipelineChangeProgress",
+        "osis:GetPipelineBlueprint",
+        "osis:ListPipelineBlueprints",
+        "osis:ListPipelines",
+        "osis:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

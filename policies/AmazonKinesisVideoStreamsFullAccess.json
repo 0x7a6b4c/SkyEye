@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonKinesisVideoStreamsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisVideoStreamsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "kinesisvideo:*",
+      "Resource": "*"
+    }
+  ]
+}

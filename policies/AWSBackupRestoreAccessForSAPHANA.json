@@ -1,0 +1,37 @@
+{
+  "PolicyName": "AWSBackupRestoreAccessForSAPHANA",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSBackupRestoreAccessForSAPHANA",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "backup:Get*",
+        "backup:List*",
+        "backup:Describe*",
+        "backup:StartBackupJob",
+        "backup:StartRestoreJob"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm-sap:GetOperation",
+        "ssm-sap:ListDatabases"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm-sap:BackupDatabase",
+        "ssm-sap:RestoreDatabase",
+        "ssm-sap:UpdateHanaBackupSettings",
+        "ssm-sap:GetDatabase",
+        "ssm-sap:ListTagsForResource"
+      ],
+      "Resource": "arn:aws:ssm-sap:*:*:*"
+    }
+  ]
+}

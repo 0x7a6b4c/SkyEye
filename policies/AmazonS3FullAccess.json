@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonS3FullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*",
+        "s3-object-lambda:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

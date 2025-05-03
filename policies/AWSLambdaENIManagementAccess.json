@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSLambdaENIManagementAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaENIManagementAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteNetworkInterface",
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:UnassignPrivateIpAddresses"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

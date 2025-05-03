@@ -1,0 +1,41 @@
+{
+  "PolicyName": "AWSCodeDeployRoleForECS",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Action": [
+        "ecs:DescribeServices",
+        "ecs:CreateTaskSet",
+        "ecs:UpdateServicePrimaryTaskSet",
+        "ecs:DeleteTaskSet",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:ModifyRule",
+        "lambda:InvokeFunction",
+        "cloudwatch:DescribeAlarms",
+        "sns:Publish",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "iam:PassedToService": [
+            "ecs-tasks.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

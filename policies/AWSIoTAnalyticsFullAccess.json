@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoTAnalyticsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTAnalyticsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotanalytics:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

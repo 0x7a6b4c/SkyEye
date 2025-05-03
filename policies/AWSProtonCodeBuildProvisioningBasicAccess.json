@@ -1,0 +1,23 @@
+{
+  "PolicyName": "AWSProtonCodeBuildProvisioningBasicAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSProtonCodeBuildProvisioningBasicAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:CreateLogGroup",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:log-group:/aws/codebuild/AWSProton-*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "proton:NotifyResourceDeploymentStatusChange",
+      "Resource": "arn:aws:proton:*:*:*"
+    }
+  ]
+}

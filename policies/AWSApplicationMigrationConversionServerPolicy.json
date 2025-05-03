@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AWSApplicationMigrationConversionServerPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSApplicationMigrationConversionServerPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mgn:SendClientMetricsForMgn",
+        "mgn:SendClientLogsForMgn",
+        "mgn:GetChannelCommandsForMgn",
+        "mgn:SendChannelCommandResultForMgn"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

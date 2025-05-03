@@ -1,0 +1,45 @@
+{
+  "PolicyName": "AWSApplicationMigrationServiceEc2InstancePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSApplicationMigrationServiceEc2InstancePolicy",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "MgnAgentInstallation",
+      "Effect": "Allow",
+      "Action": [
+        "mgn:SendClientLogsForMgn",
+        "mgn:RegisterAgentForMgn",
+        "mgn:GetAgentInstallationAssetsForMgn"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "MgnAgentReplication",
+      "Effect": "Allow",
+      "Action": [
+        "mgn:SendAgentMetricsForMgn",
+        "mgn:SendAgentLogsForMgn",
+        "mgn:UpdateAgentSourcePropertiesForMgn",
+        "mgn:UpdateAgentReplicationInfoForMgn",
+        "mgn:UpdateAgentConversionInfoForMgn",
+        "mgn:GetAgentCommandForMgn",
+        "mgn:GetAgentConfirmedResumeInfoForMgn",
+        "mgn:GetAgentRuntimeConfigurationForMgn",
+        "mgn:UpdateAgentBacklogForMgn",
+        "mgn:GetAgentReplicationInfoForMgn"
+      ],
+      "Resource": "arn:aws:mgn:*:*:source-server/*"
+    },
+    {
+      "Sid": "MgnSourceServerTagResource",
+      "Effect": "Allow",
+      "Action": "mgn:TagResource",
+      "Resource": "arn:aws:mgn:*:*:source-server/*",
+      "Condition": {
+        "StringEquals": {
+          "mgn:CreateAction": "RegisterAgentForMgn"
+        }
+      }
+    }
+  ]
+}

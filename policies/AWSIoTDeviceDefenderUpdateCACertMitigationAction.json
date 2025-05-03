@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSIoTDeviceDefenderUpdateCACertMitigationAction",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSIoTDeviceDefenderUpdateCACertMitigationAction",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:UpdateCACertificate"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

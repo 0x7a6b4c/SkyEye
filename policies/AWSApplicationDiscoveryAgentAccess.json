@@ -1,0 +1,21 @@
+{
+  "PolicyName": "AWSApplicationDiscoveryAgentAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSApplicationDiscoveryAgentAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "arsenal:RegisterOnPremisesAgent"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "mgh:GetHomeRegion"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

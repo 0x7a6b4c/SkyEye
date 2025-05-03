@@ -1,0 +1,15 @@
+{
+  "PolicyName": "CloudWatchApplicationInsightsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchApplicationInsightsReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "applicationinsights:Describe*",
+        "applicationinsights:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

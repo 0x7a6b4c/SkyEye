@@ -1,0 +1,24 @@
+{
+  "PolicyName": "CloudWatchLogsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
+  "DefaultVersionId": "v6",
+  "Statement": [
+    {
+      "Sid": "CloudWatchLogsReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "logs:Describe*",
+        "logs:Get*",
+        "logs:List*",
+        "logs:StartQuery",
+        "logs:StopQuery",
+        "logs:TestMetricFilter",
+        "logs:FilterLogEvents",
+        "logs:StartLiveTail",
+        "logs:StopLiveTail",
+        "cloudwatch:GenerateQuery"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

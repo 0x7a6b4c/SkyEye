@@ -1,0 +1,16 @@
+{
+  "PolicyName": "WellArchitectedConsoleReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/WellArchitectedConsoleReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "wellarchitected:Get*",
+        "wellarchitected:List*",
+        "wellarchitected:ExportLens"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

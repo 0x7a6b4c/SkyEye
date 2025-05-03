@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonMobileAnalyticsNon-financialReportAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMobileAnalyticsNon-financialReportAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "mobileanalytics:GetReports",
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "PolicyName": "AmazonVerifiedPermissionsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonVerifiedPermissionsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AccountLevelPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "verifiedpermissions:CreatePolicyStore",
+        "verifiedpermissions:ListPolicyStores"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "PolicyStoreLevelPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "verifiedpermissions:*"
+      ],
+      "Resource": [
+        "arn:aws:verifiedpermissions::*:policy-store/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "PolicyName": "AWSElasticBeanstalkRoleECS",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkRoleECS",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "AllowECS",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:CreateCluster",
+        "ecs:DeleteCluster",
+        "ecs:RegisterTaskDefinition",
+        "ecs:DeRegisterTaskDefinition"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "AllowECSTagResource",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:TagResource"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:CreateAction": [
+            "CreateCluster",
+            "RegisterTaskDefinition"
+          ]
+        }
+      }
+    }
+  ]
+}

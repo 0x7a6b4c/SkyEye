@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoTWirelessDataAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoTWirelessDataAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iotwireless:SendDataToWirelessDevice"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

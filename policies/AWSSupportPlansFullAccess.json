@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSSupportPlansFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSupportPlansFullAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "supportplans:GetSupportPlan",
+        "supportplans:GetSupportPlanUpdateStatus",
+        "supportplans:ListSupportPlanModifiers",
+        "supportplans:StartSupportPlanUpdate",
+        "supportplans:CreateSupportPlanSchedule"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

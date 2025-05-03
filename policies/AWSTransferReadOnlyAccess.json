@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSTransferReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSTransferReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "transfer:DescribeUser",
+        "transfer:DescribeServer",
+        "transfer:ListUsers",
+        "transfer:ListServers",
+        "transfer:TestIdentityProvider",
+        "transfer:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

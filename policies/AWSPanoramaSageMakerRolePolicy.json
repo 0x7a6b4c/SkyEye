@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSPanoramaSageMakerRolePolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSPanoramaSageMakerRolePolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "PanoramaSageMakerS3Access",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:GetBucket*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::*aws-panorama*"
+      ]
+    }
+  ]
+}

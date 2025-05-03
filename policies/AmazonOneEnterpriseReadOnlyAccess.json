@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonOneEnterpriseReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOneEnterpriseReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "ReadOnlyAccessStatementID",
+      "Effect": "Allow",
+      "Action": [
+        "one:Get*",
+        "one:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

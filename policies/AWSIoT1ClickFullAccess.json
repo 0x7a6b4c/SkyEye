@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSIoT1ClickFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSIoT1ClickFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "iot1click:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

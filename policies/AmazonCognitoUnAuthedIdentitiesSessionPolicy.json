@@ -1,0 +1,39 @@
+{
+  "PolicyName": "AmazonCognitoUnAuthedIdentitiesSessionPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonCognitoUnAuthedIdentitiesSessionPolicy",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Sid": "CognitoUnAuthedIdentitiesSessionPolicy",
+      "Effect": "Allow",
+      "Action": [
+        "rum:PutRumEvents",
+        "sagemaker:InvokeEndpoint",
+        "polly:*",
+        "comprehend:*",
+        "translate:*",
+        "transcribe:*",
+        "rekognition:*",
+        "mobiletargeting:*",
+        "firehose:*",
+        "personalize:*",
+        "geo:GetMap*",
+        "geo:SearchPlaceIndex*",
+        "geo:GetPlace",
+        "geo:CalculateRoute*",
+        "geo:*Geofence",
+        "geo:*Geofences",
+        "geo:*DevicePosition*",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncryptTo",
+        "kms:ReEncryptFrom",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

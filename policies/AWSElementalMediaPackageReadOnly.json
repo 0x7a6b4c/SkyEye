@@ -1,0 +1,13 @@
+{
+  "PolicyName": "AWSElementalMediaPackageReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSElementalMediaPackageReadOnly",
+  "DefaultVersionId": "v1",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": [
+      "mediapackage:List*",
+      "mediapackage:Describe*"
+    ],
+    "Resource": "*"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "PolicyName": "RDSCloudHsmAuthorizationRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/RDSCloudHsmAuthorizationRole",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudhsm:CreateLunaClient",
+        "cloudhsm:DeleteLunaClient",
+        "cloudhsm:DescribeHapg",
+        "cloudhsm:DescribeLunaClient",
+        "cloudhsm:GetConfig",
+        "cloudhsm:ModifyHapg",
+        "cloudhsm:ModifyLunaClient"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

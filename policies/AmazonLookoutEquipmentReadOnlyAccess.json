@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonLookoutEquipmentReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonLookoutEquipmentReadOnlyAccess",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lookoutequipment:Describe*",
+        "lookoutequipment:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

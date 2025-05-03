@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSArtifactReportsReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSArtifactReportsReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Sid": "ArtifactReportActions",
+      "Effect": "Allow",
+      "Action": [
+        "artifact:GetReport",
+        "artifact:GetReportMetadata",
+        "artifact:GetTermForReport",
+        "artifact:ListReports"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

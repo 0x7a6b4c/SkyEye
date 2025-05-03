@@ -1,0 +1,19 @@
+{
+  "PolicyName": "AWSCloudFormationReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:Describe*",
+        "cloudformation:EstimateTemplateCost",
+        "cloudformation:Get*",
+        "cloudformation:List*",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:Detect*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

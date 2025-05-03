@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSSupportPlansReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSupportPlansReadOnlyAccess",
+  "DefaultVersionId": "v2",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "supportplans:GetSupportPlan",
+        "supportplans:GetSupportPlanUpdateStatus",
+        "supportplans:ListSupportPlanModifiers"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

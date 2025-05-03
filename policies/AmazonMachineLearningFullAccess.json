@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonMachineLearningFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMachineLearningFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "machinelearning:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

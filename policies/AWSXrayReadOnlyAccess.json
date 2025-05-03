@@ -1,0 +1,34 @@
+{
+  "PolicyName": "AWSXrayReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSXrayReadOnlyAccess",
+  "DefaultVersionId": "v8",
+  "Statement": [
+    {
+      "Sid": "AWSXrayReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "xray:GetSamplingRules",
+        "xray:GetSamplingTargets",
+        "xray:GetSamplingStatisticSummaries",
+        "xray:BatchGetTraces",
+        "xray:BatchGetTraceSummaryById",
+        "xray:GetDistinctTraceGraphs",
+        "xray:GetServiceGraph",
+        "xray:GetTraceGraph",
+        "xray:GetTraceSummaries",
+        "xray:GetGroups",
+        "xray:GetGroup",
+        "xray:ListTagsForResource",
+        "xray:ListResourcePolicies",
+        "xray:GetTimeSeriesServiceStatistics",
+        "xray:GetInsightSummaries",
+        "xray:GetInsight",
+        "xray:GetInsightEvents",
+        "xray:GetInsightImpactGraph"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AWSSSODirectoryAdministrator",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSSODirectoryAdministrator",
+  "DefaultVersionId": "v4",
+  "Statement": [
+    {
+      "Sid": "AWSSSODirectoryAdministrator",
+      "Effect": "Allow",
+      "Action": [
+        "sso-directory:*",
+        "identitystore:*",
+        "identitystore-auth:*",
+        "sso:ListDirectoryAssociations"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

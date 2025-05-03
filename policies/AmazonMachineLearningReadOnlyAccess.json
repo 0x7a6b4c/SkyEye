@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonMachineLearningReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonMachineLearningReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "machinelearning:Describe*",
+        "machinelearning:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

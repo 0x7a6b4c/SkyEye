@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AWSLambdaRole",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaRole",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lambda:InvokeFunction"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

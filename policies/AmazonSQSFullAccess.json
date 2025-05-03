@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AmazonSQSFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "sqs:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}

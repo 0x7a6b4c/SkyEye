@@ -1,0 +1,22 @@
+{
+  "PolicyName": "ResourceGroupsandTagEditorFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/ResourceGroupsandTagEditorFullAccess",
+  "DefaultVersionId": "v6",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "tag:getResources",
+        "tag:getTagKeys",
+        "tag:getTagValues",
+        "tag:TagResources",
+        "tag:UntagResources",
+        "resource-groups:*",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ListStackResources",
+        "cloudformation:ListStacks"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

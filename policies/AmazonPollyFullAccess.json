@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonPollyFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonPollyFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "polly:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

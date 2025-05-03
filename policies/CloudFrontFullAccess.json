@@ -1,0 +1,64 @@
+{
+  "PolicyName": "CloudFrontFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/CloudFrontFullAccess",
+  "DefaultVersionId": "v9",
+  "Statement": [
+    {
+      "Sid": "cfflistbuckets",
+      "Action": [
+        "s3:ListAllMyBuckets"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::*"
+    },
+    {
+      "Sid": "cffullaccess",
+      "Action": [
+        "acm:DescribeCertificate",
+        "acm:ListCertificates",
+        "cloudfront:*",
+        "cloudfront-keyvaluestore:*",
+        "iam:ListServerCertificates",
+        "waf:ListWebACLs",
+        "waf:GetWebACL",
+        "wafv2:ListWebACLs",
+        "wafv2:GetWebACL",
+        "kinesis:ListStreams",
+        "ec2:DescribeInstances",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "ec2:DescribeInternetGateways"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "acm:RequestCertificate"
+      ],
+      "Resource": "*",
+      "Sid": "cfrequestcertificate",
+      "Condition": {
+        "StringEquals": {
+          "aws:CalledViaLast": "cloudfront.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "cffdescribestream",
+      "Action": [
+        "kinesis:DescribeStream"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:kinesis:*:*:*"
+    },
+    {
+      "Sid": "cfflistroles",
+      "Action": [
+        "iam:ListRoles"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::*:*"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "PolicyName": "AWSCodeArtifactReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSCodeArtifactReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Action": [
+        "codeartifact:Describe*",
+        "codeartifact:Get*",
+        "codeartifact:List*",
+        "codeartifact:ReadFromRepository"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "sts:GetServiceBearerToken",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "sts:AWSServiceName": "codeartifact.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

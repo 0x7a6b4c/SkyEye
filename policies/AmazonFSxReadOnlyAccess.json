@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AmazonFSxReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonFSxReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "fsx:Describe*",
+        "fsx:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

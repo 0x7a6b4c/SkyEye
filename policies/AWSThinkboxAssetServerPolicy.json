@@ -1,0 +1,29 @@
+{
+  "PolicyName": "AWSThinkboxAssetServerPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSThinkboxAssetServerPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams",
+        "logs:GetLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:log-group:/thinkbox*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::aws-portal-cache*"
+      ]
+    }
+  ]
+}

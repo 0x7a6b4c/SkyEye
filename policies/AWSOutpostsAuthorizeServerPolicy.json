@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSOutpostsAuthorizeServerPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSOutpostsAuthorizeServerPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "outposts:StartConnection",
+        "outposts:GetConnection"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

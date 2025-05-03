@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonSSMReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:Describe*",
+        "ssm:Get*",
+        "ssm:List*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

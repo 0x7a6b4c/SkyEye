@@ -1,0 +1,18 @@
+{
+  "PolicyName": "AmazonOpenSearchDirectQueryGlueCreateAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOpenSearchDirectQueryGlueCreateAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "AmazonOpenSearchDirectQueryGlueCreateAccess",
+      "Effect": "Allow",
+      "Action": [
+        "glue:CreateDatabase",
+        "glue:CreatePartition",
+        "glue:CreateTable",
+        "glue:BatchCreatePartition"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

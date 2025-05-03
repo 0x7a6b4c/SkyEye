@@ -1,0 +1,24 @@
+{
+  "PolicyName": "AmazonEventBridgePipesFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgePipesFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "EventBridgePipesActions",
+      "Effect": "Allow",
+      "Action": "pipes:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "IAMPassRoleAccessForPipes",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::*:role/*",
+      "Condition": {
+        "StringLike": {
+          "iam:PassedToService": "pipes.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

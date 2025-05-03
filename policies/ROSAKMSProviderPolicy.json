@@ -1,0 +1,22 @@
+{
+  "PolicyName": "ROSAKMSProviderPolicy",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/ROSAKMSProviderPolicy",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Sid": "VolumeEncryption",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/red-hat": "true"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AWSSavingsPlansFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSSavingsPlansFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "savingsplans:*",
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "PolicyName": "AmazonSageMakerGeospatialFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/service-role/AmazonSageMakerGeospatialFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "sagemaker-geospatial:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::*:role/*",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": [
+            "sagemaker-geospatial.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonEventBridgePipesReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgePipesReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "pipes:DescribePipe",
+        "pipes:ListPipes",
+        "pipes:ListTagsForResource"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

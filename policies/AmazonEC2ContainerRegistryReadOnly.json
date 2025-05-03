@@ -1,0 +1,25 @@
+{
+  "PolicyName": "AmazonEC2ContainerRegistryReadOnly",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+  "DefaultVersionId": "v3",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:GetRepositoryPolicy",
+        "ecr:DescribeRepositories",
+        "ecr:ListImages",
+        "ecr:DescribeImages",
+        "ecr:BatchGetImage",
+        "ecr:GetLifecyclePolicy",
+        "ecr:GetLifecyclePolicyPreview",
+        "ecr:ListTagsForResource",
+        "ecr:DescribeImageScanFindings"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

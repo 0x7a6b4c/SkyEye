@@ -1,0 +1,16 @@
+{
+  "PolicyName": "AmazonOpenSearchServiceReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonOpenSearchServiceReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "es:Describe*",
+        "es:List*",
+        "es:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

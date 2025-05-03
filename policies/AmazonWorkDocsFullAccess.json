@@ -1,0 +1,17 @@
+{
+  "PolicyName": "AmazonWorkDocsFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkDocsFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "workdocs:*",
+        "ds:DescribeDirectories",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "PolicyName": "AmazonWorkSpacesApplicationManagerAdminAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AmazonWorkSpacesApplicationManagerAdminAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "wam:AuthenticatePackager",
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "PolicyName": "AWSGreengrassFullAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSGreengrassFullAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "greengrass:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PolicyName": "AWSAppRunnerReadOnlyAccess",
+  "PolicyArn": "arn:aws:iam::aws:policy/AWSAppRunnerReadOnlyAccess",
+  "DefaultVersionId": "v1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "apprunner:List*",
+        "apprunner:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
