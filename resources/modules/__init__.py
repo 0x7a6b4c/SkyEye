@@ -2,7 +2,7 @@ from resources.libraries.aws_policies import AWS_POLICIES
 from ..libraries.boto3_iam_operations import IAM_READ_OPERATION_LIST
 from ..utils import (envIAMData, remove_metadata, json_encoder, configure_logging, 
                      load_credentials_from_json, ensure_completed_scan_folder, createDir, 
-                     save_output_to_file, save_output_to_fileEnv)
+                     save_output_to_file, save_output_to_fileEnv, regex_filtering)
 
 from .iam_fuzzing import iam_permission_fuzzing
 from .update_aws_policy import update_aws_managed_policies
@@ -31,6 +31,6 @@ __all__ = ['account_filterings', 'assume_roles_enumeration', 'assumeRoleIteratio
            'filter_roles','all_iam_json_enum','version_checking','policy_new_check','list_inline_policies','get_inline_policy','get_policy_version_safe',
            'filteringListIdentitiesForPolicy','checkingLIFPPermission','scanningListIdentitiesForPolicy','multiAccountThreading','session_list_generation',
            'envIAMData','AWS_POLICIES','IAM_READ_OPERATION_LIST',
-           'remove_metadata', 'json_encoder', 'configure_logging', 
+           'remove_metadata', 'json_encoder', 'configure_logging', 'regex_filtering',
            'load_credentials_from_json', 'ensure_completed_scan_folder', 'createDir', 
            'save_output_to_file', 'save_output_to_fileEnv']

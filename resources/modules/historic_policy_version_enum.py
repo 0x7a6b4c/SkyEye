@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import botocore
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from . import regex_filtering
 
 def get_policy_version_safe(iam_client, policy_arn, version_id):
     try:
@@ -39,19 +40,21 @@ def version_diff(response, policy, version_id, new_actions_statement1):
     all_actions = set()
     new_actions_statement2 = []
     for statement in response['PolicyVersion']['Document']['Statement']:
-        current_actions = set(statement["Action"])
-        new_actions = current_actions - all_actions
-        all_actions.update(new_actions)
-        new_actions_statement2.extend(new_actions)
+        if regex_filtering("Allow", statement['Effect']):
+            current_actions = set(statement["Action"])
+            new_actions = current_actions - all_actions
+            all_actions.update(new_actions)
+            new_actions_statement2.extend(new_actions)
     diff_version_action = policy_new_check(new_actions_statement1,new_actions_statement2)
     if diff_version_action:
         all_resources = set()
         new_resources_statement = list()
         for statement in response['PolicyVersion']['Document']['Statement']:
-            current_resources = set(statement["Resource"])
-            new_resources = current_resources - all_resources
-            all_resources.update(new_resources)
-            new_resources_statement.extend(new_resources)
+            if regex_filtering("Allow", statement['Effect']):
+                current_resources = set(statement["Resource"])
+                new_resources = current_resources - all_resources
+                all_resources.update(new_resources)
+                new_resources_statement.extend(new_resources)
         policy['HistoricPolicyVersionDetection'].append({"PolicyVersionId":version_id,"Statement":diff_version_action,"Resource":new_resources_statement})
 
 def version_checking(policy, iam_client):
@@ -59,10 +62,11 @@ def version_checking(policy, iam_client):
     all_actions = set()
     new_actions_statement1 = []
     for statement in policy['Statement']:
-        current_actions = set(statement["Action"])
-        new_actions = current_actions - all_actions
-        all_actions.update(new_actions)
-        new_actions_statement1.extend(new_actions)
+        if regex_filtering("Allow", statement['Effect']):
+            current_actions = set(statement["Action"])
+            new_actions = current_actions - all_actions
+            all_actions.update(new_actions)
+            new_actions_statement1.extend(new_actions)
     if policy.get('OtherVersionIds', []):
         for version_id in policy["OtherVersionIds"]:
             try:
