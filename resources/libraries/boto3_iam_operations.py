@@ -4941,7 +4941,8 @@ IAM_READ_OPERATION_LIST = {
         "list_identity_sources",
         "list_policies",
         "list_policy_stores",
-        "list_policy_templates"
+        "list_policy_templates",
+        "list_tags_for_resource"
     ],
     "lakeformation": [
         "describe_lake_formation_identity_center_configuration",

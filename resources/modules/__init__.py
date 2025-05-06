@@ -6,7 +6,7 @@ from ..utils import (envIAMData, remove_metadata, json_encoder, configure_loggin
 
 from .iam_fuzzing import iam_permission_fuzzing
 from .update_aws_policy import update_aws_managed_policies
-from .update_aws_boto3_operations import update_boto3_iam_read_operations
+from .update_aws_iam_operations import update_iam_operations
 from .account_filtering import account_filterings
 from .enumerate_env_entities import enumerateEnvEntities
 from .historic_policy_version_enum import version_checking, policy_new_check, get_policy_version_safe
@@ -25,7 +25,7 @@ from .session_list_generate import session_list_generation
 from .multi_account_threading import multiAccountThreading
 
 __all__ = ['account_filterings', 'assume_roles_enumeration', 'assumeRoleIterationFilter', 'list_attached_policies', 'get_attached_policies',
-           'process_credential_set_cross','process_credential_set','enumerateEnvEntities','envEntitiesSupplement','update_aws_managed_policies', 'update_boto3_iam_read_operations',
+           'process_credential_set_cross','process_credential_set','enumerateEnvEntities','envEntitiesSupplement','update_aws_managed_policies', 'update_iam_operations',
            'envUsersCollection','envGroupsCollection','envRolesCollection','enumerate_iam_to_json','enumerate_iam_to_json_cross','iam_permission_fuzzing',
            'list_groups_for_user','filter_roles_by_principal','getAccountAuthorizationDetailsEnum','getAccountAuthorizationDetailsEnumCross',
            'filter_roles','all_iam_json_enum','version_checking','policy_new_check','list_inline_policies','get_inline_policy','get_policy_version_safe',

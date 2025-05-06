@@ -21,7 +21,7 @@ import resources.threads_config
 
 from resources.utils import configure_logging, load_credentials_from_json, ensure_completed_scan_folder, update_max_threads
 from resources.mode_loader import singleUserSeparationMode, multipleUserCrossMode
-from resources.modules import update_aws_managed_policies, update_boto3_iam_read_operations, iam_permission_fuzzing
+from resources.modules import update_aws_managed_policies, update_iam_operations, iam_permission_fuzzing
 
 def main():
     configure_logging()
@@ -54,8 +54,8 @@ def main():
         update_max_threads(args.thread)
 
     if args.update:
-        update_boto3_iam_read_operations()
-        update_aws_managed_policies()
+        update_iam_operations()
+        #update_aws_managed_policies()
         return
 
     if args.json_file:
