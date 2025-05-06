@@ -55,7 +55,7 @@ def main():
 
     if args.update:
         update_iam_operations()
-        #update_aws_managed_policies()
+        update_aws_managed_policies()
         return
 
     if args.json_file:
