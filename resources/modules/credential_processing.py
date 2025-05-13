@@ -38,18 +38,19 @@ def process_credential_set(session, sts_caller_identity, output_folder):
             save_output_to_file(remove_metadata(envData.all[0]), output_folder, file_name)
         else:
             reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
-            if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
-                stop_event = threading.Event()
-                if reScanEnvEntities.get("Users"):
-                    logging.info("Identified missing IAM component at ['User'] entity level!")
-                if reScanEnvEntities.get("Groups"):
-                    logging.info("Identified missing IAM component at ['Group'] entity level!")
-                if reScanEnvEntities.get("Roles"):
-                    logging.info("Identified missing IAM component at ['Role'] entity level!")
-                if reScanEnvEntities.get("Policies"):
-                    logging.info("Identified missing IAM component at ['Policy'] entity level!")
-                logging.info("Attempting to perform IAM [AssumedRole] Interation method to supplement...")
-                assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
+            if envData.roles:
+                if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
+                    stop_event = threading.Event()
+                    if reScanEnvEntities.get("Users"):
+                        logging.info("Identified missing IAM component at ['User'] entity level!")
+                    if reScanEnvEntities.get("Groups"):
+                        logging.info("Identified missing IAM component at ['Group'] entity level!")
+                    if reScanEnvEntities.get("Roles"):
+                        logging.info("Identified missing IAM component at ['Role'] entity level!")
+                    if reScanEnvEntities.get("Policies"):
+                        logging.info("Identified missing IAM component at ['Policy'] entity level!")
+                    logging.info("Attempting to perform IAM [AssumedRole] Interation method to supplement...")
+                    assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
             if not envData.all:
                 final_output = deepcopy(envData.users[0])
                 final_output['GroupList'] = deepcopy(envData.groups)

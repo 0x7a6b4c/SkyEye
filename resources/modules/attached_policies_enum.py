@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import botocore, json
-from . import remove_metadata, version_checking, get_policy_version_safe
+from . import remove_metadata, version_checking, get_policy_version_safe, statement_filterings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def get_attached_policies(iam_client, policy):
@@ -28,7 +28,7 @@ def get_attached_policies(iam_client, policy):
         else:
             result = json.loads(f.read())
             policy['DefaultVersionId'] = result['DefaultVersionId']
-            policy['Statement'] = result['Statement']
+            policy['Statement'] = statement_filterings(result['Statement'])
     else:
         policy['OtherVersionIds'] = list()
         try:
@@ -50,7 +50,7 @@ def get_attached_policies(iam_client, policy):
                 else:
                     if response["PolicyVersion"]["IsDefaultVersion"]:
                         policy['DefaultVersionId'] = "v1"
-                        policy["Statement"] = remove_metadata(response['PolicyVersion']['Document']['Statement'])
+                        policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
                     else:
                         validity = 1
 
@@ -65,7 +65,7 @@ def get_attached_policies(iam_client, policy):
                             if response:
                                 if response["PolicyVersion"]["IsDefaultVersion"]:
                                     policy['DefaultVersionId'] = version_id
-                                    policy["Statement"] = remove_metadata(response['PolicyVersion']['Document']['Statement'])
+                                    policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
                                 else:
                                     policy['OtherVersionIds'].append(version_id)
             else:
@@ -86,7 +86,7 @@ def get_attached_policies(iam_client, policy):
             except botocore.exceptions.ClientError as error:
                 pass
             else:
-                policy["Statement"] = remove_metadata(response['PolicyVersion']['Document']['Statement'])
+                policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
         if policy['Statement']:
             policy = version_checking(policy, iam_client)
     

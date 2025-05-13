@@ -16,6 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import botocore
+from . import statement_filterings
 
 def get_inline_policy(iam_client, targetName, policyList, mode="user"):
     for policy in policyList:
@@ -25,21 +26,21 @@ def get_inline_policy(iam_client, targetName, policyList, mode="user"):
             except botocore.exceptions.ClientError as error:
                 pass
             else:
-                policy["Statement"] = get_user_policy_json['PolicyDocument']['Statement']
+                policy['Statement'] = statement_filterings(get_user_policy_json['PolicyDocument']['Statement'])
         elif mode == "group":
             try:
                 get_group_policy_json = iam_client.get_group_policy(GroupName=targetName,PolicyName=policy['PolicyName'])
             except botocore.exceptions.ClientError as error:
                 pass
             else:
-                policy["Statement"] = get_group_policy_json['PolicyDocument']['Statement']
+                policy['Statement'] = statement_filterings(get_group_policy_json['PolicyDocument']['Statement'])
         elif mode == "role":
             try:
                 get_role_policy_json = iam_client.get_role_policy(RoleName=targetName,PolicyName=policy['PolicyName'])
             except botocore.exceptions.ClientError as error:
                 pass
             else:
-                policy["Statement"] = get_role_policy_json['PolicyDocument']['Statement']
+                policy['Statement'] = statement_filterings(get_role_policy_json['PolicyDocument']['Statement'])
 
     return policyList
 

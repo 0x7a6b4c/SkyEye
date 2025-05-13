@@ -18,8 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import botocore, json, importlib
 from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import resources.threads_config
-from . import remove_metadata, version_checking
+from . import remove_metadata, version_checking, statement_filterings
 
 # ListEntitiesForPolicy
 
@@ -78,7 +77,7 @@ def versionToStatement(iam_client, policy):
             pass
         else:
             result = json.loads(f.read())
-            policy['Statement'] = result['Statement']
+            policy['Statement'] = statement_filterings(result['Statement'])
     else:
         try:
             response = iam_client.get_policy_version(
@@ -88,7 +87,7 @@ def versionToStatement(iam_client, policy):
         except botocore.exceptions.ClientError as error:
             pass
         else:
-            policy["Statement"] = remove_metadata(response['PolicyVersion']['Document']['Statement'])
+            policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
             policy = version_checking(policy, iam_client)
     return policy
     
@@ -153,8 +152,7 @@ def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES
     for policy in acquired_policies:
         scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
     
-    importlib.reload(resources.threads_config)
-    with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
+    with ThreadPoolExecutor(max_workers=10) as sub_executor:
         futures = [
             sub_executor.submit(scanningListIdentitiesForPolicyCore, 
                 iam_client, 

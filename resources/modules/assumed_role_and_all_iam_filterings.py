@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import json
-from . import remove_metadata, json_encoder, policy_new_check
+from . import remove_metadata, json_encoder, version_statement_diff, statement_filterings
 
 def assumeRoleIterationFilter(userArnList, roleListAll, policy_dict=None):
     roleList = list()
@@ -47,7 +47,7 @@ def assumeRoleIterationFilter(userArnList, roleListAll, policy_dict=None):
                                         "RoleName": role["RoleName"],
                                         "RoleId": role["RoleId"],
                                         "Arn": role["Arn"],
-                                        "AssumeRolePolicyStatement": role["AssumeRolePolicyDocument"]["Statement"]
+                                        "AssumeRolePolicyStatement": role["AssumeRolePolicyDocument"]['Statement']
                                     }
                                 roleList.append(iRole)
                                 roleListAll.remove(role)
@@ -69,7 +69,7 @@ def filter_groups(groupJson, policy_dict):
     if "GroupPolicyList" in groupJson:
         groupJson["InlinePolicies"] = groupJson.pop("GroupPolicyList")
         for inlinePolicies in groupJson['InlinePolicies']:
-            inlinePolicies['Statement'] = inlinePolicies['PolicyDocument']['Statement']
+            inlinePolicies['Statement'] = statement_filterings(inlinePolicies['PolicyDocument']['Statement'])
             del inlinePolicies['PolicyDocument']
 
     groupJson['AttachedManagedPolicies'] = all_iam_managedpolicies(groupJson, policy_dict)
@@ -87,7 +87,7 @@ def filter_roles(roleJson, policy_dict):
     if "RolePolicyList" in roleJson:
         roleJson["InlinePolicies"] = roleJson.pop("RolePolicyList")
         for inlinePolicies in roleJson['InlinePolicies']:
-            inlinePolicies['Statement'] = inlinePolicies['PolicyDocument']['Statement']
+            inlinePolicies['Statement'] = statement_filterings(inlinePolicies['PolicyDocument']['Statement'])
             del inlinePolicies['PolicyDocument']
 
     roleJson['AttachedManagedPolicies'] = all_iam_managedpolicies(roleJson, policy_dict)
@@ -114,6 +114,7 @@ def all_iam_managedpolicies(entity, policy_dict):
                     pass
                 else:
                     result = json.loads(f.read())
+                    result['Statement'] = statement_filterings(result['Statement'])
             else:
                 result = dict()
                 result['PolicyName'] = allResult['PolicyName']
@@ -121,37 +122,23 @@ def all_iam_managedpolicies(entity, policy_dict):
                 result['DefaultVersionId'] = allResult['DefaultVersionId']
                 result['OtherVersionIds'] = list()
                 result['Statement'] = list()
-                result['Statement'].extend(statement for policy in allResult['PolicyVersionList'] if policy["VersionId"] == result['DefaultVersionId'] for statement in policy['Document']['Statement'])
-                all_actions = set()
-                new_actions_statement1 = list()
-                
-                for statement in result['Statement']:
-                    current_actions = set(statement["Action"])
-                    new_actions = current_actions - all_actions
-                    all_actions.update(new_actions)
-                    new_actions_statement1.extend(new_actions)
+                result['Statement'].extend(
+                    statement
+                    for policy in allResult['PolicyVersionList']
+                    if policy["VersionId"] == result['DefaultVersionId']
+                    for statement in (
+                        policy['Document']['Statement'] if isinstance(policy['Document']['Statement'], list) else [policy['Document']['Statement']]
+                    )
+                )
+                result['Statement'] = statement_filterings(result['Statement'])
                 for policy in allResult['PolicyVersionList']:
                     if policy['VersionId'] != result['DefaultVersionId']:
                         result['OtherVersionIds'].append(policy['VersionId'])
-                        all_actions = set()
-                        new_actions_statement2 = list()
-                        for statement in policy['Document']['Statement']:
-                            current_actions = set(statement["Action"])
-                            new_actions = current_actions - all_actions
-                            all_actions.update(new_actions)
-                            new_actions_statement2.extend(new_actions)
-                        diff_version_action = policy_new_check(new_actions_statement1,new_actions_statement2)
-                        if diff_version_action:
-                            if not result.get("HistoricPolicyVersionDetection", None):
-                                result['HistoricPolicyVersionDetection'] = list()
-                            all_resources = set()
-                            new_resources_statement = list()
-                            for statement in policy['Document']['Statement']:
-                                current_resources = set(statement["Resource"])
-                                new_resources = current_resources - all_resources
-                                all_resources.update(new_resources)
-                                new_resources_statement.extend(new_resources)
-                            result['HistoricPolicyVersionDetection'].append({"PolicyVersionId":policy['VersionId'],"Statement":diff_version_action,"Resource":new_resources_statement})
+                        other_version_statements = statement_filterings(policy['Document']['Statement'])
+                        diff_version_statements = version_statement_diff(result['Statement'], other_version_statements, policy['VersionId'])
+                        if not result.get("HistoricPolicyVersionDetection", None):
+                            result['HistoricPolicyVersionDetection'] = list()
+                        result['HistoricPolicyVersionDetection'].append(diff_version_statements)
             response.append(result)
         entity['AttachedManagedPolicies'] = response
     else:
@@ -168,7 +155,7 @@ def all_iam_json_enum(all_iam):
         if user.get('UserPolicyList') is not None:
             user["InlinePolicies"] = user.pop("UserPolicyList")
             for inlinePolicies in user['InlinePolicies']:
-                inlinePolicies['Statement'] = inlinePolicies['PolicyDocument']['Statement']
+                inlinePolicies['Statement'] = statement_filterings(inlinePolicies['PolicyDocument']['Statement'])
                 del inlinePolicies['PolicyDocument']
         else:
             user['InlinePolicies'] = []
@@ -182,7 +169,7 @@ def all_iam_json_enum(all_iam):
                 result = filter_groups(json.loads(json.dumps(remove_metadata(group_dict.get(groupJson, {})), default=json_encoder)),policy_dict)
                 response.append(result)
             user['GroupList'] = response
-        
+
         roleResponse = assumeRoleIterationFilter([user['Arn']], all_iam['RoleDetailList'], policy_dict)
         if not roleResponse:
             user['RoleList'] = []

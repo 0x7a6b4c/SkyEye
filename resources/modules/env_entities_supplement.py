@@ -65,7 +65,31 @@ def envEntitiesSupplement(session, reScanEnvEntities, envData, targetUserArns=li
                 envPolicies[reScanPolicy] = get_attached_policies(iam_client, envPolicies[reScanPolicy])
     if mode == "assumed-role":
         try:
-            all_iam = iam_client.get_account_authorization_details()
+            # Initialize variables for pagination
+            all_iam = {
+                "UserDetailList": [],
+                "GroupDetailList": [],
+                "RoleDetailList": [],
+                "Policies": []
+            }
+            marker = None
+            is_truncated = True
+
+            # Loop through all pages
+            while is_truncated:
+                if marker:
+                    response = iam_client.get_account_authorization_details(Marker=marker)
+                else:
+                    response = iam_client.get_account_authorization_details()
+
+                # Merge results into all_iam
+                for key in all_iam.keys():
+                    if key in response:
+                        all_iam[key].extend(response[key])
+
+                # Check if there are more pages
+                is_truncated = response.get("IsTruncated", False)
+                marker = response.get("Marker", None)
         except (botocore.exceptions.ClientError,
                 botocore.exceptions.EndpointConnectionError,
                 botocore.exceptions.ReadTimeoutError):

@@ -24,7 +24,31 @@ from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross,
 def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData):
     policy_json = {}
     try:
-        all_iam = iam_client.get_account_authorization_details()
+        # Initialize variables for pagination
+        all_iam = {
+            "UserDetailList": [],
+            "GroupDetailList": [],
+            "RoleDetailList": [],
+            "Policies": []
+        }
+        marker = None
+        is_truncated = True
+
+        # Loop through all pages
+        while is_truncated:
+            if marker:
+                response = iam_client.get_account_authorization_details(Marker=marker)
+            else:
+                response = iam_client.get_account_authorization_details()
+
+            # Merge results into all_iam
+            for key in all_iam.keys():
+                if key in response:
+                    all_iam[key].extend(response[key])
+
+            # Check if there are more pages
+            is_truncated = response.get("IsTruncated", False)
+            marker = response.get("Marker", None)
     except (botocore.exceptions.ClientError,
             botocore.exceptions.EndpointConnectionError,
             botocore.exceptions.ReadTimeoutError):
@@ -41,16 +65,18 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
     policy_json['UserName'] = sts_caller_identity['Arn'].split('/')[-1]
     with envData.policies_context() as envPolicies:
         output = enumerate_iam_to_json(iam_client, policy_json, envPolicies)
-
+    with envData.arns_context() as arns_list:
+        arns_list[:] = [sts_caller_identity['Arn']]
     with envData.users_context() as envUsers:
-        envUsers.append(output)
+        envUsers[:] = [output]
     with envData.groups_context() as envGroups:
-        envGroups = output.get('GroupList', [])
+        envGroups[:] = output.get('GroupList', [])
     with envData.roles_context() as envRoles:
-        envRoles = output.get('RoleList', [])
+        envRoles[:] = output.get('RoleList', [])
+    
     total_policies, reScanNamePolicies = filteringListIdentitiesForPolicy(envData.users, envData.groups, envData.roles)
     with envData.policies_context() as envPolicies:
-        envPolicies = total_policies   
+        envPolicies[:] = total_policies
     if reScanNamePolicies.get("Users") or reScanNamePolicies.get("Groups") or reScanNamePolicies.get("Roles"):
         if checkingLIFPPermission(iam_client):
             if reScanNamePolicies.get("Users"):
@@ -61,7 +87,7 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
                 logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
             logging.info("Identified permitted [ListIdentityForPolicies] action!")
             logging.info("Attempting to perform IAM [ListRoles / ListIdentityForPolicies] method to supplement...")
-            scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
+            #scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
             logging.info("Completed IAM [ListRoles / ListIdentityForPolicies] method !")
 
     return output
@@ -69,7 +95,31 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
 def getAccountAuthorizationDetailsEnumCross(iam_client, sts_caller_identity, targetUserArns, stop_event, envData, mode):
     policy_json = {}
     try:
-        all_iam = iam_client.get_account_authorization_details()
+        # Initialize variables for pagination
+        all_iam = {
+            "UserDetailList": [],
+            "GroupDetailList": [],
+            "RoleDetailList": [],
+            "Policies": []
+        }
+        marker = None
+        is_truncated = True
+
+        # Loop through all pages
+        while is_truncated:
+            if marker:
+                response = iam_client.get_account_authorization_details(Marker=marker)
+            else:
+                response = iam_client.get_account_authorization_details()
+
+            # Merge results into all_iam
+            for key in all_iam.keys():
+                if key in response:
+                    all_iam[key].extend(response[key])
+
+            # Check if there are more pages
+            is_truncated = response.get("IsTruncated", False)
+            marker = response.get("Marker", None)
     except (botocore.exceptions.ClientError,
             botocore.exceptions.EndpointConnectionError,
             botocore.exceptions.ReadTimeoutError):

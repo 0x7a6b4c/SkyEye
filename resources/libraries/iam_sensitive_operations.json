@@ -18048,5 +18048,6 @@
     "DLM:CreateLifeCyclePolicy": "high",
     "msk:ListClusters": "high",
     "msk:UpdateSecurity": "high",
-    "sqs:SendMessageBatch": "high"
+    "sqs:SendMessageBatch": "high",
+    "*": "critical"
 }

@@ -98,8 +98,6 @@ def assumed_role_enum_task(envData, reScanEnvEntities, role_list, current_arn, a
             if identity['Arn'].split(':')[5].split('/')[0] == "assumed-role":
                 logging.info(f"Supplementing IAMs by [AssumedRole Session] : [{'] → ['.join(path)}]")
                 envEntitiesSupplement(new_session, reScanEnvEntities, envData, arn_list, "assumed-role")
-                if stop_event.is_set():
-                    return
                 with envData.all_context() as envAll:
                     if envAll:
                         logging.info(f"Identified get_account_authorization_details permissions at [{identity['Arn']}]!")
@@ -191,12 +189,13 @@ def assume_roles_enumeration(envData, reScanEnvEntities, sts_caller_identity_lis
             )
 
         pending_tasks.wait_zero()
-    
-    with envData.all_context() as envAll:
-        if envAll:
-            for iam_result in envAll:
-                for identity in sts_caller_identity_list:
-                    if identity['UserName'] == iam_result['UserName']:
-                        iam_result['AccessKey'] = identity['AccessKey']
-                        file_name = f"scanningOutputCredentialSet_{identity['AccessKey']}.json"
-                        save_output_to_file(remove_metadata(iam_result), accountDir, file_name)
+
+    if stop_event.is_set():
+        with envData.all_context() as envAll:
+            if envAll:
+                for iam_result in envAll:
+                    for identity in sts_caller_identity_list:
+                        if identity['UserName'] == iam_result['UserName']:
+                            iam_result['AccessKey'] = identity['AccessKey']
+                            file_name = f"scanningOutputCredentialSet_{identity['AccessKey']}.json"
+                            save_output_to_file(remove_metadata(iam_result), accountDir, file_name)

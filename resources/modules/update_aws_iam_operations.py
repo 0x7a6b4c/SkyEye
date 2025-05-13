@@ -318,10 +318,29 @@ def update_iam_operations():
         with open(merged_library_filename, 'w') as outfile:
             outfile.write(f"IAM_READ_OPERATION_LIST = {json.dumps(IAM_READ_OPERATION_LIST, indent=4)}\n")
 
-    logging.info("AWS Boto3 IAM Read-Only Operations has been updated!")
+        logging.info("AWS Boto3 IAM Read-Only Operations Library has been updated!")
+    else:
+        logging.error("Failed to update AWS Boto3 IAM Read-Only Operations Library!")
 
+    update_aws_permissions_library(aws_operations)
     update_sensitive_permissions_library(aws_operations)
 
+def update_aws_permissions_library(aws_operations):
+    logging.info("Updating [Resource] AWS IAM All Operations Library...")
+    IAM_OPERATION_LIST = dict()
+    file_name = "iam_all_operations.py"
+    for service in aws_operations['serviceMap'].values():
+        if service['StringPrefix'] not in IAM_OPERATION_LIST:
+            IAM_OPERATION_LIST[service['StringPrefix']] = [item for item in service['Actions'] ]
+    
+    if IAM_OPERATION_LIST:
+        merged_library_filename = os.path.join("resources/libraries", file_name)
+        with open(merged_library_filename, 'w') as outfile:
+            outfile.write(f"IAM_OPERATION_LIST = {json.dumps(IAM_OPERATION_LIST, indent=4)}\n")
+        
+        logging.info("AWS IAM All Operations Library has been updated!")
+    else:
+        logging.error("Failed to update AWS IAM All Operations Library!")
 
 def update_sensitive_permissions_library(aws_operations):
     logging.info("Updating [Resource] AWS IAM Sensitive Operations Library...")
@@ -349,9 +368,13 @@ def update_sensitive_permissions_library(aws_operations):
     for perm, risk_level in IAM_RISK_OPERATIONS.items():
         IAM_SENSITIVE_OPERATIONS[perm] = risk_level
     
+    IAM_SENSITIVE_OPERATIONS['*'] = "critical"
+    
     if IAM_SENSITIVE_OPERATIONS:
         merged_library_filename = os.path.join("resources/libraries", file_name)
         with open(merged_library_filename, 'w') as outfile:
             outfile.write(json.dumps(IAM_SENSITIVE_OPERATIONS, indent=4))
-
-    logging.info("AWS IAM Sensitive Operations Library has been updated!")
+    
+        logging.info("AWS IAM Sensitive Operations Library has been updated!")
+    else:
+        logging.error("Failed to update AWS IAM Sensitive Operations Library!")
