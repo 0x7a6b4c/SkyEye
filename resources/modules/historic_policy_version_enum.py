@@ -102,7 +102,7 @@ def version_statement_diff(current_version_statement, other_version_statement, o
             action_comparison = {
                 **({'New': list(new_perms)} if new_perms else {}),
                 **({'Kept': list(kept_perms)} if kept_perms else {}),
-                **({'Old': list(old_perms)} if old_perms else {})
+                **({'Removed': list(old_perms)} if old_perms else {})
             }
         else:
             other_perms = to_set(other_action if other_action is not None else other_not_action)
@@ -138,7 +138,7 @@ def version_statement_diff(current_version_statement, other_version_statement, o
             resource_comparison = {
                 **({'New': list(new_res)} if new_res else {}),
                 **({'Kept': list(kept_res)} if kept_res else {}),
-                **({'Old': list(old_res)} if old_res else {})
+                **({'Removed': list(old_res)} if old_res else {})
             }
         else:
             other_res = to_set(other_resource if other_resource is not None else other_not_resource)
@@ -194,20 +194,22 @@ def version_statement_diff(current_version_statement, other_version_statement, o
             'EffectStatus': 'Removed',
             'ActionStatus': 'Removed',
             'Action': {
-                **({'Old': list(action_set)} if action_set else {})
+                **({'Removed': list(action_set)} if action_set else {})
             },
             'ResourceStatus': 'Removed',
             'Resource': {
-                **({'Old': list(resource_set)} if resource_set else {})
+                **({'Removed': list(resource_set)} if resource_set else {})
             },
             **({"Condition": current_stmt["Condition"]} if "Condition" in current_stmt else {})
         }
 
     return {
         'PolicyVersionId': other_version_id,
-        'OldSids': old_sids,
-        'CommonSids': common_sids,
-        'NewSids': new_sids,
+        'SidStatus': {
+        **{sid: 'Removed' for sid in old_sids},
+        **{sid: 'NotChange' for sid in common_sids},
+        **{sid: 'New' for sid in new_sids}
+        },
         'Differences': differences,
         **({'NoSidStatement': other_no_sid} if other_no_sid else {})
     }
