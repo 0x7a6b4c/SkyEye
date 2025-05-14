@@ -136,9 +136,9 @@ def all_iam_managedpolicies(entity, policy_dict):
                         result['OtherVersionIds'].append(policy['VersionId'])
                         other_version_statements = statement_filterings(policy['Document']['Statement'])
                         diff_version_statements = version_statement_diff(result['Statement'], other_version_statements, policy['VersionId'])
-                        if not result.get("HistoricPolicyVersionDetection", None):
-                            result['HistoricPolicyVersionDetection'] = list()
-                        result['HistoricPolicyVersionDetection'].append(diff_version_statements)
+                        if not result.get("HistoricPolicyVersionEnumeration", None):
+                            result['HistoricPolicyVersionEnumeration'] = list()
+                        result['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
             response.append(result)
         entity['AttachedManagedPolicies'] = response
     else:
