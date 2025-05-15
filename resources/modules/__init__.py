@@ -1,5 +1,5 @@
 from resources.libraries.aws_policies import AWS_POLICIES
-from ..libraries.boto3_iam_operations import IAM_READ_OPERATION_LIST
+from ..libraries.boto3_iam_read_operations import IAM_BOTO3_READ_OPERATION_LIST
 from ..libraries.iam_all_operations import IAM_OPERATION_LIST
 from ..utils import (envIAMData, remove_metadata, json_encoder, configure_logging, regex_filtering,
                      load_credentials_from_json, ensure_completed_scan_folder, createDir, 
@@ -32,7 +32,7 @@ __all__ = ['account_filterings', 'assume_roles_enumeration', 'assumeRoleIteratio
            'list_groups_for_user','filter_roles_by_principal','getAccountAuthorizationDetailsEnum','getAccountAuthorizationDetailsEnumCross',
            'filter_roles','all_iam_json_enum','version_checking','version_statement_diff','list_inline_policies','get_inline_policy','get_policy_version_safe',
            'filteringListIdentitiesForPolicy','checkingLIFPPermission','scanningListIdentitiesForPolicy','multiAccountThreading','session_list_generation',
-           'envIAMData','AWS_POLICIES','IAM_READ_OPERATION_LIST','IAM_OPERATION_LIST',
+           'envIAMData','AWS_POLICIES','IAM_BOTO3_READ_OPERATION_LIST','IAM_OPERATION_LIST',
            'remove_metadata', 'json_encoder', 'configure_logging', 'regex_filtering',
            'load_credentials_from_json', 'ensure_completed_scan_folder', 'createDir', 
            'save_output_to_file', 'save_output_to_fileEnv']

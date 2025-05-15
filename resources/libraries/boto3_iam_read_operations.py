@@ -1,4 +1,4 @@
-IAM_READ_OPERATION_LIST = {
+IAM_BOTO3_READ_OPERATION_LIST = {
     "aiops": [
         "get_investigation",
         "get_investigation_event",
@@ -253,12 +253,18 @@ IAM_READ_OPERATION_LIST = {
     "scn": [
         "describe_instance",
         "get_bill_of_materials_import_job",
+        "get_data_integration_event",
         "get_data_integration_flow",
+        "get_data_integration_flow_execution",
         "get_data_lake_dataset",
+        "get_data_lake_namespace",
         "get_instance",
         "list_admin_users",
+        "list_data_integration_events",
+        "list_data_integration_flow_executions",
         "list_data_integration_flows",
         "list_data_lake_datasets",
+        "list_data_lake_namespaces",
         "list_instances",
         "list_tags_for_resource"
     ],
@@ -2958,7 +2964,7 @@ IAM_READ_OPERATION_LIST = {
         "list_nodes",
         "list_offerings",
         "list_reservations",
-        "list_sdi_source",
+        "list_sdi_sources",
         "list_signal_maps",
         "list_tags_for_resource",
         "list_versions"
@@ -3834,6 +3840,10 @@ IAM_READ_OPERATION_LIST = {
         "list_security_control_definitions",
         "list_standards_control_associations",
         "list_tags_for_resource"
+    ],
+    "transform": [
+        "get_connector",
+        "list_profiles"
     ],
     "sqs": [
         "get_queue_attributes",
@@ -6964,6 +6974,7 @@ IAM_READ_OPERATION_LIST = {
         "describe_network_interface_attribute",
         "describe_network_interface_permissions",
         "describe_network_interfaces",
+        "describe_outpost_lags",
         "describe_placement_groups",
         "describe_prefix_lists",
         "describe_principal_id_format",
@@ -6984,6 +6995,7 @@ IAM_READ_OPERATION_LIST = {
         "describe_security_group_rules",
         "describe_security_group_vpc_associations",
         "describe_security_groups",
+        "describe_service_link_virtual_interfaces",
         "describe_snapshot_attribute",
         "describe_snapshot_tier_status",
         "describe_snapshots",

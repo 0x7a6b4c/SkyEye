@@ -296,9 +296,12 @@ IAM_RISK_OPERATIONS = {
 
 def update_iam_operations():
     logging.info("Updating [Resource] AWS Boto3 IAM Read-Only Operations...")
-    IAM_READ_OPERATION_LIST = dict()
+    logging.info("Updating [Resource] AWS Boto3 IAM Full Operations...")
+    IAM_BOTO3_READ_OPERATION_LIST = dict()
+    IAM_BOTO3_FULL_OPERATION_LIST = dict()
     url = "https://awspolicygen.s3.amazonaws.com/js/policies.js"
-    file_name = "boto3_iam_operations.py"
+    boto3_read_file_name = "boto3_iam_read_operations.py"
+    boto3_full_file_name = "boto3_iam_full_operations.py"
 
     try:
         response = requests.get(url)
@@ -309,18 +312,28 @@ def update_iam_operations():
         aws_operations = json.loads(response.text.replace("app.PolicyEditorConfig=", ""))
 
     for service in aws_operations['serviceMap'].values():
-        if service['StringPrefix'] not in IAM_READ_OPERATION_LIST:
-            IAM_READ_OPERATION_LIST[service['StringPrefix']] = [re.sub(r'(?<!^)(?=[A-Z])', '_', item).lower() for item in service['Actions'] if item.startswith(("List", "Get", "Describe"))
-    ]
+        if service['StringPrefix'] not in IAM_BOTO3_READ_OPERATION_LIST:
+            IAM_BOTO3_READ_OPERATION_LIST[service['StringPrefix']] = [re.sub(r'(?<!^)(?=[A-Z])', '_', item).lower() for item in service['Actions'] if item.startswith(("List", "Get", "Describe"))]
+            
+    for service in aws_operations['serviceMap'].values():
+        if service['StringPrefix'] not in IAM_BOTO3_FULL_OPERATION_LIST:
+            IAM_BOTO3_FULL_OPERATION_LIST[service['StringPrefix']] = [re.sub(r'(?<!^)(?=[A-Z])', '_', item).lower() for item in service['Actions']]
 
-    if IAM_READ_OPERATION_LIST:
-        merged_library_filename = os.path.join("resources/libraries", file_name)
+    if IAM_BOTO3_READ_OPERATION_LIST:
+        merged_library_filename = os.path.join("resources/libraries", boto3_read_file_name)
         with open(merged_library_filename, 'w') as outfile:
-            outfile.write(f"IAM_READ_OPERATION_LIST = {json.dumps(IAM_READ_OPERATION_LIST, indent=4)}\n")
-
+            outfile.write(f"IAM_BOTO3_READ_OPERATION_LIST = {json.dumps(IAM_BOTO3_READ_OPERATION_LIST, indent=4)}\n")
         logging.info("AWS Boto3 IAM Read-Only Operations Library has been updated!")
     else:
         logging.error("Failed to update AWS Boto3 IAM Read-Only Operations Library!")
+    
+    if IAM_BOTO3_FULL_OPERATION_LIST:
+        merged_library_filename = os.path.join("resources/libraries", boto3_full_file_name)
+        with open(merged_library_filename, 'w') as outfile:
+            outfile.write(f"IAM_BOTO3_FULL_OPERATION_LIST = {json.dumps(IAM_BOTO3_FULL_OPERATION_LIST, indent=4)}\n")
+        logging.info("AWS Boto3 IAM Full Operations Library has been updated!")
+    else:
+        logging.error("Failed to update AWS Boto3 IAM Full Operations Library!")
 
     update_aws_permissions_library(aws_operations)
     update_sensitive_permissions_library(aws_operations)

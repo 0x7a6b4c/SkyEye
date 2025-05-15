@@ -19,7 +19,7 @@ import boto3, threading, importlib, logging
 from botocore.client import Config
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import resources.threads_config
-from . import IAM_READ_OPERATION_LIST, createDir, save_output_to_file
+from . import IAM_BOTO3_READ_OPERATION_LIST, createDir, save_output_to_file
 
 CLIENT_SESSION_POOL = {}
 CLIENT_SESSION_POOL_LOCK = threading.Lock()
@@ -65,7 +65,7 @@ def args_generation(access_key, secret_key, session_token, region):
         'aws_secret_access_key': secret_key,
         'aws_session_token': session_token
     }
-    for service_name, operations in IAM_READ_OPERATION_LIST.items():
+    for service_name, operations in IAM_BOTO3_READ_OPERATION_LIST.items():
         for operation in operations:
             yield (credentials, region, service_name, operation)
 
