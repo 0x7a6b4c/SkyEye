@@ -1,4 +1,4 @@
-IAM_OPERATION_LIST = {
+IAM_OPERATION_DICT = {
     "aiops": [
         "CreateInvestigation",
         "CreateInvestigationEvent",
@@ -660,6 +660,7 @@ IAM_OPERATION_LIST = {
         "BatchGetProfile",
         "CreateCalculatedAttributeDefinition",
         "CreateDomain",
+        "CreateDomainLayout",
         "CreateEventStream",
         "CreateEventTrigger",
         "CreateIntegrationWorkflow",
@@ -670,6 +671,7 @@ IAM_OPERATION_LIST = {
         "CreateSnapshot",
         "DeleteCalculatedAttributeDefinition",
         "DeleteDomain",
+        "DeleteDomainLayout",
         "DeleteEventStream",
         "DeleteEventTrigger",
         "DeleteIntegration",
@@ -684,6 +686,7 @@ IAM_OPERATION_LIST = {
         "GetCalculatedAttributeDefinition",
         "GetCalculatedAttributeForProfile",
         "GetDomain",
+        "GetDomainLayout",
         "GetEventStream",
         "GetEventTrigger",
         "GetIdentityResolutionJob",
@@ -702,6 +705,7 @@ IAM_OPERATION_LIST = {
         "ListAccountIntegrations",
         "ListCalculatedAttributeDefinitions",
         "ListCalculatedAttributesForProfile",
+        "ListDomainLayouts",
         "ListDomains",
         "ListEventStreams",
         "ListEventTriggers",
@@ -725,6 +729,7 @@ IAM_OPERATION_LIST = {
         "UntagResource",
         "UpdateCalculatedAttributeDefinition",
         "UpdateDomain",
+        "UpdateDomainLayout",
         "UpdateEventTrigger",
         "UpdateProfile"
     ],
@@ -8727,6 +8732,7 @@ IAM_OPERATION_LIST = {
         "GetThirdPartyJobDetails",
         "ListActionExecutions",
         "ListActionTypes",
+        "ListDeployActionExecutionTargets",
         "ListPipelineExecutions",
         "ListPipelines",
         "ListRuleExecutions",
@@ -13589,6 +13595,7 @@ IAM_OPERATION_LIST = {
         "CreateCase",
         "DescribeAttachment",
         "DescribeCaseAttributes",
+        "DescribeCaseOptions",
         "DescribeCases",
         "DescribeCommunication",
         "DescribeCommunications",
@@ -13610,7 +13617,8 @@ IAM_OPERATION_LIST = {
         "RefreshTrustedAdvisorCheck",
         "ResolveCase",
         "SearchForCases",
-        "StartInteraction"
+        "StartInteraction",
+        "UpdateCaseSeverity"
     ],
     "polly": [
         "DeleteLexicon",

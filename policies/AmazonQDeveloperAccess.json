@@ -1,7 +1,7 @@
 {
   "PolicyName": "AmazonQDeveloperAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AmazonQDeveloperAccess",
-  "DefaultVersionId": "v3",
+  "DefaultVersionId": "v4",
   "Statement": [
     {
       "Sid": "AllowAmazonQDeveloperAccess",
@@ -11,6 +11,8 @@
         "q:SendMessage",
         "q:GetConversation",
         "q:ListConversations",
+        "q:UpdateConversation",
+        "q:DeleteConversation",
         "q:PassRequest",
         "q:StartTroubleshootingAnalysis",
         "q:StartTroubleshootingResolutionExplanation",

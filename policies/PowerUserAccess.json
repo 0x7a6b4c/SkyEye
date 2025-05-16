@@ -1,7 +1,7 @@
 {
   "PolicyName": "PowerUserAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/PowerUserAccess",
-  "DefaultVersionId": "v6",
+  "DefaultVersionId": "v7",
   "Statement": [
     {
       "Effect": "Allow",
@@ -21,6 +21,7 @@
         "iam:CreateServiceLinkedRole",
         "iam:DeleteServiceLinkedRole",
         "iam:ListRoles",
+        "organizations:DescribeEffectivePolicy",
         "organizations:DescribeOrganization"
       ],
       "Resource": "*"

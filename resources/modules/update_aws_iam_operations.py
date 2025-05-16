@@ -340,14 +340,26 @@ def update_iam_operations():
 
 def update_aws_permissions_library(aws_operations):
     logging.info("Updating [Resource] AWS IAM All Operations Library...")
-    IAM_OPERATION_LIST = dict()
+    IAM_OPERATION_DICT = dict()
     file_name = "iam_all_operations.py"
+    file_name2 = "iam_all_operations_list.py"
     for service in aws_operations['serviceMap'].values():
-        if service['StringPrefix'] not in IAM_OPERATION_LIST:
-            IAM_OPERATION_LIST[service['StringPrefix']] = [item for item in service['Actions'] ]
+        if service['StringPrefix'] not in IAM_OPERATION_DICT:
+            IAM_OPERATION_DICT[service['StringPrefix']] = [item for item in service['Actions'] ]
+
+    IAM_OPERATION_LIST = [
+        f"{service}:{operation}"
+        for service, operations in IAM_OPERATION_DICT.items()
+        for operation in operations
+    ]
     
-    if IAM_OPERATION_LIST:
+    if IAM_OPERATION_DICT:
         merged_library_filename = os.path.join("resources/libraries", file_name)
+        with open(merged_library_filename, 'w') as outfile:
+            outfile.write(f"IAM_OPERATION_DICT = {json.dumps(IAM_OPERATION_DICT, indent=4)}\n")
+
+    if IAM_OPERATION_LIST:
+        merged_library_filename = os.path.join("resources/libraries", file_name2)
         with open(merged_library_filename, 'w') as outfile:
             outfile.write(f"IAM_OPERATION_LIST = {json.dumps(IAM_OPERATION_LIST, indent=4)}\n")
         

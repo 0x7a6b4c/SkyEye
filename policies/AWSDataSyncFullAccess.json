@@ -1,7 +1,7 @@
 {
   "PolicyName": "AWSDataSyncFullAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AWSDataSyncFullAccess",
-  "DefaultVersionId": "v8",
+  "DefaultVersionId": "v9",
   "Statement": [
     {
       "Sid": "DataSyncFullAccessPermissions",
@@ -63,6 +63,25 @@
       "Condition": {
         "StringEquals": {
           "iam:AWSServiceName": "datasync.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "DataSyncSecretsManagerWriteAccess",
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:DeleteSecret",
+        "secretsmanager:UpdateSecret"
+      ],
+      "Resource": [
+        "arn:*:secretsmanager:*:*:secret:aws-datasync!*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "secretsmanager:ResourceTag/aws:secretsmanager:owningService": "aws-datasync",
+          "aws:ResourceAccount": "${aws:PrincipalAccount}"
         }
       }
     }

@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from . import regex_filtering, IAM_OPERATION_LIST
+from . import regex_filtering, IAM_OPERATION_DICT
 
 def action_filterings(statement, param="Action"):
     if isinstance(statement[param], str):
@@ -25,7 +25,7 @@ def action_filterings(statement, param="Action"):
             continue
         if "*" in action:
             action_parts = action.split(":")
-            for perms in IAM_OPERATION_LIST[action_parts[0]]:
+            for perms in IAM_OPERATION_DICT[action_parts[0]]:
                 if regex_filtering(perms, action_parts[1]):
                     statement[param].append(f"{action_parts[0]}:{perms}")
             del statement[param][statement[param].index(action)]

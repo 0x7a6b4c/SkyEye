@@ -1,12 +1,13 @@
 {
   "PolicyName": "CloudFrontReadOnlyAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/CloudFrontReadOnlyAccess",
-  "DefaultVersionId": "v6",
+  "DefaultVersionId": "v7",
   "Statement": [
     {
       "Sid": "cfReadOnly",
       "Effect": "Allow",
       "Action": [
+        "acm:DescribeCertificate",
         "acm:ListCertificates",
         "cloudfront:Describe*",
         "cloudfront:Get*",

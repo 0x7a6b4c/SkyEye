@@ -1,7 +1,7 @@
 {
   "PolicyName": "ViewOnlyAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess",
-  "DefaultVersionId": "v23",
+  "DefaultVersionId": "v24",
   "Statement": [
     {
       "Sid": "GeneralViewOnlyAccessStatement",
@@ -287,6 +287,11 @@
         "resource-explorer-2:ListSupportedResourceTypes",
         "resource-explorer-2:ListTagsForResource",
         "resource-explorer-2:ListViews",
+        "rolesanywhere:ListCrls",
+        "rolesanywhere:ListProfiles",
+        "rolesanywhere:ListSubjects",
+        "rolesanywhere:ListTagsForResource",
+        "rolesanywhere:ListTrustAnchors",
         "route53:Get*",
         "route53:List*",
         "route53domains:List*",

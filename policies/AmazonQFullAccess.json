@@ -1,7 +1,7 @@
 {
   "PolicyName": "AmazonQFullAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AmazonQFullAccess",
-  "DefaultVersionId": "v5",
+  "DefaultVersionId": "v7",
   "Statement": [
     {
       "Sid": "AllowAmazonQFullAccess",
@@ -11,6 +11,8 @@
         "q:SendMessage",
         "q:GetConversation",
         "q:ListConversations",
+        "q:UpdateConversation",
+        "q:DeleteConversation",
         "q:PassRequest",
         "q:StartTroubleshootingAnalysis",
         "q:GetTroubleshootingResults",
@@ -21,6 +23,7 @@
         "q:DeleteAssignment",
         "q:GenerateCodeFromCommands",
         "q:CreatePlugin",
+        "q:UpdatePlugin",
         "q:DeletePlugin",
         "q:GetPlugin",
         "q:UsePlugin",

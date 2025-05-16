@@ -1,7 +1,7 @@
 {
   "PolicyName": "AWSMarketplaceRead-only",
   "PolicyArn": "arn:aws:iam::aws:policy/AWSMarketplaceRead-only",
-  "DefaultVersionId": "v5",
+  "DefaultVersionId": "v6",
   "Statement": [
     {
       "Effect": "Allow",
@@ -22,8 +22,6 @@
     {
       "Effect": "Allow",
       "Action": [
-        "aws-marketplace:ListBuilds",
-        "aws-marketplace:DescribeBuilds",
         "iam:ListRoles",
         "iam:ListInstanceProfiles",
         "sns:GetTopicAttributes",
