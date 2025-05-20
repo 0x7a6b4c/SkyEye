@@ -53,9 +53,9 @@ def filter_roles_by_principal(iam_client, targetArn, envRoles):
         iam_roles = iam_client.list_roles()
     except botocore.exceptions.ClientError as error:
         if envRoles:
-            iam_roles = filter_roles_by_principal_in_envRoles(targetArn, envRoles)
-            if iam_roles:
-                return iam_roles
+            filtered_iam_roles = filter_roles_by_principal_in_envRoles(targetArn, envRoles)
+            if filtered_iam_roles:
+                return filtered_iam_roles
         return None
     else:
         roleListAll = iam_roles['Roles']

@@ -1,7 +1,7 @@
 {
   "PolicyName": "AmazonAuroraDSQLConsoleFullAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AmazonAuroraDSQLConsoleFullAccess",
-  "DefaultVersionId": "v1",
+  "DefaultVersionId": "v2",
   "Statement": [
     {
       "Sid": "DsqlAllPermissions",
@@ -18,7 +18,12 @@
         "dsql:UntagResource",
         "dsql:ListTagsForResource",
         "dsql:DbConnectAdmin",
-        "dsql:DbConnect"
+        "dsql:DbConnect",
+        "dsql:PutMultiRegionProperties",
+        "dsql:PutWitnessRegion",
+        "dsql:AddPeerCluster",
+        "dsql:RemovePeerCluster",
+        "dsql:GetVpcEndpointServiceName"
       ],
       "Resource": "*"
     },

@@ -87,7 +87,7 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
                 logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
             logging.info("Identified permitted [ListIdentityForPolicies] action!")
             logging.info("Attempting to perform IAM [ListRoles / ListIdentityForPolicies] method to supplement...")
-            #scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
+            scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
             logging.info("Completed IAM [ListRoles / ListIdentityForPolicies] method !")
 
     return output

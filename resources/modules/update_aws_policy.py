@@ -79,10 +79,6 @@ def parse_policy_html(html_content):
     return structured_policy
 
 def save_json_to_aws_policies(data, filename):
-    """Ensure the 'aws_policies' folder exists, and save aws policies."""
-    if not os.path.exists("policies"):
-        os.makedirs("policies")
-    
     if isinstance(data, dict):
         merged_filename = os.path.join("policies", filename)
         with open(merged_filename, 'w') as f:
@@ -96,7 +92,7 @@ def remove_aws_policies_dir(directory):
     if os.path.exists(directory):
         shutil.rmtree(directory)
 
-def aws_policy_crawling(policy_key, policy_value, aws_policy_arn):
+def aws_policy_crawling(policy_key, policy_value, aws_policy_arn, aws_policy_dict):
     response = requests.get(policy_value)
     if response.status_code == 200:
         structured_policy = parse_policy_html(response.text)
@@ -108,6 +104,10 @@ def aws_policy_crawling(policy_key, policy_value, aws_policy_arn):
                     'PolicyArn':structured_policy["PolicyArn"]
                 }
             )
+            aws_policy_dict[structured_policy["PolicyName"]] = {
+                'PolicyName':structured_policy["PolicyName"],
+                'PolicyArn':structured_policy["PolicyArn"]
+            }
 
 def update_aws_managed_policies():
     logging.info("Updating [Resource] AWS managed policies...")
@@ -128,6 +128,9 @@ def update_aws_managed_policies():
     else:
         remove_aws_policies_dir("policies")
         aws_policy_arn = []
+        aws_policy_dict = dict()
+        if not os.path.exists("policies"):
+            os.makedirs("policies")
 
         importlib.reload(resources.threads_config)
         with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as executor:
@@ -137,7 +140,8 @@ def update_aws_managed_policies():
                     aws_policy_crawling,
                     policy_key,
                     policy_value,
-                    aws_policy_arn
+                    aws_policy_arn,
+                    aws_policy_dict
                 )
                 futures.append(future)
             
@@ -149,4 +153,6 @@ def update_aws_managed_policies():
 
         if aws_policy_arn:
             save_json_to_aws_policies(f"AWS_POLICIES = {json.dumps(aws_policy_arn, indent=4)}\n", "aws_policies.py")
+        if aws_policy_dict:
+            save_json_to_aws_policies(f"AWS_POLICY_DICT = {json.dumps(aws_policy_dict, indent=4)}\n", "aws_policy_dict.py")
         logging.info("AWS managed policies has been updated!")

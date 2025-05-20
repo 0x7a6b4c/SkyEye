@@ -1,7 +1,7 @@
 {
   "PolicyName": "AmazonEventBridgeSchedulerReadOnlyAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AmazonEventBridgeSchedulerReadOnlyAccess",
-  "DefaultVersionId": "v1",
+  "DefaultVersionId": "v2",
   "Statement": [
     {
       "Effect": "Allow",

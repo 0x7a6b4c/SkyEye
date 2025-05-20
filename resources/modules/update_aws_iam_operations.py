@@ -343,6 +343,7 @@ def update_aws_permissions_library(aws_operations):
     IAM_OPERATION_DICT = dict()
     file_name = "iam_all_operations.py"
     file_name2 = "iam_all_operations_list.py"
+    service_list_file_name = "iam_all_service_list.json"
     for service in aws_operations['serviceMap'].values():
         if service['StringPrefix'] not in IAM_OPERATION_DICT:
             IAM_OPERATION_DICT[service['StringPrefix']] = [item for item in service['Actions'] ]
@@ -352,13 +353,26 @@ def update_aws_permissions_library(aws_operations):
         for service, operations in IAM_OPERATION_DICT.items()
         for operation in operations
     ]
+
+    SERVICE_LIST = {
+        "services":[
+            {
+                "value": service,
+                "label": service
+            }
+            for service in IAM_OPERATION_DICT.keys()
+        ] 
+    }
     
-    if IAM_OPERATION_DICT:
+    if IAM_OPERATION_DICT and IAM_OPERATION_LIST and SERVICE_LIST:
+        merged_library_filename = os.path.join("resources/libraries", service_list_file_name)
+        with open(merged_library_filename, 'w') as outfile:
+            outfile.write(json.dumps(SERVICE_LIST, indent=4))
+
         merged_library_filename = os.path.join("resources/libraries", file_name)
         with open(merged_library_filename, 'w') as outfile:
             outfile.write(f"IAM_OPERATION_DICT = {json.dumps(IAM_OPERATION_DICT, indent=4)}\n")
 
-    if IAM_OPERATION_LIST:
         merged_library_filename = os.path.join("resources/libraries", file_name2)
         with open(merged_library_filename, 'w') as outfile:
             outfile.write(f"IAM_OPERATION_LIST = {json.dumps(IAM_OPERATION_LIST, indent=4)}\n")

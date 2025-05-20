@@ -1,13 +1,14 @@
 {
   "PolicyName": "AmazonAuroraDSQLReadOnlyAccess",
   "PolicyArn": "arn:aws:iam::aws:policy/AmazonAuroraDSQLReadOnlyAccess",
-  "DefaultVersionId": "v1",
+  "DefaultVersionId": "v2",
   "Statement": [
     {
       "Sid": "DsqlReadOnlyPermissions",
       "Effect": "Allow",
       "Action": [
         "dsql:GetCluster",
+        "dsql:GetVpcEndpointServiceName",
         "dsql:ListClusters",
         "dsql:ListTagsForResource"
       ],
