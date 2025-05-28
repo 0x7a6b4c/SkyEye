@@ -20,16 +20,54 @@ from . import assumeRoleIterationFilter
 
 ### Group Filtering
 
-def list_groups_for_user(iam_client, targetUserName):
+def list_groups_all(iam_client, envData):
+    try:
+        groups_all = iam_client.list_groups()
+    except botocore.exceptions.ClientError as error:
+        pass
+    else:
+        with envData.groupsAll_context as envGroupsAll:
+            if not envGroupsAll:
+                envGroupsAll[:] = groups_all['Groups']
+
+def list_groups_for_user(iam_client, targetUserName, envGroupsAll):
     try:
         iam_groups = iam_client.list_groups_for_user(UserName=targetUserName)
     except botocore.exceptions.ClientError as error:
-        return None
+        pass
     else:
         group_json = []
         for group in iam_groups['Groups']:
             group_json.append({"GroupName":group['GroupName'],"GroupId":group['GroupId'],"Arn":group['Arn']})
         return group_json
+    
+    if envGroupsAll:
+        group_list = []
+        for group in envGroupsAll['Groups']:
+            group_list.append({"GroupName":group['GroupName'],"GroupId":group['GroupId'],"Arn":group['Arn']})
+    else:
+        try:
+            iam_groups_list = iam_client.list_groups()
+        except botocore.exceptions.ClientError as error:
+            return None
+        else:
+            group_list = []
+            for group in iam_groups_list['Groups']:
+                group_list.append({"GroupName":group['GroupName'],"GroupId":group['GroupId'],"Arn":group['Arn']})
+    
+    group_json = []
+    for group in group_list:
+        try:
+            iam_groups_get = iam_client.get_group(GroupName=group['GroupName'])
+        except botocore.exceptions.ClientError as error:
+            return None
+        else:
+            user_groups_get = [user['UserName'] for user in iam_groups_get['Users']]
+            if targetUserName in user_groups_get:
+                group_json.append(group)
+    
+    return group_json
+
     
 ### Role Filtering (Include assumeRoleIterationFilter)
 

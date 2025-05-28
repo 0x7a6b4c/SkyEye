@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import botocore, json, logging
 from ..utils import remove_metadata, json_encoder
-from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross, 
+from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross, list_groups_all,
                filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy, 
                all_iam_json_enum)
 
@@ -93,6 +93,7 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
     return output
 
 def getAccountAuthorizationDetailsEnumCross(iam_client, sts_caller_identity, targetUserArns, stop_event, envData, mode):
+    list_groups_all(iam_client, envData)
     policy_json = {}
     try:
         # Initialize variables for pagination

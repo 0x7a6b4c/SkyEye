@@ -130,38 +130,31 @@ def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES
     keys_to_exclude = ["PolicyId","Path","AttachmentCount","PermissionsBoundaryUsageCount","IsAttachable","CreateDate","UpdateDate"]
     acquired_policies = deepcopy(envData.policies)
     try:
-        policies = iam_client.list_policies()['Policies']
+        policies = iam_client.list_policies(Scope='All', OnlyAttached=True, PolicyUsageFilter='PermissionsPolicy')['Policies']
     except botocore.exceptions.ClientError as error:
         for policy in acquired_policies[:]:
             if "aws" == policy['PolicyArn'].split(':')[4]:
                 acquired_policies.remove(policy)
+
+        for policy in acquired_policies:
+            scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
+    
+        with ThreadPoolExecutor(max_workers=10) as sub_executor:
+            futures = [
+                sub_executor.submit(scanningListIdentitiesForPolicyCore, 
+                    iam_client, 
+                    reScanNamePolicies,
+                    policy,
+                    envData,
+                    "newScan"        
+                )
+                for policy in AWS_POLICIES
+            ]
+            for future in as_completed(futures):
+                future.result()
     else:
         for policy in policies[:]:
             for removed_key in keys_to_exclude:
                 del policy[removed_key]
             policy['PolicyArn'] = policy.pop('Arn')
-            if "aws" == policy['PolicyArn'].split(':')[4]:
-                policies.remove(policy)
-            else:
-                env_policy_arns = {policy['PolicyArn'] for policy in acquired_policies}
-                if policy['PolicyArn'] in env_policy_arns:
-                    policies.remove(policy)
-        for policy in policies:
             scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")
-    
-    for policy in acquired_policies:
-        scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
-    
-    with ThreadPoolExecutor(max_workers=10) as sub_executor:
-        futures = [
-            sub_executor.submit(scanningListIdentitiesForPolicyCore, 
-                iam_client, 
-                reScanNamePolicies,
-                policy,
-                envData,
-                "newScan"        
-            )
-            for policy in AWS_POLICIES
-        ]
-        for future in as_completed(futures):
-            future.result()

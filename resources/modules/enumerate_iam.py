@@ -34,15 +34,17 @@ def list_object_iam(iam_client, policy_json, envPolicies, mode):
     if mode == "user":
         policyJson = process_iam(iam_client, policy_json, mode, envPolicies)
     if mode == "group":
-        policyJson = list_groups_for_user(iam_client, policy_json['UserName'])
-        if policyJson:
-            for group_iam in policyJson:
-                group_iam = process_iam(iam_client, group_iam, mode, envPolicies)
+        policyJson = list_groups_for_user(iam_client, policy_json['UserName'], None)
+        if isinstance(policyJson, list):
+            if policyJson:
+                for group_iam in policyJson:
+                    group_iam = process_iam(iam_client, group_iam, mode, envPolicies)
     if mode == "role":
         policyJson = filter_roles_by_principal(iam_client, policy_json['Arn'], None)
-        if policyJson:
-            for role_iam in policyJson:
-                role_iam = process_iam(iam_client, role_iam, mode, envPolicies)
+        if isinstance(policyJson, list):
+            if policyJson:
+                for role_iam in policyJson:
+                    role_iam = process_iam(iam_client, role_iam, mode, envPolicies)
     return policyJson
 
 def envInlineCollection(iam_client, entityJson, policy_json, mode):
@@ -198,7 +200,7 @@ def envRolesCollection(iam_client, role, unmatching_roles, envData):
 
 def enumerate_iam_to_json(iam_client, policy_json, envPolicies):
     group_policy_json = list_object_iam(iam_client, policy_json, envPolicies, "group")
-    if group_policy_json:
+    if isinstance(group_policy_json, list):
         policy_json['GroupList'] = group_policy_json
     role_policy_json = list_object_iam(iam_client, policy_json, envPolicies, "role")
     if role_policy_json:
@@ -208,7 +210,7 @@ def enumerate_iam_to_json(iam_client, policy_json, envPolicies):
     return policy_json
 
 def enumerate_iam_to_json_cross(iam_client, policy_json, envData, mode="default"):
-    iam_groups = list_groups_for_user(iam_client, policy_json['UserName'])
+    iam_groups = list_groups_for_user(iam_client, policy_json['UserName'], envData.groupsAll)
     if isinstance(iam_groups, list):
         policy_json['GroupList'] = iam_groups
         unmatching_groups = [group for group in policy_json['GroupList'] if group['GroupName'] not in {r['GroupName'] for r in envData.groups}]

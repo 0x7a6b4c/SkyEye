@@ -15,24 +15,28 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import sys
 import time
 import argparse
 import resources.threads_config
 
-from resources.utils import configure_logging, load_credentials_from_json, ensure_completed_scan_folder, update_max_threads
+from resources.utils import configure_logging, load_credentials_from_json, ensure_completed_scan_folder, update_max_threads, skyeye_logo
 from resources.mode_loader import singleUserSeparationMode, multipleUserCrossMode
-from resources.modules import update_aws_managed_policies, update_iam_operations, iam_permission_fuzzing
+from resources.modules import update_aws_managed_policies, update_iam_operations, update_mitre_attack_cloud_data ,iam_permission_fuzzing
 
 def main():
     configure_logging()
-    parser = argparse.ArgumentParser(description='Enumerate IAM Permissions')
+    parser = argparse.ArgumentParser(description=skyeye_logo())
 
     parser.add_argument('--json-file', help='Path to JSON file containing AWS credentials')
     parser.add_argument('--mode', help='Scanning mode: cross-entities, separate-entities')
     parser.add_argument('--thread', type=int, help=f"Number of threads to be used - [default = {resources.threads_config.MAX_THREADS}]", default=resources.threads_config.MAX_THREADS)
 
-    update_group = parser.add_argument_group('Update AWS Policies')
-    update_group.add_argument('--update', action='store_true', help='Update resources of AWS Managed policies and Boto3 IAM Read-only operations')
+    update_group = parser.add_argument_group('Update SkyEye Libraries')
+    update_group.add_argument('--update', action='store_true', help='Update SkyEye Libraries')
+    update_group.add_argument('--mitre-attack-cloud', action='store_true', help='Update TTPs Matrix of MITRE ATT&CK Cloud - Office Suite, Identity Provider, SaaS, IaaS')
+    update_group.add_argument('--aws-actions', action='store_true', help='Update resources of AWS Actions and Boto3 AWS Actions')
+    update_group.add_argument('--aws-managed-policies', action='store_true', help='Update resources of AWS Managed Policies')
 
     credential_group = parser.add_argument_group('Individual Credentials')
     credential_group.add_argument('--access-key', help='AWS Access Key')
@@ -43,20 +47,30 @@ def main():
 
     args = parser.parse_args()
 
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+
     if args.thread and all(
             value == parser.get_default(key)
             for key, value in vars(args).items()
             if key != 'thread'
         ):
         update_max_threads(args.thread)
-        return
+        sys.exit(0)
     elif args.thread:
         update_max_threads(args.thread)
 
     if args.update:
-        update_iam_operations()
-        update_aws_managed_policies()
-        return
+        if not (args.mitre_attack_cloud or args.aws_actions or args.aws_managed_policies):
+            parser.error("--mitre-attack-cloud, --aws-actions, --aws-managed-policies are required at least one when using --update")
+        if args.mitre_attack_cloud:
+            update_mitre_attack_cloud_data()
+        if args.aws_actions:
+            update_iam_operations()
+        if args.aws_managed_policies:
+            update_aws_managed_policies()
+        sys.exit(0)
 
     if args.json_file:
         if not args.mode:

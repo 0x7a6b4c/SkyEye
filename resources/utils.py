@@ -26,13 +26,15 @@ class envIAMData:
         self._policies = []
         self._all = []
         self._arns = []
-        
+        self._groupsAll = []
+
         self._lockU = threading.Lock()
         self._lockG = threading.Lock()
         self._lockR = threading.Lock()
         self._lockP = threading.Lock()
         self._lockA = threading.Lock()
         self._lockArn = threading.Lock()
+        self._lockGroupsAll = threading.Lock()
 
     # Context manager methods for each collection
     def users_context(self):
@@ -58,6 +60,10 @@ class envIAMData:
     def arns_context(self):
         """Provides thread-safe access to arn list"""
         return self._CollectionContext(self._arns, self._lockArn)
+    
+    def groupsAll_context(self):
+        """Provides thread-safe access to group all list"""
+        return self._CollectionContext(self._groupsAll, self._lockGroupsAll)
 
     # Inner context manager class
     class _CollectionContext:
@@ -101,6 +107,11 @@ class envIAMData:
     def arns(self):
         with self._lockArn:
             return self._arns.copy()
+        
+    @property
+    def groupsAll(self):
+        with self._lockGroupsAll:
+            return self._groupsAll.copy()
 
 def remove_metadata(boto_response):
     if isinstance(boto_response, dict):
@@ -111,7 +122,7 @@ def json_encoder(o):
     if type(o) is datetime.date or type(o) is datetime.datetime:
         return o.isoformat()
 
-    if isinstance(o, unicode):
+    if isinstance(o, bytes):
         return o.encode('utf-8', errors='ignore')
 
     if isinstance(o, str):
@@ -201,4 +212,17 @@ def update_max_threads(new_value):
 
     with open(config_file, 'w') as file:
         file.writelines(updated_lines)
-        
+
+def skyeye_logo():
+    logo = f"""
+    ╔═══════╗ ══  ══ ══    ══ ══════ ══    ══ ══════ 
+    ║ ══════╝ ══ ══   ══  ══  ══      ══  ══  ══      
+    ╚═══════╗ ════     ════   ═════    ════   ═════
+    ╔══════ ║ ══  ══    ══    ══        ══    ══      
+    ╚═══════╝ ══   ══   ══    ══════    ══    ══════
+
+    ═╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩════
+    WHEN YOUR VISION REACHES BEYOND IAM BOUNDARY SCOPE
+    ══════════════════════════════════════════════════╗
+    """
+    print(logo)

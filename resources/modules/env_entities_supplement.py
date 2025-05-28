@@ -18,19 +18,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import botocore, json
 from copy import deepcopy
 from . import (AWS_POLICIES, remove_metadata, json_encoder, 
-               list_groups_for_user, filter_roles_by_principal, 
+               list_groups_for_user, filter_roles_by_principal, list_groups_all,
                envUsersCollection, envGroupsCollection, envRolesCollection, 
                filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy, 
                get_attached_policies, all_iam_json_enum)
 
 def envEntitiesSupplement(session, reScanEnvEntities, envData, targetUserArns=list(), mode="default"):
+    list_groups_all(iam_client, envData)
     iam_client = session.client("iam")
     if reScanEnvEntities.get("Users", []):
         for reScanUser in reScanEnvEntities['Users']:
             entity = deepcopy(envData.users[reScanUser])
             if mode == "assumed-role":
                 if not entity.get("GroupList", []):
-                    iam_groups = list_groups_for_user(iam_client, entity['UserName'])
+                    iam_groups = list_groups_for_user(iam_client, entity['UserName'], envData.groupsAll)
                     if isinstance(iam_groups, list):
                         entity['GroupList'] = iam_groups
                         unmatching_groups = [group for group in entity['GroupList'] if any(group['GroupName'] != groupJson['GroupName'] for groupJson in envData.groups)]

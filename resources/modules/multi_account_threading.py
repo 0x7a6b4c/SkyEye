@@ -140,7 +140,14 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                 logging.info("Identified missing IAM component at ['Role'] entity level!")
             if reScanEnvEntities.get("Policies"):
                 logging.info("Identified missing IAM component at ['Policy'] entity level!")
-            logging.info("Attempting to perform IAM [AssumedRole] Interated Enumeration method to supplement...")
+            logging.info("Attempting to initialize IAM [AssumedRole] Interated Enumeration method to supplement...")
+            if not stop_event.is_set():
+                assume_roles_enumeration(envData, reScanEnvEntities, sts_caller_identity_list, session_list, accountDir, stop_event)
+
+    reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
+    if not stop_event.is_set():
+        if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
+            logging.info("Attempting to re-initialize IAM [AssumedRole] Interated Enumeration method to supplement...")
             if not stop_event.is_set():
                 assume_roles_enumeration(envData, reScanEnvEntities, sts_caller_identity_list, session_list, accountDir, stop_event)
 
