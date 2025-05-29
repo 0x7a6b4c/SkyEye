@@ -63,7 +63,7 @@ def main():
 
     if args.update:
         if not (args.mitre_attack_cloud or args.aws_actions or args.aws_managed_policies):
-            parser.error("--mitre-attack-cloud, --aws-actions, --aws-managed-policies are required at least one when using --update")
+            parser.error("--mitre-attack-cloud, --aws-actions, --aws-managed-policies, at least one are required when using --update")
         if args.mitre_attack_cloud:
             update_mitre_attack_cloud_data()
         if args.aws_actions:
