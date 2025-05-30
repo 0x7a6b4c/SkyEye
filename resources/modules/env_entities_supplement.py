@@ -24,8 +24,8 @@ from . import (AWS_POLICIES, remove_metadata, json_encoder,
                get_attached_policies, all_iam_json_enum)
 
 def envEntitiesSupplement(session, reScanEnvEntities, envData, targetUserArns=list(), mode="default"):
-    list_groups_all(iam_client, envData)
     iam_client = session.client("iam")
+    list_groups_all(iam_client, envData)
     if reScanEnvEntities.get("Users", []):
         for reScanUser in reScanEnvEntities['Users']:
             entity = deepcopy(envData.users[reScanUser])

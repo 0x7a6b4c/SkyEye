@@ -227,6 +227,7 @@ def version_checking(policy, iam_client):
                 diff_version_statements = version_statement_diff(policy['Statement'], other_version_statements, other_version_id)
                 policy['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
     else:
+        policy['OtherVersionIds'] = list()
         default_version_id = int(policy['DefaultVersionId'][1:])
         version_ids = set()
 
@@ -249,5 +250,5 @@ def version_checking(policy, iam_client):
                     other_version_statements = statement_filterings(response['PolicyVersion']['Document']['Statement'])
                     diff_version_statements = version_statement_diff(policy.get('Statement', []), other_version_statements, other_version_id)
                     policy['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
-                    policy['OtherVersionIds'].append(version_id)
+                    policy['OtherVersionIds'].append(other_version_id)
     return policy

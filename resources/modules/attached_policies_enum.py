@@ -87,7 +87,7 @@ def get_attached_policies(iam_client, policy):
                 pass
             else:
                 policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
-        if policy['Statement']:
+        if policy.get('Statement', []):
             policy = version_checking(policy, iam_client)
     
     return policy

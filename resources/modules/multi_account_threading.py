@@ -91,6 +91,37 @@ def multiAccountThreading(output_folder, account_id, credential_list):
             if stop_event.is_set():
                 return
             logging.info("Completed IAM cross-scanning method!")
+
+    # (2) Re-scan environment entities
+    reScanEnvEntities = enumerateEnvEntities(envData)
+    if not stop_event.is_set():
+        if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
+            if reScanEnvEntities.get("Users"):
+                logging.info("Identified missing IAM component at ['User'] entity level!")
+            if reScanEnvEntities.get("Groups"):
+                logging.info("Identified missing IAM component at ['Group'] entity level!")
+            if reScanEnvEntities.get("Roles"):
+                logging.info("Identified missing IAM component at ['Role'] entity level!")
+            if reScanEnvEntities.get("Policies"):
+                logging.info("Identified missing IAM component at ['Policy'] entity level!")
+            logging.info("Attempting to perform IAM cross-scanning to supplement...")
+            with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
+                futures = [
+                    sub_executor.submit(envEntitiesSupplement, 
+                        session, 
+                        reScanEnvEntities,
+                        envData
+                    )
+                    for session in session_list
+                ]
+                for future in as_completed(futures):
+                    if stop_event.is_set():
+                        sub_executor.shutdown(wait=False)
+                        break
+                    future.result()
+            if stop_event.is_set():
+                return
+            logging.info("Completed IAM cross-scanning method!")
     
     # (3) Re-scan by Reverse Approach - ListIdentitiesForPolicy - ListPolicies
     envPolicies, reScanNamePolicies = filteringListIdentitiesForPolicy(envData.users, envData.groups, envData.roles)
@@ -107,7 +138,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
             if reScanNamePolicies.get("Roles"):
                 logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
             logging.info("Identified permitted [ListIdentityForPolicies] action!")
-            logging.info("Attempting to perform IAM [ListRoles / ListIdentityForPolicies] method to supplement...")
+            logging.info("Attempting to perform IAM [ListPolicies / ListIdentityForPolicies] method to supplement...")
             if not stop_event.is_set():
                 with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
                     futures = [
@@ -126,7 +157,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                         future.result()
                 if stop_event.is_set():
                     return
-            logging.info("Completed IAM [ListRoles / ListIdentityForPolicies] method !")
+            logging.info("Completed IAM [ListPolicies / ListIdentityForPolicies] method !")
 
     # (4) Re-scan by interating through Roles to perform AssumeRole
     reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")

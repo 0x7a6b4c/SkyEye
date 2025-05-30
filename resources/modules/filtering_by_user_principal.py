@@ -26,7 +26,7 @@ def list_groups_all(iam_client, envData):
     except botocore.exceptions.ClientError as error:
         pass
     else:
-        with envData.groupsAll_context as envGroupsAll:
+        with envData.groupsAll_context() as envGroupsAll:
             if not envGroupsAll:
                 envGroupsAll[:] = groups_all['Groups']
 
@@ -43,7 +43,7 @@ def list_groups_for_user(iam_client, targetUserName, envGroupsAll):
     
     if envGroupsAll:
         group_list = []
-        for group in envGroupsAll['Groups']:
+        for group in envGroupsAll:
             group_list.append({"GroupName":group['GroupName'],"GroupId":group['GroupId'],"Arn":group['Arn']})
     else:
         try:
