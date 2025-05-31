@@ -85,7 +85,7 @@ def main():
         output_folder = ensure_completed_scan_folder()
 
         if args.mode == 'separate-entities':
-            singleUserSeparationMode(credentials_list, output_folder)
+            singleUserSeparationMode(credentials_list, output_folder, "separate")
         elif args.mode == 'cross-entities':
             multipleUserCrossMode(credentials_list, output_folder)
         else:
