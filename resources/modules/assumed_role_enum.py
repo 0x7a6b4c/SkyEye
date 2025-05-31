@@ -19,7 +19,7 @@ import threading, logging, boto3, importlib
 from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor
 import resources.threads_config
-from . import remove_metadata, save_output_to_file, envEntitiesSupplement
+from . import remove_metadata, save_output_to_file, envEntitiesComplement
 
 class ProcessedTracker:
     def __init__(self):
@@ -96,8 +96,8 @@ def assumed_role_enum_task(envData, reScanEnvEntities, role_list, current_arn, a
             if stop_event.is_set():
                 return
             if identity['Arn'].split(':')[5].split('/')[0] == "assumed-role":
-                logging.info(f"Supplementing IAMs by [AssumedRole Session] : [{'] → ['.join(path)}]")
-                envEntitiesSupplement(new_session, reScanEnvEntities, envData, arn_list, "assumed-role")
+                logging.info(f"Complementing IAMs by [AssumedRole Session] : [{'] → ['.join(path)}]")
+                envEntitiesComplement(new_session, reScanEnvEntities, envData, arn_list, "assumed-role")
                 with envData.all_context() as envAll:
                     if envAll:
                         logging.info(f"Identified get_account_authorization_details permissions at [{identity['Arn']}]!")

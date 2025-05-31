@@ -72,6 +72,8 @@ def envAttachedCollection(iam_client, entityJson, policy_json, envData, mode):
                         for envPolicy in envPolicies:
                             if (envPolicy['PolicyName'] == userAttachedPolicy['PolicyName']):
                                 if envPolicy.get('Statement') is not None:
+                                    # userAttachedPolicy = userAttachedPolicy | envPolicy
+                                    # envPolicy = userAttachedPolicy | envPolicy
                                     userAttachedPolicy.update(envPolicy)
                                 break
                     else:
@@ -81,6 +83,8 @@ def envAttachedCollection(iam_client, entityJson, policy_json, envData, mode):
                             for envPolicy in envPolicies:
                                 if envPolicy['PolicyName'] == userAttachedPolicy['PolicyName']:
                                     if envPolicy.get('Statement') is None:
+                                        # envPolicy = envPolicy | userAttachedPolicy
+                                        # userAttachedPolicy = envPolicy | userAttachedPolicy
                                         envPolicy.update(userAttachedPolicy)
                                         break
                 policy_json['AttachedManagedPolicies'] = policy_json.get("AttachedManagedPolicies", []) + entityJson.get("AttachedManagedPolicies", [])
@@ -91,6 +95,8 @@ def envAttachedCollection(iam_client, entityJson, policy_json, envData, mode):
                     for envPolicy in envPolicies:
                         if (envPolicy['PolicyName'] == userAttachedPolicy['PolicyName']):
                             if envPolicy.get('Statement') is not None:
+                                # userAttachedPolicy = userAttachedPolicy | envPolicy
+                                # envPolicy = userAttachedPolicy | envPolicy
                                 userAttachedPolicy.update(envPolicy)
                                 cond_policy = True
                             break
@@ -103,6 +109,8 @@ def envAttachedCollection(iam_client, entityJson, policy_json, envData, mode):
                             if (envPolicy['PolicyName'] == userAttachedPolicy['PolicyName']):
                                 if envPolicy.get('Statement') is None:
                                     envPolicy.update(userAttachedPolicy)
+                                    # envPolicy = envPolicy | userAttachedPolicy
+                                    # userAttachedPolicy = envPolicy | userAttachedPolicy
                                 break
                 if not cond_policy:
                     userAttachedPolicy = get_attached_policies(iam_client, userAttachedPolicy)
@@ -110,6 +118,8 @@ def envAttachedCollection(iam_client, entityJson, policy_json, envData, mode):
                         if (envPolicy['PolicyName'] == userAttachedPolicy['PolicyName']):
                             if envPolicy.get('Statement') is None:
                                 envPolicy.update(userAttachedPolicy)
+                                # envPolicy = envPolicy | userAttachedPolicy
+                                # userAttachedPolicy = envPolicy | userAttachedPolicy
                             break
             policy_json['AttachedManagedPolicies'] = policy_json.get("AttachedManagedPolicies", []) + entityJson.get("AttachedManagedPolicies", [])
     return entityJson, policy_json
@@ -126,12 +136,16 @@ def envPoliciesCollection(iam_client, entity, envData, mode):
                             if attachedPolicy['PolicyName'] == envPolicy['PolicyName']:
                                 if envPolicy.get('Statement') is not None:
                                     attachedPolicy.update(envPolicy)
+                                    # attachedPolicy = attachedPolicy | envPolicy
+                                    # envPolicy = attachedPolicy | envPolicy
                                 break
                     else:
                         for envPolicy in envPolicies:
                             if attachedPolicy['PolicyName'] == envPolicy['PolicyName']:
                                 if envPolicy.get('Statement') is None:
                                     envPolicy.update(attachedPolicy)
+                                    # envPolicy = envPolicy | attachedPolicy
+                                    # attachedPolicy = envPolicy | attachedPolicy
                                 break
                 else:
                     envPolicies.append(attachedPolicy)

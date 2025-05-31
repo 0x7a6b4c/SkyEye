@@ -30,6 +30,21 @@ def list_groups_all(iam_client, envData):
             if not envGroupsAll:
                 envGroupsAll[:] = groups_all['Groups']
 
+def list_policies_all(iam_client, envData):
+    try:
+        policies_all = iam_client.list_policies(Scope='All', OnlyAttached=True, PolicyUsageFilter='PermissionsPolicy')['Policies']
+    except botocore.exceptions.ClientError as error:
+        pass
+    else:
+        with envData.policiesAll_context() as envPoliciesAll:
+            if not envPoliciesAll:
+                keys_to_exclude = ["PolicyId","Path","AttachmentCount","PermissionsBoundaryUsageCount","IsAttachable","CreateDate","UpdateDate"]
+                for policy in policies_all:
+                    for removed_key in keys_to_exclude:
+                        del policy[removed_key]
+                    policy['PolicyArn'] = policy.pop('Arn')
+                envPoliciesAll[:] = policies_all
+
 def list_groups_for_user(iam_client, targetUserName, envGroupsAll):
     try:
         iam_groups = iam_client.list_groups_for_user(UserName=targetUserName)

@@ -69,7 +69,7 @@ def listEntitiesForPolicy(iam_client, policy_arn):
                     "PolicyRoles": [role["RoleName"] for role in entities["PolicyRoles"]]}
         return entities
     
-def versionToStatement(iam_client, policy):
+def versionToStatement(iam_client, policy, envData):
     if policy['PolicyArn'].split(':')[4] == "aws":
         try:
             f = open(f"policies/{policy['PolicyName']}.json", "r")
@@ -79,33 +79,34 @@ def versionToStatement(iam_client, policy):
             result = json.loads(f.read())
             policy['Statement'] = statement_filterings(result['Statement'])
     else:
-        try:
-            response = iam_client.get_policy_version(
-                PolicyArn=policy['PolicyArn'],
-                VersionId=policy['DefaultVersionId']
-            )
-        except botocore.exceptions.ClientError as error:
-            pass
-        else:
-            policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
-            policy = version_checking(policy, iam_client)
+        with envData.policies_context() as envPolicies:
+            env_policy_names = {policy['PolicyName'] for policy in envPolicies}
+            if policy['PolicyName'] in env_policy_names:
+                for envPolicy in envPolicies:
+                    if envPolicy['PolicyName'] == policy['PolicyName']:
+                        # policy = policy | envPolicy
+                        # envPolicy = policy | envPolicy
+                        policy.update(envPolicy)
+                        break
+            else:
+                try:
+                    response = iam_client.get_policy_version(
+                        PolicyArn=policy['PolicyArn'],
+                        VersionId=policy['DefaultVersionId']
+                    )
+                except botocore.exceptions.ClientError as error:
+                    pass
+                else:
+                    policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
+                    policy = version_checking(policy, iam_client)
+                    envPolicies.append(policy)
     return policy
     
 def scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, core_mode):
     for entity in reScanNamePolicies[f"{core_mode}"]:
         if entity['Name'] in entities[f"Policy{core_mode}"]:
             if mode == "newScan":
-                policy = versionToStatement(iam_client, policy)
-                with envData.policies_context() as envPolicies:
-                    env_policy_names = {policy['PolicyName'] for policy in envPolicies}
-                    if policy['PolicyName'] not in env_policy_names:
-                        envPolicies.append(policy)
-                    else:
-                        for envPolicy in envPolicies:
-                            if envPolicy['PolicyName'] == policy['PolicyName']:
-                                if envPolicy.get('Statement') is None:
-                                    envPolicy.update(policy)
-                                    break
+                policy = versionToStatement(iam_client, policy, envData)
             if core_mode == "Users":
                 with envData.users_context() as envUsers:
                     envUsers[entity['Index']]['AttachedManagedPolicies'] = envUsers[entity['Index']].get('AttachedManagedPolicies',[]) + [policy]
@@ -128,33 +129,38 @@ def scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, 
 
 def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData):
     keys_to_exclude = ["PolicyId","Path","AttachmentCount","PermissionsBoundaryUsageCount","IsAttachable","CreateDate","UpdateDate"]
-    acquired_policies = deepcopy(envData.policies)
-    try:
-        policies = iam_client.list_policies(Scope='All', OnlyAttached=True, PolicyUsageFilter='PermissionsPolicy')['Policies']
-    except botocore.exceptions.ClientError as error:
-        for policy in acquired_policies[:]:
-            if "aws" == policy['PolicyArn'].split(':')[4]:
-                acquired_policies.remove(policy)
-
-        for policy in acquired_policies:
-            scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
-    
-        with ThreadPoolExecutor(max_workers=10) as sub_executor:
-            futures = [
-                sub_executor.submit(scanningListIdentitiesForPolicyCore, 
-                    iam_client, 
-                    reScanNamePolicies,
-                    policy,
-                    envData,
-                    "newScan"        
-                )
-                for policy in AWS_POLICIES
-            ]
-            for future in as_completed(futures):
-                future.result()
-    else:
-        for policy in policies[:]:
-            for removed_key in keys_to_exclude:
-                del policy[removed_key]
-            policy['PolicyArn'] = policy.pop('Arn')
+    envPoliciesAll = deepcopy(envData.policiesAll)
+    if envPoliciesAll:
+        for policy in envPoliciesAll:
             scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")
+    else:
+        try:
+            policies = iam_client.list_policies(Scope='All', OnlyAttached=True, PolicyUsageFilter='PermissionsPolicy')['Policies']
+        except botocore.exceptions.ClientError as error:
+            acquired_policies = deepcopy(envData.policies)
+            for policy in acquired_policies[:]:
+                if "aws" == policy['PolicyArn'].split(':')[4]:
+                    acquired_policies.remove(policy)
+
+            for policy in acquired_policies:
+                scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
+        
+            with ThreadPoolExecutor(max_workers=10) as sub_executor:
+                futures = [
+                    sub_executor.submit(scanningListIdentitiesForPolicyCore, 
+                        iam_client, 
+                        reScanNamePolicies,
+                        policy,
+                        envData,
+                        "newScan"        
+                    )
+                    for policy in AWS_POLICIES
+                ]
+                for future in as_completed(futures):
+                    future.result()
+        else:
+            for policy in policies[:]:
+                for removed_key in keys_to_exclude:
+                    del policy[removed_key]
+                policy['PolicyArn'] = policy.pop('Arn')
+                scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")

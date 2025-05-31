@@ -50,14 +50,14 @@ def process_credential_set(session, sts_caller_identity, output_folder):
                         logging.info("Identified missing IAM component at ['Role'] entity level!")
                     if reScanEnvEntities.get("Policies"):
                         logging.info("Identified missing IAM component at ['Policy'] entity level!")
-                    logging.info("Attempting to intialize IAM [AssumedRole] Interation method to supplement...")
+                    logging.info("Attempting to intialize IAM [AssumedRole] rotated scanning model to complement...")
                     assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
             # Second Assumed Role Scanning - 2
             reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
             if envData.roles:
                 if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
                     stop_event = threading.Event()
-                    logging.info("Attempting to re-initialize IAM [AssumedRole] Interation method to supplement...")
+                    logging.info("Attempting to re-initialize IAM [AssumedRole] rotated scanning model to complement...")
                     assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
             if not envData.all:
                 final_output = deepcopy(envData.users[0])

@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import botocore, json, logging
 from ..utils import remove_metadata, json_encoder
-from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross, list_groups_all,
+from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross, list_groups_all, list_policies_all,
                filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy, 
                all_iam_json_enum)
 
@@ -86,7 +86,7 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
             if reScanNamePolicies.get("Roles"):
                 logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
             logging.info("Identified permitted [ListIdentityForPolicies] action!")
-            logging.info("Attempting to perform IAM [ListPolicies / ListIdentityForPolicies] method to supplement...")
+            logging.info("Attempting to perform IAM [ListPolicies / ListIdentityForPolicies] method to complement...")
             scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
             logging.info("Completed IAM [ListPolicies / ListIdentityForPolicies] method !")
 
@@ -94,6 +94,7 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
 
 def getAccountAuthorizationDetailsEnumCross(iam_client, sts_caller_identity, targetUserArns, stop_event, envData, mode):
     list_groups_all(iam_client, envData)
+    list_policies_all(iam_client, envData)
     policy_json = {}
     try:
         # Initialize variables for pagination

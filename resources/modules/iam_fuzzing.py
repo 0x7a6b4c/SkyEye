@@ -357,7 +357,7 @@ def simulate_principal_policy(cred, sts_caller_identity):
             role_result = filter_allowed_actions(role_simulation_results, "role")
             role_result['RoleName'] = role_iam['RoleName']
             role_result['Arn'] = role_iam['Arn']
-            role_result['AssumeRolePolicyDocument'] = role_iam['AssumeRolePolicyDocument']
+            role_result['AssumeRolePolicyStatement'] = role_iam['AssumeRolePolicyStatement']
             output['RoleList'].append(role_result)
     
     return {

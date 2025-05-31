@@ -27,6 +27,7 @@ class envIAMData:
         self._all = []
         self._arns = []
         self._groupsAll = []
+        self._policiesAll = []
 
         self._lockU = threading.Lock()
         self._lockG = threading.Lock()
@@ -35,6 +36,8 @@ class envIAMData:
         self._lockA = threading.Lock()
         self._lockArn = threading.Lock()
         self._lockGroupsAll = threading.Lock()
+        self._lockPoliciesAll = threading.Lock()
+        
 
     # Context manager methods for each collection
     def users_context(self):
@@ -64,6 +67,10 @@ class envIAMData:
     def groupsAll_context(self):
         """Provides thread-safe access to group all list"""
         return self._CollectionContext(self._groupsAll, self._lockGroupsAll)
+    
+    def policiesAll_context(self):
+        """Provides thread-safe access to policies all list"""
+        return self._CollectionContext(self._policiesAll, self._lockPoliciesAll)
 
     # Inner context manager class
     class _CollectionContext:
@@ -112,6 +119,11 @@ class envIAMData:
     def groupsAll(self):
         with self._lockGroupsAll:
             return self._groupsAll.copy()
+        
+    @property
+    def policiesAll(self):
+        with self._lockPoliciesAll:
+            return self._policiesAll.copy()
 
 def remove_metadata(boto_response):
     if isinstance(boto_response, dict):
@@ -224,32 +236,26 @@ def update_max_threads(new_value):
 
 def skyeye_logo():
     logo = f"""
-                      -+############+-.                                                    
-                   .#####################-                          
-                 +#########################.                                 
-               .##########################+-.                       
-              -#######################-..    .##########-           
-             .####################-.     .-################+.       
-             .################+.      .+######################.     
-        ...+################.    ..-##############+-###########+    
-      .##################-   ..-#######++-.      .+#############+.  
-    .#################+. -#######+...           +################-  
-  .+################-.######+.        ..+#+    -##################. 
-  -###############+#####-.           #####-    ###################. 
- .##################+         +#..#######-    -###################- 
- .###############+. ..+#####-.     -####.    -####################. 
- .#############.-+###-.-#######++#####-    .+#####################. 
- .##################+..  .-########+.    .+######################.  
-  -#####################+--..-###+---++#########################.   
-  .+###########################################################.    
-    -########################################################+      
-        -################################################-.        
-                       -#.   +#     .#-   ##-  .##.                 
-                 .##..+#-    +#     .#-    -####--#.                
-                .#--#+.      +#     -##.       -##.                 
-                 .##.       ####.  .#--#+.                           
-                           .#--#.    .##.                            
-                             ##                                  
+                         .+@@@@@@@@@@@*:                            
+                      :%@@@@@@@@@@@@@@@@@@-                         
+         :-         =@@@@@@@#+-:::=+*@@@@@@@+                       
+          ##      :@@@@@@-             :%@@@@@=                     
+         :.@@#   :@@@@@-                 .%@@@@+                    
+         +@:#@@@+:.=%%                     *@@@@=                   
+         .%@@%@@@@@@+-  =*=:                #@@@@.                  
+           =@@@@@@@@@@@@%++@@@#: :#-         @@@@@@@@@@+.           
+      .#:=    :*@@@@@@@@@@@@@@@@@%.%@*.-     +@@@@@@@@@@@@:         
+     *@@-*+#@%:       %@@@@@@@@@@@@@@@@%@-   -@@@@--+%@@@@@%.       
+    #@@@%-@%*@@-      =#=#@@@@@@::=*@@@@@@+  #@@@*     =@@@@%:      
+   =@@@@: -@@@@@#         @@@@@        .=@@- @@@*       :@@@@#      
+   @@@@*   :@@@@@@*       ==:        ..:.   @@@-         +@@@@.     
+   @@@@+     #@@@@@@@+-.      .=#*+@@@@#+-::.            -@@@@:     
+   #@@@@      .%@@%%@@@@@@@@@@@@@@@@=.                   *@@@@.     
+   :@@@@#        :@@@. -#@@@%*-                         +@@@@=      
+    =@@@@@=           .:.                             :@@@@@*       
+     :@@@@@@@@%####################################%@@@@@@@=        
+       :%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=          
+          .=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+.             
 
 ╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩════
     SkyEye - WHEN YOUR VISION REACHES BEYOND IAM BOUNDARY SCOPE

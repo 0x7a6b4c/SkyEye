@@ -215,17 +215,13 @@ def version_statement_diff(current_version_statement, other_version_statement, o
     }
         
 def version_checking(policy, iam_client):
-    policy['HistoricPolicyVersionEnumeration'] = list()
     if policy.get('OtherVersionIds', []):
-        for version_id in policy["OtherVersionIds"]:
-            try:
-                response, other_version_id = get_policy_version_safe(iam_client, policy['PolicyArn'], version_id)
-            except botocore.exceptions.ClientError as error:
-                pass
-            else:
+        for version_id in policy['OtherVersionIds']:
+            response, other_version_id = get_policy_version_safe(iam_client, policy['PolicyArn'], version_id)
+            if response:
                 other_version_statements = statement_filterings(response['PolicyVersion']['Document']['Statement'])
                 diff_version_statements = version_statement_diff(policy['Statement'], other_version_statements, other_version_id)
-                policy['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
+                policy['HistoricPolicyVersionEnumeration'] = policy.get('HistoricPolicyVersionEnumeration', []) + [diff_version_statements]
     else:
         policy['OtherVersionIds'] = list()
         default_version_id = int(policy['DefaultVersionId'][1:])
@@ -246,9 +242,9 @@ def version_checking(policy, iam_client):
             ]
             for future in as_completed(futures): 
                 response, other_version_id = future.result()
-                if response:
+                if response: #and (other_version_id not in  policy['OtherVersionIds']):
                     other_version_statements = statement_filterings(response['PolicyVersion']['Document']['Statement'])
                     diff_version_statements = version_statement_diff(policy.get('Statement', []), other_version_statements, other_version_id)
-                    policy['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
-                    policy['OtherVersionIds'].append(other_version_id)
+                    policy['HistoricPolicyVersionEnumeration'] = policy.get('HistoricPolicyVersionEnumeration', []) + [diff_version_statements]
+                    policy['OtherVersionIds'] = policy.get('OtherVersionIds', []) + [other_version_id]
     return policy

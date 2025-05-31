@@ -18,21 +18,21 @@ from .inline_policies_enum import list_inline_policies, get_inline_policy
 
 from .attached_policies_enum import list_attached_policies, get_attached_policies
 from .assumed_role_and_all_iam_filterings import assumeRoleIterationFilter, all_iam_json_enum
-from .filtering_by_user_principal import list_groups_for_user, filter_roles_by_principal, list_groups_all
+from .filtering_by_user_principal import list_groups_for_user, filter_roles_by_principal, list_groups_all, list_policies_all
 from .iam_fuzzing import iam_permission_fuzzing
 from .enumerate_iam import envUsersCollection, envGroupsCollection, envRolesCollection, enumerate_iam_to_json, enumerate_iam_to_json_cross
 from .list_identities_for_policy_enum import filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy
-from .env_entities_supplement import envEntitiesSupplement
+from .env_entities_supplement import envEntitiesComplement
 from .assumed_role_enum import assume_roles_enumeration
 from .get_account_authorization_details_enum import getAccountAuthorizationDetailsEnum, getAccountAuthorizationDetailsEnumCross
 from .credential_processing import process_credential_set_cross, process_credential_set
 from .session_list_generate import session_list_generation
 from .multi_account_threading import multiAccountThreading
 
-__all__ = ['account_filterings', 'assume_roles_enumeration', 'assumeRoleIterationFilter', 'list_attached_policies', 'get_attached_policies', 'statement_filterings',
-           'process_credential_set_cross','process_credential_set','enumerateEnvEntities','envEntitiesSupplement','update_aws_managed_policies', 'update_iam_operations', 'update_mitre_attack_cloud_data',
+__all__ = ['account_filterings', 'assume_roles_enumeration', 'assumeRoleIterationFilter', 'list_attached_policies', 'get_attached_policies', 'statement_filterings', 
+           'process_credential_set_cross','process_credential_set','enumerateEnvEntities','envEntitiesComplement','update_aws_managed_policies', 'update_iam_operations', 'update_mitre_attack_cloud_data',
            'envUsersCollection','envGroupsCollection','envRolesCollection','enumerate_iam_to_json','enumerate_iam_to_json_cross','iam_permission_fuzzing',
-           'list_groups_for_user','filter_roles_by_principal','list_groups_all','getAccountAuthorizationDetailsEnum','getAccountAuthorizationDetailsEnumCross',
+           'list_groups_for_user','filter_roles_by_principal','list_groups_all','list_policies_all','getAccountAuthorizationDetailsEnum','getAccountAuthorizationDetailsEnumCross',
            'filter_roles','all_iam_json_enum','version_checking','version_statement_diff','list_inline_policies','get_inline_policy','get_policy_version_safe',
            'filteringListIdentitiesForPolicy','checkingLIFPPermission','scanningListIdentitiesForPolicy','multiAccountThreading','session_list_generation',
            'envIAMData','AWS_POLICIES','IAM_BOTO3_READ_OPERATION_LIST','IAM_OPERATION_DICT','IAM_OPERATION_LIST','AWS_POLICY_DICT',

@@ -82,7 +82,7 @@ def filter_roles(roleJson, policy_dict):
         if removed_keys in roleJson:
             del roleJson[removed_keys]
 
-    roleJson['AssumeRolePolicyDocument'] = roleJson['AssumeRolePolicyDocument']['Statement']
+    roleJson['AssumeRolePolicyStatement'] = roleJson['AssumeRolePolicyDocument']['Statement']
     
     if "RolePolicyList" in roleJson:
         roleJson["InlinePolicies"] = roleJson.pop("RolePolicyList")
@@ -120,7 +120,6 @@ def all_iam_managedpolicies(entity, policy_dict):
                 result['PolicyName'] = allResult['PolicyName']
                 result['PolicyArn'] = allResult['Arn']
                 result['DefaultVersionId'] = allResult['DefaultVersionId']
-                result['OtherVersionIds'] = list()
                 result['Statement'] = list()
                 result['Statement'].extend(
                     statement
@@ -133,12 +132,10 @@ def all_iam_managedpolicies(entity, policy_dict):
                 result['Statement'] = statement_filterings(result['Statement'])
                 for policy in allResult['PolicyVersionList']:
                     if policy['VersionId'] != result['DefaultVersionId']:
-                        result['OtherVersionIds'].append(policy['VersionId'])
+                        result['OtherVersionIds'] = result.get('OtherVersionIds', []) + [policy['VersionId']]
                         other_version_statements = statement_filterings(policy['Document']['Statement'])
                         diff_version_statements = version_statement_diff(result['Statement'], other_version_statements, policy['VersionId'])
-                        if not result.get("HistoricPolicyVersionEnumeration", None):
-                            result['HistoricPolicyVersionEnumeration'] = list()
-                        result['HistoricPolicyVersionEnumeration'].append(diff_version_statements)
+                        result['HistoricPolicyVersionEnumeration'] = result.get('HistoricPolicyVersionEnumeration', []) + [diff_version_statements]
             response.append(result)
         entity['AttachedManagedPolicies'] = response
     else:

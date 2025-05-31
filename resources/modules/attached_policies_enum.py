@@ -30,54 +30,54 @@ def get_attached_policies(iam_client, policy):
             policy['DefaultVersionId'] = result['DefaultVersionId']
             policy['Statement'] = statement_filterings(result['Statement'])
     else:
-        policy['OtherVersionIds'] = list()
-        try:
-            get_policy_json = iam_client.get_policy(PolicyArn=policy['PolicyArn'])
-        except botocore.exceptions.ClientError as error:
+        if not policy.get('DefaultVersionId'):
             try:
                 list_versions_response = iam_client.list_policy_versions(PolicyArn=policy['PolicyArn'])
             except botocore.exceptions.ClientError as error:
-                validity = None
                 try:
-                    response = iam_client.get_policy_version(PolicyArn=policy['PolicyArn'], VersionId="v1")
+                    get_policy_json = iam_client.get_policy(PolicyArn=policy['PolicyArn'])
                 except botocore.exceptions.ClientError as error:
-                    if error.response['Error']['Code'] == 'AccessDenied':
-                        return policy
-                    elif error.response['Error']['Code'] == 'NoSuchEntity':
-                        validity = 2
+                    validity = None
+                    try:
+                        response = iam_client.get_policy_version(PolicyArn=policy['PolicyArn'], VersionId="v1")
+                    except botocore.exceptions.ClientError as error:
+                        if error.response['Error']['Code'] == 'AccessDenied':
+                            return policy
+                        elif error.response['Error']['Code'] == 'NoSuchEntity':
+                            validity = 2
+                        else:
+                            return policy
                     else:
-                        return policy
-                else:
-                    if response["PolicyVersion"]["IsDefaultVersion"]:
-                        policy['DefaultVersionId'] = "v1"
-                        policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
-                    else:
-                        validity = 1
+                        if response["PolicyVersion"]["IsDefaultVersion"]:
+                            policy['DefaultVersionId'] = "v1"
+                            policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
+                        else:
+                            validity = 1
 
-                if validity:
-                    with ThreadPoolExecutor(max_workers=10) as executor:
-                        futures = [
-                            executor.submit(get_policy_version_safe, iam_client, policy['PolicyArn'], f"v{vid}")
-                            for vid in range(validity, 100, 1)
-                        ]
-                        for future in as_completed(futures):
-                            response, version_id = future.result()
-                            if response:
-                                if response["PolicyVersion"]["IsDefaultVersion"]:
-                                    policy['DefaultVersionId'] = version_id
-                                    policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
-                                else:
-                                    policy['OtherVersionIds'].append(version_id)
+                    if validity:
+                        with ThreadPoolExecutor(max_workers=10) as executor:
+                            futures = [
+                                executor.submit(get_policy_version_safe, iam_client, policy['PolicyArn'], f"v{vid}")
+                                for vid in range(validity, 100, 1)
+                            ]
+                            for future in as_completed(futures):
+                                response, version_id = future.result()
+                                if response:
+                                    if response["PolicyVersion"]["IsDefaultVersion"]:
+                                        policy['DefaultVersionId'] = version_id
+                                        policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
+                                    else:
+                                        policy['OtherVersionIds'] = policy.get('OtherVersionIds', []) + [version_id]
+                else:
+                    policy['DefaultVersionId'] = get_policy_json['Policy']['DefaultVersionId']
             else:
                 for version in list_versions_response['Versions']:
                     if version['IsDefaultVersion']:
                         policy['DefaultVersionId'] = version['VersionId']
                     else:
-                        policy['OtherVersionIds'].append(version['VersionId'])
-        else:
-            policy['DefaultVersionId'] = get_policy_json['Policy']['DefaultVersionId']
-            
-        if policy.get('DefaultVersionId') and not policy.get('Statement', []):
+                        policy['OtherVersionIds'] = policy.get('OtherVersionIds', []) + [version['VersionId']]
+    
+        if not policy.get('Statement', []) and policy.get('DefaultVersionId'):
             try:
                 response = iam_client.get_policy_version(
                     PolicyArn=policy['PolicyArn'],
@@ -87,7 +87,11 @@ def get_attached_policies(iam_client, policy):
                 pass
             else:
                 policy['Statement'] = statement_filterings(remove_metadata(response['PolicyVersion']['Document']['Statement']))
-        if policy.get('Statement', []):
+        
+        if policy.get('OtherVersionIds', []):
+            policy['OtherVersionIds'] = list(set(policy['OtherVersionIds']))
+        
+        if policy.get('Statement', []) and not policy.get('HistoricPolicyVersionEnumeration', []):
             policy = version_checking(policy, iam_client)
     
     return policy
@@ -116,6 +120,8 @@ def list_attached_policies(iam_client, targetName, mode, envPolicies=None):
                 condition = False
                 for envPolicy in envPolicies:
                     if policy['PolicyArn'] == envPolicy['PolicyArn']:
+                        # policy = policy | envPolicy
+                        # envPolicy = policy | envPolicy
                         policy.update(envPolicy)
                         condition = True
                         break
