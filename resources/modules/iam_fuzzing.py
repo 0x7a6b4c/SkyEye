@@ -100,7 +100,7 @@ def iam_permission_fuzzing(credentials, output_folder):
     logging.info("Initializing [iam:SimulatePrincipalPolicy] permissions simulation mode...")
     output = simulate_principal_policy(credentials, sts_caller_identity)
     if output:
-        save_output_to_file(output, accountDir, f"single_fuzzingOutputCredentialSet_{credentials['AccessKey']}.json")
+        save_output_to_file(output, accountDir, f"fuzzingOutputCredentialSet_{credentials['AccessKey']}.json")
     else:
         logging.info("[iam:SimulatePrincipalPolicy] - Access Denied!")
         # [IAM Fuzzing]
@@ -126,7 +126,7 @@ def iam_permission_fuzzing(credentials, output_folder):
                 "Action": output
             }
         }
-        save_output_to_file(final_output, accountDir, f"single_fuzzingOutputCredentialSet_{credentials['AccessKey']}.json")
+        save_output_to_file(final_output, accountDir, f"fuzzingOutputCredentialSet_{credentials['AccessKey']}.json")
 
 def process_batch(iam_client, arn, batch_num, action_batch, max_retries=5):
     retry_count = 0

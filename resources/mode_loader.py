@@ -21,8 +21,11 @@ import resources.threads_config
 from .modules import (createDir, session_list_generation, process_credential_set, account_filterings, multiAccountThreading)
 
 
-def singleUserSeparationMode(credentials_list, output_folder, mode="single"):
-    logging.info("Initializing [separate-entities] scanninng mode...")
+def singleUserSeparationMode(credentials_list, output_folder, mode="default"):
+    if mode == "single-entity":
+        logging.info("Initializing [single-entity] scanninng mode...")
+    else:
+        logging.info("Initializing [separate-entity] scanninng mode...")
     session_list, sts_caller_identity_list = session_list_generation(credentials_list)
     importlib.reload(resources.threads_config)
     with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as executor:
@@ -33,8 +36,7 @@ def singleUserSeparationMode(credentials_list, output_folder, mode="single"):
                 process_credential_set,
                 session_list[index],
                 sts_caller_identity,
-                accountDir,
-                mode
+                accountDir
             )
             futures.append(future)
         
@@ -44,12 +46,11 @@ def singleUserSeparationMode(credentials_list, output_folder, mode="single"):
             except Exception as e:
                 logging.error(f"Error processing credentials set: {e}", exc_info=True)
 
-def multipleUserCrossMode(credentials_list, output_folder, mode="cross"):
-    logging.info("Initializing [cross-entities] scanninng mode...")
+def multipleUserCrossMode(credentials_list, output_folder):
+    logging.info("Initializing [cross-entity] scanninng mode...")
     filteredCredentialList = account_filterings(credentials_list)
     if filteredCredentialList == None:
-        logging.info("Initializing [separate-entities] scanninng mode...")
-        singleUserSeparationMode(credentials_list, output_folder, mode)
+        singleUserSeparationMode(credentials_list, output_folder)
     else:
         importlib.reload(resources.threads_config)
         with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as account_executor:
@@ -72,8 +73,7 @@ def multipleUserCrossMode(credentials_list, output_folder, mode="cross"):
                             process_credential_set,
                             session_list[0],
                             sts_caller_identity_list[0],
-                            accountDir,
-                            mode
+                            accountDir
                         )
                     )
             for future in as_completed(futures):

@@ -171,12 +171,12 @@ def load_credentials_from_json(file_path):
             return None
     return credentials
 
-def ensure_completed_scan_folder():
+def ensure_completed_scan_folder(mode):
     if not os.path.exists("completed_scan"):
         os.makedirs("completed_scan")
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    sub_folder = os.path.join("completed_scan", timestamp)
+    sub_folder = os.path.join("completed_scan", f"{mode}_{timestamp}")
     os.makedirs(sub_folder, exist_ok=True)
     return sub_folder
 

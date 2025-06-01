@@ -29,7 +29,7 @@ def main():
     parser = argparse.ArgumentParser(description=skyeye_logo())
 
     parser.add_argument('--json-file', help='Path to JSON file containing AWS credentials')
-    parser.add_argument('--mode', help='Scanning mode: cross-entities, separate-entities')
+    parser.add_argument('--mode', help='Scanning mode: cross-entity, separate-entity')
     parser.add_argument('--thread', type=int, help=f"Number of threads to be used - [default = {resources.threads_config.MAX_THREADS}]", default=resources.threads_config.MAX_THREADS)
 
     update_group = parser.add_argument_group('Update SkyEye Libraries')
@@ -75,32 +75,33 @@ def main():
     if args.json_file:
         if not args.mode:
             parser.error("--mode are required when using --json-file")
-        if (args.mode != 'separate-entities') and (args.mode != 'cross-entities'):
-            parser.error("--mode only supports [separate-entities] and [cross-entities] mode")
+        if (args.mode != 'separate-entity') and (args.mode != 'cross-entity'):
+            parser.error("--mode only supports [separate-entity] and [cross-entity] mode")
         
         credentials_list = load_credentials_from_json(args.json_file)
 
         if not isinstance(credentials_list, list):
             parser.error("JSON file must contain a list of credentials.")
-        output_folder = ensure_completed_scan_folder()
+        output_folder = ensure_completed_scan_folder(args.mode)
 
-        if args.mode == 'separate-entities':
-            singleUserSeparationMode(credentials_list, output_folder, "separate")
-        elif args.mode == 'cross-entities':
+        if args.mode == 'separate-entity':
+            singleUserSeparationMode(credentials_list, output_folder)
+        elif args.mode == 'cross-entity':
             multipleUserCrossMode(credentials_list, output_folder)
         else:
-            parser.error("--mode only supports [separate-entities] and [cross-entities] mode")
+            parser.error("--mode only supports [separate-entity] and [cross-entity] mode")
     else:
         if not args.access_key or not args.secret_key:
             parser.error("--access-key and --secret-key are required when not using --json-file")
-        output_folder = ensure_completed_scan_folder()
+        mode = "single-entity"
+        output_folder = ensure_completed_scan_folder(mode)
         credentials = {
             "AccessKey": args.access_key,
             "SecretKey": args.secret_key,
             "SessionToken": args.session_token,
             "Region": args.region
         }
-        singleUserSeparationMode([credentials], output_folder)
+        singleUserSeparationMode([credentials], output_folder, mode)
         if args.fuzz:
             iam_permission_fuzzing(credentials, output_folder)
 
