@@ -49,7 +49,7 @@ def singleUserSeparationMode(credentials_list, output_folder, mode="default"):
 def multipleUserCrossMode(credentials_list, output_folder):
     logging.info("Initializing [cross-entity] scanninng mode...")
     filteredCredentialList = account_filterings(credentials_list)
-    if filteredCredentialList == None:
+    if not filteredCredentialList:
         singleUserSeparationMode(credentials_list, output_folder)
     else:
         importlib.reload(resources.threads_config)

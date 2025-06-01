@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import sys, re, logging, datetime, urllib3, os, json, threading
+import sys, re, logging, logging.handlers, datetime, urllib3, os, json, threading, queue
 
 class envIAMData:
     def __init__(self):
@@ -140,23 +140,75 @@ def json_encoder(o):
     if isinstance(o, str):
         return o.encode('utf-8', errors='ignore')
 
-def configure_logging():
-    logging.basicConfig(
-        level=logging.INFO,
-        # format='%(asctime)s - %(process)d - [%(levelname)s] %(message)s',
-        # format="%(asctime)s - [%(levelname)s] %(pathname)s:%(lineno)d - %(funcName)s - %(message)s",
-        format='%(asctime)s - [%(levelname)s] %(message)s',
-        handlers=[logging.StreamHandler(sys.stdout)]
-    )
+"""
+DEBUG logging mode
 
-    logging.getLogger('boto3').setLevel(logging.WARNING)
-    logging.getLogger('botocore').setLevel(logging.WARNING)
+def configure_logging(timestamp):
+    os.makedirs('logs', exist_ok=True)
+    log_filename = os.path.join("logs", f"scanningSession_{timestamp}.log")
+
+    log_queue = queue.Queue(-1)
+
+    file_handler = logging.FileHandler(log_filename, encoding='utf-8')
+    file_handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - [%(levelname)s] %(message)s')
+    file_handler.setFormatter(formatter)
+
+    stream_handler = logging.StreamHandler(sys.stdout)
+    stream_handler.setLevel(logging.INFO)
+    stream_handler.setFormatter(formatter)
+
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.DEBUG)
+    if root_logger.hasHandlers():
+        root_logger.handlers.clear()
+
+    queue_handler = logging.handlers.QueueHandler(log_queue)
+    root_logger.addHandler(queue_handler)
+    root_logger.addHandler(stream_handler)
+
+    listener = logging.handlers.QueueListener(log_queue, file_handler)
+    listener.start()
+
+    logging.getLogger('boto3').setLevel(logging.DEBUG)
+    logging.getLogger('botocore').setLevel(logging.DEBUG)
+
     logging.getLogger('nose').setLevel(logging.WARNING)
-
     logging.getLogger("requests").setLevel(logging.WARNING)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
 
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    return listener
+"""
+
+def configure_logging(timestamp):
+    os.makedirs('logs', exist_ok=True)
+    log_filename = os.path.join("logs", f"scanningSession_{timestamp}.log")
+
+    log_queue = queue.Queue(-1)
+
+    file_handler = logging.FileHandler(log_filename, encoding='utf-8')
+    file_handler.setFormatter(logging.Formatter('%(asctime)s - [%(levelname)s] %(message)s'))
+
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(logging.Formatter('%(asctime)s - [%(levelname)s] %(message)s'))
+
+    queue_handler = logging.handlers.QueueHandler(log_queue)
+
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    root_logger.handlers = [queue_handler, console_handler]
+
+    listener = logging.handlers.QueueListener(log_queue, file_handler)
+    listener.start()
+
+    for noisy in ['boto3', 'botocore', 'nose', 'requests', 'urllib3']:
+        logging.getLogger(noisy).setLevel(logging.WARNING)
+
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    return listener
 
 # regex_filtering("sts:AssumeRole", statement_action):
 def regex_filtering(action, pattern):
@@ -171,12 +223,11 @@ def load_credentials_from_json(file_path):
             return None
     return credentials
 
-def ensure_completed_scan_folder(mode):
+def ensure_completed_scan_folder(mode, timestamp):
     if not os.path.exists("completed_scan"):
         os.makedirs("completed_scan")
     
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    sub_folder = os.path.join("completed_scan", f"{mode}_{timestamp}")
+    sub_folder = os.path.join("completed_scan", f"{timestamp}_{mode}")
     os.makedirs(sub_folder, exist_ok=True)
     return sub_folder
 

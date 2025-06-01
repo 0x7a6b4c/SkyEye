@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
 import time
+import datetime
 import argparse
 import resources.threads_config
 
@@ -25,7 +26,8 @@ from resources.mode_loader import singleUserSeparationMode, multipleUserCrossMod
 from resources.modules import update_aws_managed_policies, update_iam_operations, update_mitre_attack_cloud_data ,iam_permission_fuzzing
 
 def main():
-    configure_logging()
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_listener = configure_logging(timestamp)
     parser = argparse.ArgumentParser(description=skyeye_logo())
 
     parser.add_argument('--json-file', help='Path to JSON file containing AWS credentials')
@@ -82,7 +84,7 @@ def main():
 
         if not isinstance(credentials_list, list):
             parser.error("JSON file must contain a list of credentials.")
-        output_folder = ensure_completed_scan_folder(args.mode)
+        output_folder = ensure_completed_scan_folder(args.mode, timestamp)
 
         if args.mode == 'separate-entity':
             singleUserSeparationMode(credentials_list, output_folder)
@@ -94,7 +96,7 @@ def main():
         if not args.access_key or not args.secret_key:
             parser.error("--access-key and --secret-key are required when not using --json-file")
         mode = "single-entity"
-        output_folder = ensure_completed_scan_folder(mode)
+        output_folder = ensure_completed_scan_folder(mode, timestamp)
         credentials = {
             "AccessKey": args.access_key,
             "SecretKey": args.secret_key,
@@ -104,6 +106,8 @@ def main():
         singleUserSeparationMode([credentials], output_folder, mode)
         if args.fuzz:
             iam_permission_fuzzing(credentials, output_folder)
+    
+    log_listener.stop()
 
 if __name__ == '__main__':
     start_time = time.time()

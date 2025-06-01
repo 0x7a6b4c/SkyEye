@@ -15,13 +15,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import boto3
+import boto3, logging, botocore
 from . import remove_metadata
 
 def session_list_generation(credentials_list):
     session_list = []
     sts_caller_identity_list = []
-    for credentials in credentials_list:
+    for index, credentials in enumerate(credentials_list):
+        if 'AccessKey' not in credentials or 'SecretKey' not in credentials:
+            logging.warning(f"Skipping credentials set {index + 1}: 'AccessKey' and 'SecretKey' are required.")
+            continue
+
         access_key = credentials['AccessKey']
         secret_key = credentials['SecretKey']
         session_token = credentials.get('SessionToken', '')
@@ -38,9 +42,15 @@ def session_list_generation(credentials_list):
             aws_session_token=session_token,
             region_name=region
         )
-
         sts_client = session.client('sts')
-        sts_caller_identity = remove_metadata(sts_client.get_caller_identity())
+        try:
+            sts_caller_identity = remove_metadata(sts_client.get_caller_identity())
+        except (botocore.exceptions.ClientError,
+            botocore.exceptions.EndpointConnectionError,
+            botocore.exceptions.ReadTimeoutError) as e:
+            logging.warning(f"Credentials set {index + 1} failed validation: {e}")
+            continue
+        
         sts_caller_identity['AccessKey'] = access_key
         sts_caller_identity['UserName'] = sts_caller_identity['Arn'].split('/')[-1]
         session_list.append(session)

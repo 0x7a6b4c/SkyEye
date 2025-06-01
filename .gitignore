@@ -52,6 +52,7 @@ htmlcov/
 
 # Completed scans output
 completed_scan/
+logs/
 
 # Runs directory
 runs/
