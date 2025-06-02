@@ -18,11 +18,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging, boto3, botocore
 from collections import Counter
 
-def validate_credentials(credentials, index, results):
-    if 'AccessKey' not in credentials or 'SecretKey' not in credentials:
-        logging.warning(f"Skipping credentials set {index + 1}: 'AccessKey' and 'SecretKey' are required.")
-        return
+def get_unique_access_keys(credentials):
+    unique_dict = {}
+    for index, cred in enumerate(credentials):
+        if 'AccessKey' not in cred or 'SecretKey' not in cred:
+            logging.warning(f"Skipping credentials set {index + 1}: 'AccessKey' and 'SecretKey' are required.")
+            continue
+        cred['SessionToken'] = cred.get('SessionToken', '')
+        cred['Region'] = cred.get('Region', 'us-east-1')
 
+        access_key = cred.get("AccessKey")
+        if access_key and access_key not in unique_dict:
+            unique_dict[access_key] = cred
+    return list(unique_dict.values())
+
+def validate_credentials(credentials, index, results):
     sts_client = boto3.client(
         aws_access_key_id=credentials['AccessKey'],
         aws_secret_access_key=credentials['SecretKey'],
@@ -40,6 +50,7 @@ def validate_credentials(credentials, index, results):
             logging.warning(f"Credentials set {index + 1} failed validation: {e}")
 
 def account_filterings(credentials_list):
+    credentials_list = get_unique_access_keys(credentials_list)
     targetUserArns = []
 
     for index, credentials in enumerate(credentials_list):

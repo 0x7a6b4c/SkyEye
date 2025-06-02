@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging, importlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import resources.threads_config
-from .modules import (createDir, session_list_generation, process_credential_set, account_filterings, multiAccountThreading)
+from .modules import (createDir, session_list_generation, get_unique_access_keys, process_credential_set, account_filterings, multiAccountThreading)
 
 
 def singleUserSeparationMode(credentials_list, output_folder, mode="default"):
@@ -26,6 +26,8 @@ def singleUserSeparationMode(credentials_list, output_folder, mode="default"):
         logging.info("Initializing [single-entity] scanninng mode...")
     else:
         logging.info("Initializing [separate-entity] scanninng mode...")
+    
+    credentials_list = get_unique_access_keys(credentials_list)
     session_list, sts_caller_identity_list = session_list_generation(credentials_list)
     importlib.reload(resources.threads_config)
     with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as executor:

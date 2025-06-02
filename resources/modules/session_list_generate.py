@@ -22,26 +22,13 @@ def session_list_generation(credentials_list):
     session_list = []
     sts_caller_identity_list = []
     for index, credentials in enumerate(credentials_list):
-        if 'AccessKey' not in credentials or 'SecretKey' not in credentials:
-            logging.warning(f"Skipping credentials set {index + 1}: 'AccessKey' and 'SecretKey' are required.")
-            continue
-
-        access_key = credentials['AccessKey']
-        secret_key = credentials['SecretKey']
-        session_token = credentials.get('SessionToken', '')
-        region = credentials.get('Region', 'us-east-1')
-        
-        if session_token == "":
-            session_token = ''
-        if region == "":
-            region = 'us-east-1'
-        
         session = boto3.Session(
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            aws_session_token=session_token,
-            region_name=region
+            aws_access_key_id=credentials['AccessKey'],
+            aws_secret_access_key=credentials['SecretKey'],
+            aws_session_token=credentials.get('SessionToken', ''),
+            region_name=credentials.get('Region', 'us-east-1')
         )
+
         sts_client = session.client('sts')
         try:
             sts_caller_identity = remove_metadata(sts_client.get_caller_identity())
@@ -51,7 +38,7 @@ def session_list_generation(credentials_list):
             logging.warning(f"Credentials set {index + 1} failed validation: {e}")
             continue
         
-        sts_caller_identity['AccessKey'] = access_key
+        sts_caller_identity['AccessKey'] = credentials['AccessKey']
         sts_caller_identity['UserName'] = sts_caller_identity['Arn'].split('/')[-1]
         session_list.append(session)
         sts_caller_identity_list.append(sts_caller_identity)
