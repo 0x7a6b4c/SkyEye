@@ -21,7 +21,7 @@ from . import (envIAMData, remove_metadata, save_output_to_file,
                getAccountAuthorizationDetailsEnum, getAccountAuthorizationDetailsEnumCross, 
                assume_roles_enumeration, enumerateEnvEntities)
 
-def process_credential_set(session, sts_caller_identity, output_folder, mode):
+def process_credential_set(session, sts_caller_identity, output_folder):
     """Process a single credential set and save the output."""
     logging.info(f"Processing credentials set {sts_caller_identity['AccessKey']}...")
     iam_client = session.client("iam")
@@ -34,7 +34,7 @@ def process_credential_set(session, sts_caller_identity, output_folder, mode):
         logging.info(f"Enumeration completed for provided credentials set {sts_caller_identity['AccessKey']}.")
         if envData.all:
             logging.info(f"Identified get_account_authorization_details permissions at [{sts_caller_identity['Arn']}]!")
-            file_name = f"{mode}_scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
+            file_name = f"scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
             save_output_to_file(remove_metadata(envData.all[0]), output_folder, file_name)
         else:
             # Initial Assumed Role Scanning - 1
@@ -63,7 +63,7 @@ def process_credential_set(session, sts_caller_identity, output_folder, mode):
                 final_output = deepcopy(envData.users[0])
                 final_output['GroupList'] = deepcopy(envData.groups)
                 final_output['RoleList'] = deepcopy(envData.roles)
-                file_name = f"{mode}_scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
+                file_name = f"scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
                 save_output_to_file(remove_metadata(output), output_folder, file_name)
 
 def process_credential_set_cross(session, sts_caller_identity, sts_caller_identity_list, output_folder, stop_event, envData, mode="default"):
@@ -89,11 +89,11 @@ def process_credential_set_cross(session, sts_caller_identity, sts_caller_identi
                     for identity in sts_caller_identity_list:
                         if identity['UserName'] == iam_result['UserName']:
                             iam_result['AccessKey'] = identity['AccessKey']
-                            file_name = f"cross_scanningOutputCredentialSet_{identity['AccessKey']}.json"
+                            file_name = f"scanningOutputCredentialSet_{identity['AccessKey']}.json"
                             save_output_to_file(remove_metadata(iam_result), output_folder, file_name)
                 logging.info("Terminating all threads!")
                 stop_event.set()
             else:
                 if mode == "extract":
-                    file_name = f"cross_scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
+                    file_name = f"scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
                     save_output_to_file(remove_metadata(output), output_folder, file_name)
