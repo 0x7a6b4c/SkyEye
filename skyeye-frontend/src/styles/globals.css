@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.handle-long-text {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 229.25 100% 66.08%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border box-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  input[type="file"] {
+    @apply text-sm file:py-2 text-slate-500 file:rounded-md rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary hover:file:bg-primary/90;
+  }
+}
+
+@layer components {
+  .input {
+    @apply h-10 rounded-md border border-input bg-background px-3 py-2 text-sm 
+    ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none 
+    focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+    disabled:cursor-not-allowed disabled:opacity-50 w-full;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+    ring-offset-background transition-colors focus-visible:outline-none 
+    focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+    disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2
+    bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+}
+
+.truncateCustom {
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  overflow: hidden;
+}
+
+/* React Flow Edges Animation */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.react-flow__edge path {
+  stroke-width: 2;
+}
+
+.react-flow__edge.animated path {
+  animation: dash 1s linear infinite;
+}
+
+/* Animated Border for Nodes */
+@keyframes rotate {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 200%;
+  }
+}
+
+.animated-border {
+  position: relative;
+  background-clip: padding-box;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  z-index: -1;
+  border-radius: 0.375rem; /* equivalent to rounded-md */
+  background: repeating-linear-gradient(
+    45deg,
+    #9b87f5,
+    #9b87f5 10px,
+    #f97316 10px,
+    #f97316 20px
+  );
+  background-size: 200% 200%;
+  animation: rotate 8s linear infinite;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+/* Node specific animated border colors */
+.bg-blue-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #93c5fd,
+    #93c5fd 10px,
+    #3b82f6 10px,
+    #3b82f6 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-sky-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #93c5fd,
+    #93c5fd 10px,
+    #3b82f6 10px,
+    #3b82f6 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-purple-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #c4b5fd,
+    #c4b5fd 10px,
+    #8b5cf6 10px,
+    #8b5cf6 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-orange-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #fdba74,
+    #fdba74 10px,
+    #f97316 10px,
+    #f97316 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-green-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #86efac,
+    #86efac 10px,
+    #22c55e 10px,
+    #22c55e 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-red-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #fca5a5,
+    #fca5a5 10px,
+    #ef4444 10px,
+    #ef4444 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-teal-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #99f6e4,
+    #99f6e4 10px,
+    #14b8a6 10px,
+    #14b8a6 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-yellow-50.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #fef08a,
+    #fef08a 10px,
+    #eab308 10px,
+    #eab308 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-gray-50.animated-border::before,
+.bg-gray-100.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #d1d5db,
+    #d1d5db 10px,
+    #6b7280 10px,
+    #6b7280 20px
+  );
+  background-size: 200% 200%;
+}
+
+.bg-slate-50.animated-border::before,
+.bg-slate-100.animated-border::before {
+  background: repeating-linear-gradient(
+    45deg,
+    #d1d5db,
+    #d1d5db 10px,
+    #6b7280 10px,
+    #6b7280 20px
+  );
+  background-size: 200% 200%;
+}
+
+.react-flow__pane {
+  cursor: grab !important; /* arrow with black outline */
+}
+input[type="text"]:focus {
+  --tw-ring-shadow: 0 0 #000 !important;
+}
+.react-flow__node-LOGO {
+  z-index: -1 !important;
+}
