@@ -13,7 +13,7 @@ from pathlib import Path
 
 from sse_starlette import EventSourceResponse
 
-from resources.utils import ensure_completed_scan_folder, load_credentials_from_json, update_max_threads
+from resources.utils import configure_logging, ensure_completed_scan_folder, load_credentials_from_json, update_max_threads
 from resources.mode_loader import singleUserSeparationMode, multipleUserCrossMode
 from resources.modules import iam_permission_fuzzing
 from resources.threads_config import MAX_THREADS
@@ -155,7 +155,7 @@ async def scan_endpoint(scan_form: ScanForm, background_tasks: BackgroundTasks):
 
     # Initialise session state
     scan_status[session_id] = {"state": "running", "error": None}
-
+    log_listener = configure_logging(timestamp)
     # Background task worker
     def task() -> None:
         logger = logging.getLogger()
@@ -181,6 +181,7 @@ async def scan_endpoint(scan_form: ScanForm, background_tasks: BackgroundTasks):
 
             # Mark success
             scan_status[session_id]["state"] = "completed"
+            log_listener.stop()
         except Exception as exc:
             scan_status[session_id]["state"] = "failed"
             scan_status[session_id]["error"] = str(exc)
