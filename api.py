@@ -1,12 +1,15 @@
 import asyncio
 from collections import defaultdict, deque
+import datetime
 import logging
+from uuid import uuid4
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
-from typing import DefaultDict, Deque, List, Optional, Dict
+from pydantic import BaseModel, Field
+from typing import DefaultDict, Deque, List, Literal, Optional, Dict
 import os
 import json
+from pathlib import Path
 
 from sse_starlette import EventSourceResponse
 
@@ -84,7 +87,22 @@ class AccountSummary(BaseModel):
 
 
 class SessionData(BaseModel):
+    mode: str
     accounts: List[AccountSummary]
+
+class Node(BaseModel):
+    id: str = Field(..., description="Unique identifier (we use a UUID by default)")
+    name: str
+    type: Literal["folder", "file"]
+    children: Optional[List["Node"]] = None  # populated only for folders
+    link: Optional[str] = None  # frontend URL for file nodes
+
+    class Config:  # allow recursive model
+        orm_mode = True
+
+
+Node.model_rebuild()
+
 
 
 # ────────────────────────────────────────────────────────────────────────────────
@@ -108,16 +126,6 @@ app.add_middleware(
 # ────────────────────────────────────────────────────────────────────────────────
 @app.post("/scan", response_model=ScanResponse, status_code=202)
 async def scan_endpoint(scan_form: ScanForm, background_tasks: BackgroundTasks):
-    """Kick off a background scan and return a session id."""
-    # Configure global thread pool
-    update_max_threads(scan_form.thread)
-
-    # Prepare workspace
-    session_folder = ensure_completed_scan_folder()
-    session_id = os.path.basename(session_folder)
-
-    # Initialise session state
-    scan_status[session_id] = {"state": "running", "error": None}
 
     # Validate credentials list
     credentials_list = [c.model_dump() for c in scan_form.credentials]
@@ -125,16 +133,28 @@ async def scan_endpoint(scan_form: ScanForm, background_tasks: BackgroundTasks):
         raise HTTPException(status_code=400, detail="At least one credential is required")
 
     # Validate mode
-    if scan_form.mode not in ("separate-entities", "cross-entities"):
+    if scan_form.mode not in ("separate-entity", "cross-entity"):
         raise HTTPException(status_code=400, detail="mode must be 'separate-entities' or 'cross-entities'")
 
     # Single‑credential constraints
     if len(credentials_list) == 1:
-        if scan_form.mode != "separate-entities":
+        if scan_form.mode != "separate-entity":
             raise HTTPException(status_code=400, detail="Single credential can only use 'separate-entities' mode")
     else:
         if scan_form.fuzz:
             raise HTTPException(status_code=400, detail="Fuzzing not allowed with multiple credentials")
+    # Configure global thread pool
+    update_max_threads(scan_form.thread)
+    mode = scan_form.mode
+    if len(credentials_list) == 1:
+        mode = "single-entity"
+    # Prepare workspace
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    session_folder = ensure_completed_scan_folder(mode, timestamp)
+    session_id = os.path.basename(session_folder)
+
+    # Initialise session state
+    scan_status[session_id] = {"state": "running", "error": None}
 
     # Background task worker
     def task() -> None:
@@ -146,15 +166,18 @@ async def scan_endpoint(scan_form: ScanForm, background_tasks: BackgroundTasks):
         logger.addHandler(handler)
         try:
             # Main scan
-            if scan_form.mode == "cross-entities":
-                multipleUserCrossMode(credentials_list, session_folder)
+            if len(credentials_list) > 1:
+                if scan_form.mode == "cross-entity":
+                    multipleUserCrossMode(credentials_list, session_folder)
+                else:
+                    singleUserSeparationMode(credentials_list, session_folder)
             else:
-                singleUserSeparationMode(credentials_list, session_folder, "separate")
-
+                # Single credential scan
+                singleUserSeparationMode(credentials_list, session_folder, mode="single-entity")
             # Optional fuzzing
-            if scan_form.fuzz:
-                scan_status[session_id]["state"] = "fuzzing"
-                iam_permission_fuzzing(credentials_list[0], session_folder)
+                if scan_form.fuzz:
+                    scan_status[session_id]["state"] = "fuzzing"
+                    iam_permission_fuzzing(credentials_list[0], session_folder)
 
             # Mark success
             scan_status[session_id]["state"] = "completed"
@@ -174,9 +197,6 @@ async def get_scan_status(session_id: str):
     record = scan_status.get(session_id)
     if not record:
         raise HTTPException(status_code=404, detail="Session not found or not started")
-
-    if record["state"] == "failed":
-        raise HTTPException(status_code=500, detail=record["error"] or "Scan failed")
 
     return {"status": record["state"]}
 
@@ -202,25 +222,78 @@ async def stream_logs(session_id: str):
     return EventSourceResponse(event_generator())
 
 
-@app.get("/sessions", response_model=List[str])
-async def list_sessions():
-    base = "completed_scan"
-    if not os.path.exists(base):
+@app.get("/sessions", response_model=List[Node])
+async def list_sessions() -> List[Node]:
+    root = Path("completed_scan")
+    if not root.exists():
         return []
-    return sorted(os.listdir(base))
+    # Group sessions by date prefix
+    date_groups: Dict[str, List[str]] = defaultdict(list)
+    for entry in sorted(root.iterdir()):
+        if not entry.is_dir():
+            continue
+        # folder format: YYYY-MM-DD_HH-MM-SS_mode
+        raw_date = entry.name.split('_', 1)[0]
+        date_groups[raw_date].append(entry.name)
+    nodes: List[Node] = []
+    for raw_date in sorted(date_groups.keys(), reverse=True):
+        # format date as 'YYYY - MM - DD'
+        date_parts = raw_date.split('-')
+        display_date = '-'.join(date_parts)
+        children: List[Node] = []
+        for session_id in sorted(date_groups[raw_date], reverse=True):
+            # parse time portion
+            parts = session_id.split('_')
+            if len(parts) >= 2:
+                time_raw = parts[1]
+                display_time = time_raw.replace('-', ':')
+            else:
+                display_time = ''
+            display_name = f"{display_date} {display_time}".strip()
+            children.append(
+                Node(
+                    id=session_id,
+                    name=display_name,
+                    type="file",
+                    link=f"/aws/history/{session_id}",
+                )
+            )
+        nodes.append(
+            Node(
+                id=str(uuid4()),
+                name=display_date,
+                type="folder",
+                children=children,
+            )
+        )
+    return nodes
 
 
 @app.get("/sessions/{session_id}/{account_id}/{access_key}")
-async def get_credential_output(session_id: str, account_id: str, access_key: str):
+async def get_credential_output(
+    session_id: str,
+    account_id: str,
+    access_key: str,
+    mode: Optional[str] = None  # 'scan' or 'fuzz'
+):
     account_path = os.path.join("completed_scan", session_id, account_id)
     if not os.path.isdir(account_path):
         raise HTTPException(status_code=404, detail="Account not found")
 
-    for prefix in [
-        "seperate_scanningOutputCredentialSet",
-        "cross_scanningOutputCredentialSet",
-        "single_fuzzingOutputCredentialSet",
-    ]:
+    # Determine which file to return based on mode
+    prefixes = []
+    if mode:
+        if mode.lower() in ("fuzz", "fuzzing"):
+            prefixes = ["fuzzingOutputCredentialSet"]
+        elif mode.lower() in ("scan", "scanning"):
+            prefixes = ["scanningOutputCredentialSet"]
+        else:
+            raise HTTPException(status_code=400, detail="mode must be 'scan' or 'fuzz'")
+    else:
+        # default order: scan first, then fuzz
+        prefixes = ["fuzzingOutputCredentialSet", "scanningOutputCredentialSet"]
+    # Look for matching output file
+    for prefix in prefixes:
         filename = f"{prefix}_{access_key}.json"
         path = os.path.join(account_path, filename)
         if os.path.isfile(path):
@@ -236,27 +309,80 @@ async def get_session(session_id: str):
     if not os.path.isdir(base_path):
         raise HTTPException(status_code=404, detail="Session not found")
 
+    # Determine session mode from folder suffix
+    raw_mode = session_id.split("_", 2)[2]
+    if raw_mode == 'cross-entity':
+        mode = 'cross'
+    elif raw_mode == 'separate-entity':
+        mode = 'separate'
+    elif raw_mode == 'single-entity':
+        # detect if fuzzing output exists to classify as singleFuzz
+        fuzz_present = False
+        for acct in os.listdir(base_path):
+            acct_path = os.path.join(base_path, acct)
+            if not os.path.isdir(acct_path):
+                continue
+            for fname in os.listdir(acct_path):
+                if 'fuzzingOutputCredentialSet' in fname.lower() or len(json.loads(open(os.path.join(acct_path, fname)).read())) == 1:
+                    fuzz_present = True
+                    break
+            if fuzz_present:
+                break
+        mode = 'singleFuzz' if fuzz_present else 'single'
+    else:
+        mode = raw_mode
     accounts: List[AccountSummary] = []
     for acct in sorted(os.listdir(base_path)):
         acct_path = os.path.join(base_path, acct)
         if not os.path.isdir(acct_path):
             continue
+        # Single-entity fuzz: only return the fuzzing output
+        if mode == 'singleFuzz':
+            users: List[CredentialSummary] = []
+            # pick fuzzing file(s)
+            fuzz_files = [f for f in os.listdir(acct_path) if f.startswith('fuzzingOutputCredentialSet_') and f.endswith('.json')]
+            if fuzz_files:
+                # there should be one per account
+                fname = fuzz_files[0]
+                key = fname.rsplit('_', 1)[1].replace('.json', '')
+                try:
+                    with open(os.path.join(acct_path, fname), 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    # unwrap fuzzing wrapper
+                    if isinstance(data, dict) and len(data) == 1 and isinstance(next(iter(data.values())), dict):
+                        inner = next(iter(data.values()))
+                        user = inner.get('UserName') or inner.get('userName')
+                    else:
+                        user = data.get('UserName') or data.get('userName')
+                except Exception:
+                    user = None
+                users.append(CredentialSummary(userAccessKey=key, userName=user))
+            accounts.append(AccountSummary(accountId=acct, userIds=users))
+            continue
+        # default handling: dedupe across scan and fuzz outputs
         users: List[CredentialSummary] = []
+        seen_keys: set = set()
         for fname in os.listdir(acct_path):
-            if not fname.endswith(".json"):
+            if not fname.endswith('.json'):
                 continue
-            parts = fname.rsplit("_", 1)
+            parts = fname.rsplit('_', 1)
             if len(parts) != 2:
                 continue
-            key = parts[1].replace(".json", "")
+            key = parts[1].replace('.json', '')
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
             try:
-                with open(os.path.join(acct_path, fname), "r", encoding="utf-8") as f:
+                with open(os.path.join(acct_path, fname), 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                user = data.get("UserName") or data.get("userName")
+                if isinstance(data, dict) and len(data) == 1 and isinstance(next(iter(data.values())), dict):
+                    inner = next(iter(data.values()))
+                    user = inner.get('UserName') or inner.get('userName')
+                else:
+                    user = data.get('UserName') or data.get('userName')
             except Exception:
                 user = None
             users.append(CredentialSummary(userAccessKey=key, userName=user))
         accounts.append(AccountSummary(accountId=acct, userIds=users))
-
-    return SessionData(accounts=accounts)
+    return SessionData(mode=mode, accounts=accounts)
 
