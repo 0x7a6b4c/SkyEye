@@ -3,6 +3,6 @@ urllib3==2.0.4
 boto3==1.37.1
 botocore==1.37.1
 beautifulsoup4==4.12.2
-fastapi[standard]==0.95.2
-uvicorn[standard]==0.22.0
-sse-starlette==1.4.2
+fastapi[standard]==0.115.5
+uvicorn==0.32.0
+sse-starlette==2.3.6
