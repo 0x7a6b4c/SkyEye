@@ -182,9 +182,9 @@ def configure_logging(timestamp):
     return listener
 """
 
-def configure_logging(timestamp):
+def configure_logging(timestamp: str, session_type: str = "scanning"):
     os.makedirs('logs', exist_ok=True)
-    log_filename = os.path.join("logs", f"scanningSession_{timestamp}.log")
+    log_filename = os.path.join("logs", f"{session_type}Session_{timestamp}.log")
 
     log_queue = queue.Queue(-1)
 

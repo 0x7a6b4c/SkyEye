@@ -15,7 +15,7 @@ from sse_starlette import EventSourceResponse
 
 from resources.utils import configure_logging, ensure_completed_scan_folder, load_credentials_from_json, update_max_threads
 from resources.mode_loader import singleUserSeparationMode, multipleUserCrossMode
-from resources.modules import iam_permission_fuzzing
+from resources.modules import iam_permission_fuzzing, update_aws_managed_policies, update_iam_operations, update_mitre_attack_cloud_data
 from resources.threads_config import MAX_THREADS
 
 from resources.utils import ensure_completed_scan_folder, load_credentials_from_json, update_max_threads
@@ -53,6 +53,32 @@ class SessionLogHandler(logging.Handler):
 # ────────────────────────────────────────────────────────────────────────────────
 # { session_id: { "state": "running|fuzzing|completed|failed", "error": str|None } }
 scan_status: Dict[str, Dict[str, Optional[str]]] = {}
+
+# Update tracking state
+MAX_UPDATE_LOG_LINES = 5000
+update_logs: DefaultDict[str, Deque[str]] = defaultdict(lambda: deque(maxlen=MAX_UPDATE_LOG_LINES))
+update_status: Dict[str, Dict[str, Optional[str]]] = {}
+
+class UpdateLogHandler(logging.Handler):
+    """Logging handler for update tasks."""
+    def __init__(self, update_id: str) -> None:
+        super().__init__()
+        self.update_id = update_id
+        self.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
+    def emit(self, record: logging.LogRecord) -> None:
+        try:
+            msg = self.format(record)
+            update_logs[self.update_id].append(msg)
+        except Exception:
+            self.handleError(record)
+
+class UpdateForm(BaseModel):
+    # List of update operations to perform: each must be one of the supported types
+    types: List[str] = Field(..., description="Array of update types to run")
+    thread: int = MAX_THREADS
+
+class UpdateResponse(BaseModel):
+     update_id: str
 
 
 # ────────────────────────────────────────────────────────────────────────────────
@@ -386,4 +412,72 @@ async def get_session(session_id: str):
             users.append(CredentialSummary(userAccessKey=key, userName=user))
         accounts.append(AccountSummary(accountId=acct, userIds=users))
     return SessionData(mode=mode, accounts=accounts)
+
+
+@app.post("/update", response_model=UpdateResponse, status_code=202)
+async def update_endpoint(form: UpdateForm, background_tasks: BackgroundTasks):
+    update_id = str(uuid4())
+    # validate types
+    if not form.types:
+        raise HTTPException(status_code=400, detail="At least one update type is required")
+    
+    update_max_threads(form.thread)
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_listener = configure_logging(timestamp, "update")
+    # Background update task
+    def task():
+        logger = logging.getLogger()
+        if logger.level > logging.INFO:
+            logger.setLevel(logging.INFO)
+        handler = UpdateLogHandler(update_id)
+        handler.setLevel(logging.INFO)
+        logger.addHandler(handler)
+        update_status[update_id] = {"state": "running", "error": None}
+        try:
+            # Run each requested update operation
+            for update_type in form.types:
+                if update_type == "mitre-attack-cloud":
+                    update_mitre_attack_cloud_data()
+                elif update_type == "aws-actions":
+                    update_iam_operations()
+                elif update_type == "aws-managed-policies":
+                    update_aws_managed_policies()
+            update_status[update_id]["state"] = "completed"
+            log_listener.stop()
+        except Exception as exc:
+            update_status[update_id]["state"] = "failed"
+            update_status[update_id]["error"] = str(exc)
+            logger.exception("Update task %s failed", update_id)
+        finally:
+            logger.removeHandler(handler)
+    background_tasks.add_task(task)
+    return {"update_id": update_id}
+
+
+@app.get("/update/{update_id}/status")
+async def get_update_status(update_id: str):
+    record = update_status.get(update_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Update session not found")
+    return {"status": record["state"]}
+
+
+@app.get("/update/{update_id}/logs")
+async def stream_update_logs(update_id: str):
+    if update_id not in update_status:
+        raise HTTPException(status_code=404, detail="Update session not found")
+    async def event_generator():
+        last = 0
+        while True:
+            await asyncio.sleep(0.5)
+            logs = update_logs.get(update_id)
+            if logs is None:
+                break
+            for line in list(logs)[last:]:
+                yield f"data: {line}\n\n"
+            last = len(logs)
+            state = update_status[update_id]["state"]
+            if state in ("completed", "failed") and last == len(logs):
+                break
+    return EventSourceResponse(event_generator())
 
