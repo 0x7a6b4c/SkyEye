@@ -1,0 +1,29 @@
+.list {
+  @apply inline-flex items-center -space-x-px;
+}
+
+.previous {
+  @apply h-8 flex justify-center items-center  bg-white  leading-tight text-gray-500 hover:text-white hover:bg-[#2c9a7a] inline-flex rounded-3xl;
+}
+.previous[disabled] {
+  @apply bg-white  text-gray-500 hover:bg-white hover:text-gray-500;
+}
+.page {
+  @apply w-8 h-8 border border-gray-300 bg-white  leading-tight text-gray-500 ml-2 rounded-full hover:text-white hover:bg-[#2c9a7a];
+}
+
+.active {
+  @apply text-white  bg-[#2c9a7a] hover:text-white hover:bg-[#2c9a7a];
+}
+
+.next {
+  @apply ml-2 h-8 flex justify-center items-center  bg-white  leading-tight text-gray-500 hover:text-white hover:bg-[#2c9a7a] inline-flex rounded-3xl;
+}
+
+.next[disabled] {
+  @apply bg-white  text-gray-500 hover:bg-white hover:text-gray-500;
+}
+
+.dots {
+  @apply w-8 border border-gray-300 bg-white py-2 leading-tight text-gray-500 text-center rounded-full ml-2;
+}
