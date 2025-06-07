@@ -480,4 +480,3 @@ async def stream_update_logs(update_id: str):
             if state in ("completed", "failed") and last == len(logs):
                 break
     return EventSourceResponse(event_generator())
-
