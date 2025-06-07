@@ -5,6 +5,7 @@ import logging
 from uuid import uuid4
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from typing import DefaultDict, Deque, List, Literal, Optional, Dict
 import os
@@ -481,3 +482,5 @@ async def stream_update_logs(update_id: str):
                 break
     return EventSourceResponse(event_generator())
 
+app.mount("/_next", StaticFiles(directory="skyeye-frontend/.next", html=False), name="_next")
+app.mount("/public", StaticFiles(directory="skyeye-frontend/public", html=False), name="public")

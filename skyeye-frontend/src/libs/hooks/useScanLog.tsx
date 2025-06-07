@@ -16,7 +16,7 @@ export default function useScanLogs(
   // connect / disconnect SSE
   useEffect(() => {
     if (!sessionId) return
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000"
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? ""
     const url = isUpdate
       ? `${API_BASE}/update/${sessionId}/logs`
       : `${API_BASE}/sessions/${sessionId}/logs`
