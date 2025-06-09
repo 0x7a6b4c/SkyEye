@@ -78,6 +78,39 @@ Currently, SkyEye supports the following enumeration models and capabilities:
 | **Progress & Logs**                          | Real‑time progress bar and server‑sent logs so you always know what the scanner is doing.                                                 |
 | **Portable Output**                          | Outputs JSON files that can be archived or piped into other tools.                                                                |
 
+## 🖥️ Quick Start (CLI-based)
+
+```bash
+# 1. Clone the repo
+$ git clone https://github.com/0x7a6b4c/skyeye.git && cd skyeye
+
+# 2. Install requirements
+$ pip install -r requirements.txt
+
+# 3. IAM Enumeration mode
+# 3.1 Cross-Principal mode
+$ python skyeye.py --json-file --mode cross-entity --thread [?]
+
+# 3.2 Separate-Principal mode
+$ python skyeye.py --json-file --mode separate-entity --thread [?]
+
+# 3.3 Single-Principal mode
+$ python skyeye.py --access-key ACCESS_KEY --secret-key SECRET_KEY --session-token OPTIONAL_SESSION_TOKEN --region REGION --thread [?]
+
+# 4. Update libraries
+# 4.1 MITRE ATT&CK only
+$ python skyeye.py --update --mitre-attack-cloud
+
+# 4.2 AWS Actions only
+$ python skyeye.py --update --aws-actions 
+
+# 4.3 AWS-Managed Policies only
+$ python skyeye.py --update --aws-managed-policies
+
+# 4.4 A Complete Update
+$ python skyeye.py --update --mitre-attack-cloud --aws-actions --aws-managed-policies
+```
+
 ## 📦 Quick Start (Docker Compose)
 
 ```bash
