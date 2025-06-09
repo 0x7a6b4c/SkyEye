@@ -126,15 +126,15 @@ All config can be set via `.env` or the container `environment:` block.
 
 ## 📑 API Reference (FastAPI)
 
-| Method   | Path                                               | Purpose / Notes                                                                                                                                   |               |                                                            |
-| -------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------------------------------------- |
-| **POST** | `/scan`                                            | Start a new scan.<br>**Body**:<br>`{ credentials: [ … ], mode: "cross‑entity" \| "separate‑entity", thread: int, fuzz: bool }` → `{ session_id }` |
+| Method   | Path                                               | Purpose / Notes                                                                                                                                   |
+| -------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **POST** | `/scan`                                            | Start a new scan.<br>**Body**:<br>`{ credentials: [ … ], mode: "cross‑entity" \| "separate‑entity", thread: int, fuzz: bool }` → `{ session_id }` |
 | **GET**  | `/sessions`                                        | Return a folder‑style tree (dates → sessions) used by the history sidebar.                                                                        |
-| **GET**  | `/sessions/{session_id}`                           | JSON summary of accounts → credentials for a scan.                                                                                                |
+| **GET**  | `/sessions/{session_id}`                           | JSON summary of accounts → credentials for a scan.                                                                                                |
 | **GET**  | `/sessions/{session_id}/status`                    | `running` \| `fuzzing` \| `completed` \| `failed`.                                                                                                |
 | **GET**  | `/sessions/{session_id}/logs`                      | **Server‑Sent Events** stream of live scan logs.                                                                                                  |
-| **GET**  | `/sessions/{session_id}/{account_id}/{access_key}` | Raw JSON for a single credential set.<br>Optional query `mode=scan` or `mode=fuzz`.                                                               |
-| **POST** | `/update`                                          | Kick off a data update (MITRE ATT\&CK Cloud, AWS actions, and AWS-managed policies).<br>**Body**:<br>\`{ types: \["mitre-attack-cloud", "aws-actions", "aws-managed-policies"], thread: int }` → `{ update_id }\` |
+| **GET**  | `/sessions/{session_id}/{account_id}/{access_key}` | Raw JSON for a single credential set.<br>Optional query `mode=scan` or `mode=fuzz`.                                                               |
+| **POST** | `/update`                                          | Kick off a data update (MITRE ATT\&CK Cloud, AWS actions, and AWS-managed policies).<br>**Body**:<br>`{ types: ["mitre-attack-cloud", "aws-actions", "aws-managed-policies"], thread: int }` → `{ update_id }` |
 | **GET**  | `/update/{update_id}/status`                       | `running` \| `completed` \| `failed`.                                                                                                             |
 | **GET**  | `/update/{update_id}/logs`                         | **Server‑Sent Events** stream of update job logs.                                                                                                 |
 
