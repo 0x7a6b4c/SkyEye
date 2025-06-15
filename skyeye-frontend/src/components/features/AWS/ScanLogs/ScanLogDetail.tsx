@@ -6,10 +6,10 @@ import {
   LuTimer,
   LuSettings,
 } from "react-icons/lu"
-import { IoMdCheckmarkCircle } from "react-icons/io"
 import { IoAlertCircleOutline } from "react-icons/io5"
 import { FaRegCircleXmark } from "react-icons/fa6"
 import { ScanLogSummary } from "@/libs/api"
+import { FaRegCheckCircle } from "react-icons/fa"
 
 const ScanLogDetail = ({ logData }: { logData: ScanLogSummary }) => {
   const getLevelIcon = (level: string) => {
@@ -21,7 +21,7 @@ const ScanLogDetail = ({ logData }: { logData: ScanLogSummary }) => {
       case "ERROR":
         return <FaRegCircleXmark className="w-4 h-4 text-red-600" />
       case "DEBUG":
-        return <IoMdCheckmarkCircle className="w-4 h-4 text-green-600" />
+        return <FaRegCheckCircle className="w-4 h-4 text-green-600" />
       default:
         return <div className="w-4 h-4 bg-gray-600 rounded-full" />
     }
@@ -98,7 +98,7 @@ const ScanLogDetail = ({ logData }: { logData: ScanLogSummary }) => {
                 value={`${logData.date} ${logData.time}`}
               />
               <SummaryItem
-                icon={<IoMdCheckmarkCircle className="w-5 h-5 text-gray-500" />}
+                icon={<FaRegCheckCircle className="w-5 h-5 text-gray-500" />}
                 label="Status"
                 value={
                   <span
