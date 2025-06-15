@@ -488,7 +488,7 @@ async def list_scan_logs():
     if not logs_dir.exists():
         return []
     # Collect log files sorted newest first
-    files = sorted(logs_dir.glob('scanningSession_*.log'), reverse=True)
+    files = sorted(logs_dir.glob('scanningSession_*.log'))
     results = []
     count = 1
     for log_file in files:
