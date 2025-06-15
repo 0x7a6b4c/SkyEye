@@ -79,3 +79,45 @@ export const getUpdateStatus = async (
   }>(`/update/${updateId}/status`)
   return data
 }
+
+// Scan logs summary
+export interface logDetail {
+  timestamp: string
+  level: string
+  message: string
+}
+export interface ScanLogSummary {
+  id: string
+  date: string
+  time: string
+  status: string
+  duration: string
+  type: string
+  logs: logDetail[]
+}
+export const getScanLogs = async (): Promise<ScanLogSummary[]> => {
+  const { data } = await api.get<ScanLogSummary[]>("/scan/logs")
+  return data
+}
+
+// Scan log detail
+export interface ScanLogDetail extends ScanLogSummary {
+  entities: number
+  logs: Array<{ timestamp: string; level: string; message: string }>
+}
+export const getScanLogDetail = async (
+  timestamp: string,
+): Promise<ScanLogDetail> => {
+  const { data } = await api.get<ScanLogDetail>(
+    `/scan/logs/${timestamp}/detail`,
+  )
+  return data
+}
+
+// Download raw scan log file as blob
+export const fetchScanLogFile = async (timestamp: string): Promise<Blob> => {
+  const response = await api.get<Blob>(`/scan/logs/${timestamp}`, {
+    responseType: "blob",
+  })
+  return response.data
+}

@@ -9,13 +9,26 @@ interface Props {
 export default function SessionBanner({ sessionId, mode }: Props) {
   const [copied, setCopied] = useState(false)
 
+  // derive a formatted timestamp without mode suffix
+  const formattedTimestamp = sessionId
+    ? (() => {
+        const match = sessionId.match(
+          /^(\d{4}-\d{2}-\d{2})_(\d{2}-\d{2}-\d{2})/,
+        )
+        if (match) {
+          const [, date, time] = match
+          return `${date} ${time.replace(/-/g, ":")}`
+        }
+        return sessionId
+      })()
+    : ""
+
   const copyToClipboard = () => {
     if (!sessionId) return
-    navigator.clipboard.writeText(sessionId)
+    navigator.clipboard.writeText(formattedTimestamp || sessionId)
     setCopied(true)
     setTimeout(() => setCopied(false), 1200)
   }
-
   return (
     <div
       className="absolute left-4 top-3 z-20
@@ -48,7 +61,7 @@ export default function SessionBanner({ sessionId, mode }: Props) {
           className="text-sm font-semibold
                        text-slate-900 dark:text-slate-100"
         >
-          {sessionId}
+          {formattedTimestamp}
         </span>
       )}
 

@@ -11,7 +11,7 @@ import {
   RoleStatus,
   Statement,
 } from "@/types/IAM/enums"
-import rawOps from "@/mock_data/iam_sensitive_operations.json"
+import rawOps from "@/data/iam_sensitive_operations.json"
 import attackJson from "@/data/mitre_attack_aws_actions.json" assert { type: "json" }
 import { SessionData } from "../api"
 const AWS_ATTACK_MAP: Record<

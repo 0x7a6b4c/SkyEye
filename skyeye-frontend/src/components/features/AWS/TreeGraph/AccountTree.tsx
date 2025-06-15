@@ -20,6 +20,7 @@ import {
 import "reactflow/dist/style.css"
 import { useRouter } from "next/router"
 import SessionBanner from "../SessionBanner/banner"
+import ScanStatusBanner from "../ScanStatusBanner/banner"
 const AccountGraph: React.FC<{
   data: SessionData | null
   sessionId?: string
@@ -90,10 +91,14 @@ const AccountGraph: React.FC<{
     <div className="h-[90vh] w-full relative mt-4">
       <img
         src="/images/logo/skyeye_standalone_logo.svg"
-        className="absolute left-[40px] bottom-[-30px] z-10 h-[150px] min-w-[45px] rounded-md opacity-40"
+        className="absolute left-[15px] bottom-[-55px] z-10 h-[240px] min-w-[45px] rounded-md opacity-40"
         alt="Skyeye logo"
       />
       {data?.mode && <SessionBanner mode={data.mode} sessionId={sessionId} />}
+      <ScanStatusBanner
+        isFail={!!data?.accounts && data?.accounts.length <= 0}
+        sessionId={sessionId}
+      />
       <ReactFlow
         nodes={nodes}
         edges={edges}

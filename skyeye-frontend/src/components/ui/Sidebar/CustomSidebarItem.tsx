@@ -26,7 +26,7 @@ export function CustomSidebarItem({ item }: SidebarItemProps) {
     return (
       <a
         href={item.url}
-        className="flex items-center gap-2 px-2 py-2 text-sm rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors dark:hover:bg-gray-800 dark:hover:text-white"
+        className="flex items-center gap-[9px] px-2 py-2 text-md rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors dark:hover:bg-gray-800 dark:hover:text-white"
       >
         {item.icon || <span className="w-4 h-4">📄</span>}
         <span>{item.title}</span>

@@ -19,7 +19,7 @@ const AccountUserNode: React.FC<BaseNodeProps> = ({ data, ...props }) => {
         icon: data.icon || <FaUser className="text-blue-500" size={18} />,
       }}
     >
-      <span className="mt-1 w-full max-w-[130px] text-center rounded bg-blue-600 px-1 text-[10px] text-white absolute left-[0px] top-[40px]">
+      <span className="mt-1 inline-block text-center whitespace-nowrap rounded bg-blue-600 px-1 text-[10px] text-white absolute left-[0px] top-[40px]">
         {data?.accessKey}
       </span>
       <Handle type="target" position={Position.Top} isConnectable={true} />

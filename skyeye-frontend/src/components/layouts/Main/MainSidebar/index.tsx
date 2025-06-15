@@ -11,11 +11,11 @@ import { CustomFileExplorer } from "@/components/ui/Sidebar/CustomFileExplorer"
 import { CustomSidebarSection } from "@/components/ui/Sidebar/CustomSidebarSection"
 import { useScanHistory } from "@/libs/context/ScanHistoryContext"
 import { useMemo, useState } from "react"
-import LoadHandler from "@/components/ui/LoadHandler"
 import { FaHome } from "react-icons/fa"
 import { RiScan2Line } from "react-icons/ri"
 import { SidebarTrigger } from "@/components/ui/Sidebar/SidebarTrigger"
 import { cn } from "@/libs/utils"
+import { VscTerminalCmd } from "react-icons/vsc"
 import { useSidebar } from "@/components/ui/Sidebar/SidebarProvider"
 
 // Static navigation items
@@ -25,14 +25,21 @@ const navigationItems = [
     title: "Home page",
     type: "link" as const,
     url: "/",
-    icon: <FaHome color="gray" />,
+    icon: <FaHome color="gray" className="w-5 h-5" />,
   },
   {
     id: "nav-2",
     title: "Scan Forms",
     type: "link" as const,
     url: "/aws/scan",
-    icon: <RiScan2Line color="gray" />,
+    icon: <RiScan2Line color="gray" className="w-5 h-5" />,
+  },
+  {
+    id: "nav-3",
+    title: "Scan Logs",
+    type: "link" as const,
+    url: "/aws/scan-logs",
+    icon: <VscTerminalCmd color="gray" className="w-5 h-5" />,
   },
 ]
 
@@ -99,7 +106,6 @@ export default function MainSideBar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>AWS</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <CustomSidebarSection items={navigationItems} />

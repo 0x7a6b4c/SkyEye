@@ -4,7 +4,7 @@ import datetime
 import logging
 from uuid import uuid4
 from fastapi import FastAPI, BackgroundTasks, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel, Field
 from typing import DefaultDict, Deque, List, Literal, Optional, Dict
 import os
@@ -480,3 +480,151 @@ async def stream_update_logs(update_id: str):
             if state in ("completed", "failed") and last == len(logs):
                 break
     return EventSourceResponse(event_generator())
+
+# Add scan logs summary endpoint
+@app.get("/scan/logs")
+async def list_scan_logs():
+    logs_dir = Path("logs")
+    if not logs_dir.exists():
+        return []
+    # Collect log files sorted newest first
+    files = sorted(logs_dir.glob('scanningSession_*.log'), reverse=True)
+    results = []
+    count = 1
+    for log_file in files:
+        fname = log_file.name
+        # extract timestamp
+        ts_part = fname[len('scanningSession_'):-len('.log')]
+        try:
+            date_str, time_str = ts_part.split('_', 1)
+        except ValueError:
+            continue
+        # format time
+        time_formatted = time_str.replace('-', ':')
+        # read log lines
+        lines = log_file.read_text(encoding='utf-8').splitlines()
+        if not lines:
+            continue
+        # parse first and last timestamps
+        def parse_ts(line: str):
+            ts_text = line.split(' - ')[0]
+            return datetime.datetime.strptime(ts_text, '%Y-%m-%d %H:%M:%S,%f')
+        try:
+            start_dt = parse_ts(lines[0])
+            end_dt = parse_ts(lines[-1])
+            duration_td = end_dt - start_dt
+            mins, secs = divmod(int(duration_td.total_seconds()), 60)
+            duration = f"{mins}m {secs}s"
+        except Exception:
+            duration = "failed"
+        # determine status: failed if any error log present
+        status = 'failed' if any('[ERROR]' in line for line in lines) else 'completed'
+        # determine type by matching completed_scan folder
+        scanned_type = 'update'
+        for session_dir in Path('completed_scan').iterdir():
+            if session_dir.is_dir() and session_dir.name.startswith(ts_part):
+                parts = session_dir.name.split('_', 2)
+                if len(parts) >= 3:
+                    raw_mode = parts[2]
+                    if raw_mode == 'cross-entity':
+                        scanned_type = 'cross'
+                    elif raw_mode == 'separate-entity':
+                        scanned_type = 'separate'
+                    elif raw_mode == 'single-entity':
+                        scanned_type = 'single'
+                break
+        # assign id
+        entry_id = f"scan_{count:03d}"
+        count += 1
+        results.append({
+            'id': entry_id,
+            'date': date_str,
+            'time': time_formatted,
+            'status': status,
+            'duration': duration,
+            'type': scanned_type,
+        })
+    return results
+
+# Download a specific scan log file
+@app.get("/scan/logs/{timestamp}")
+async def download_scan_log(timestamp: str):
+    # timestamp should match format YYYY-MM-DD_HH-MM-SS
+    log_path = Path("logs") / f"scanningSession_{timestamp}.log"
+    if not log_path.exists() or not log_path.is_file():
+        raise HTTPException(status_code=404, detail="Log file not found")
+    return FileResponse(
+        path=str(log_path),
+        media_type="text/plain",
+        filename=log_path.name,
+    )
+
+@app.get("/scan/logs/{timestamp}/detail")
+async def scan_log_detail(timestamp: str):
+    # timestamp param in 'YYYY-MM-DD_HH-MM-SS' format
+    # split into date and time
+    try:
+        date_str, time_str = timestamp.rsplit('_', 1)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid timestamp format")
+    time_formatted = time_str.replace('-', ':')
+    log_file = Path('logs') / f"scanningSession_{timestamp}.log"
+    if not log_file.exists():
+        raise HTTPException(status_code=404, detail="Log file not found")
+    # read file lines
+    lines = log_file.read_text(encoding='utf-8').splitlines()
+    if not lines:
+        raise HTTPException(status_code=404, detail="Empty log file")
+    # parse start/end timestamps for duration
+    def parse_ts(line: str):
+        ts_text = line.split(' - ')[0]
+        return datetime.datetime.strptime(ts_text, '%Y-%m-%d %H:%M:%S,%f')
+    try:
+        start_dt = parse_ts(lines[0])
+        end_dt = parse_ts(lines[-1])
+        delta = end_dt - start_dt
+        mins, secs = divmod(int(delta.total_seconds()), 60)
+        duration = f"{mins}m {secs}s"
+    except Exception:
+        duration = ""
+    # determine status: failed if any error log present
+    status = 'failed' if any('[ERROR]' in line for line in lines) else 'completed'
+    # determine type by matching completed_scan folder
+    scan_type = 'update'
+    for session_dir in Path('completed_scan').iterdir():
+        if session_dir.is_dir() and session_dir.name.startswith(timestamp):
+            parts = session_dir.name.split('_', 2)
+            mode = parts[2] if len(parts) >= 3 else ''
+            scan_type = {'cross-entity':'cross','separate-entity':'separate',
+                         'single-entity':'single'}.get(mode, 'update')
+            break
+    # parse logs
+    logs_parsed = []
+    for line in lines:
+        parts = line.split(' - ', 1)
+        if len(parts) != 2:
+            continue
+        ts_text, rest = parts
+        level, msg = ('INFO', rest)
+        if '] ' in rest:
+            lp, msg = rest.split('] ', 1)
+            level = lp.strip('[')
+        logs_parsed.append({'timestamp':ts_text,'level':level,'message':msg})
+    # count JSON files in completed_scan as entities
+    entities = 0
+    for session_dir in Path('completed_scan').iterdir():
+        if session_dir.is_dir() and session_dir.name.startswith(timestamp):
+            for acct in session_dir.iterdir():
+                if acct.is_dir():
+                    entities += len(list(acct.glob('*.json')))
+            break
+    return JSONResponse(content={
+        'id': timestamp,
+        'date': date_str,
+        'time': time_formatted,
+        'status': status,
+        'entities': entities,
+        'duration': duration,
+        'type': scan_type,
+        'logs': logs_parsed,
+    })

@@ -27,7 +27,7 @@ import {
   buildLogicalGraph,
 } from "@/libs/helpers/graph-helpers"
 import Select from "react-select"
-import serviceOptions from "@/mock_data/iam_all_service_list.json" assert { type: "json" }
+import serviceOptions from "@/data/iam_all_service_list.json" assert { type: "json" }
 import {
   buildFuzzingGraph,
   buildPrincipalSimulationGraph,
@@ -404,7 +404,7 @@ const IAMPolicyTree: React.FC<PolicyTreeProps> = ({ iamData }) => {
       )}
       <img
         src="/images/logo/skyeye_standalone_logo.svg"
-        className="absolute left-[40px] bottom-[-30px] z-10 h-[150px] min-w-[45px] rounded-md opacity-40"
+        className="absolute left-[15px] bottom-[-55px] z-10 h-[240px] min-w-[45px] rounded-md opacity-40"
         alt="Skyeye logo"
       />
 

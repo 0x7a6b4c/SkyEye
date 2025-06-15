@@ -9,8 +9,11 @@ import ProgressBar from "@/components/ui/ProgressBar/ProgressBar"
 import ScanLog from "@/components/ui/ScanLog/ScanLog"
 import useScanLogs from "@/libs/hooks/useScanLog"
 import { MdBrowserUpdated } from "react-icons/md"
+import { RHFNumber } from "@/components/ui/Form/FormInputs/RHFNumber"
+import { useOnlineStatus } from "@/libs/hooks/useOnlineStatus"
 
 const formSchema = z.object({
+  threads: z.number().min(1, "Minimum 1 thread").max(64, "Maximum 64 threads"),
   updates: z
     .array(
       z.enum(["mitre-attack-cloud", "aws-actions", "aws-managed-policies"]),
@@ -29,6 +32,7 @@ const UpdateForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       updates: [],
+      threads: 5,
     },
   })
 
@@ -38,12 +42,16 @@ const UpdateForm = ({
   const [status, setStatus] = useState<
     "running" | "completed" | "failed" | null
   >(null)
+  const isOnline = useOnlineStatus()
   const { logs, logEndRef, setLogs } = useScanLogs(updateId, true)
   const startRef = useRef(0)
 
   const onSubmit = async (data: UpdateFormValues) => {
     try {
-      const update_id = await triggerUpdate({ types: data.updates })
+      const update_id = await triggerUpdate({
+        types: data.updates,
+        thread: data.threads,
+      })
       if (!update_id) return
       setUpdateId(update_id)
       setStatus("running")
@@ -95,6 +103,14 @@ const UpdateForm = ({
             onSubmit={methods.handleSubmit(onSubmit)}
             className="space-y-6 p-5 bg-white rounded shadow"
           >
+            <RHFNumber
+              name="threads"
+              label="Threads to use"
+              min={1}
+              max={64}
+              className="w-32"
+              disabled={!isOnline}
+            />
             <RHFGroupCheckbox
               name="updates"
               label="Select updates to perform"

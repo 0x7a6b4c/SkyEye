@@ -9,7 +9,7 @@ import {
 import { GraphNodeMeta, GraphEdgeMeta } from "@/libs/helpers/graph-helpers"
 import { SimulatePrincipalPolicyTechnique as SimTech } from "@/types/IAM/enums" // path as you like
 import AWS_ATTACK_MAP from "@/data/mitre_attack_aws_actions.json"
-import sensitiveOps from "@/mock_data/iam_sensitive_operations.json"
+import sensitiveOps from "@/data/iam_sensitive_operations.json"
 
 export function buildPrincipalSimulationGraph(sim: SimTech): {
   nodes: Map<string, GraphNodeMeta>

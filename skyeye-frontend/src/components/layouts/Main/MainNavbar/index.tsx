@@ -7,7 +7,7 @@ import { cn } from "@/libs/utils"
 export default function MainNavbar() {
   return (
     <Navbar
-      className="fixed top-0 z-50 w-full border-b [&>div]:flex-nowrap"
+      className="py-1.5 fixed top-0 z-50 w-full border-b [&>div]:flex-nowrap"
       fluid
     >
       <div className="mr-2 flex items-center">
@@ -23,16 +23,20 @@ export default function MainNavbar() {
               className="absolute scale-125 top-[-1px] left-[0px]"
             />
           </div>
-          <LogoTextWithSub className="ml-[-3px]" />
+          <img
+            src="/images/logo/logo-text.png"
+            alt="Skyeye logo"
+            className="ml-[2px] h-[55px]"
+          />
         </Navbar.Brand>
       </div>
-      <div className="btn-primary w-full max-w-[200px] rounded-md border border-gray-200 p-2">
+      <div className="btn-primary w-full max-w-[280px] rounded-md border border-gray-200 p-2">
         <a
           href="/mitre-attack-matrix"
           className="block text-center font-semibold text-white"
           rel="noopener noreferrer"
         >
-          MITRE ATT&CK® Matrix
+          MITRE ATT&CK® Matrix - Cloud
         </a>
       </div>
     </Navbar>

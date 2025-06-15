@@ -8,6 +8,10 @@ import {
   getUserData as apiGetUserData,
   postUpdate as apiPostUpdate,
   getUpdateStatus as apiGetUpdateStatus,
+  // new scan log methods
+  getScanLogs as apiGetScanLogs,
+  getScanLogDetail as apiGetScanLogDetail,
+  fetchScanLogFile as apiFetchScanLogFile,
   SessionData,
 } from "@/libs/api"
 import { IAMData } from "@/types/IAM/enums"
@@ -116,6 +120,47 @@ export function useApi() {
     }
   }
 
+  // Fetch summary of all scan logs
+  const getScanLogs = async (): Promise<any[] | null> => {
+    setLoading(true)
+    try {
+      return await apiGetScanLogs()
+    } catch (err: any) {
+      toast.error(err.message || "Failed to fetch scan logs summary")
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Fetch detailed scan log by timestamp
+  const getScanLogDetail = async (timestamp: string): Promise<any | null> => {
+    setLoading(true)
+    try {
+      return await apiGetScanLogDetail(timestamp)
+    } catch (err: any) {
+      toast.error(err.message || "Failed to fetch scan log detail")
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Download raw scan log file
+  const downloadScanLogFile = async (
+    timestamp: string,
+  ): Promise<Blob | null> => {
+    setLoading(true)
+    try {
+      return await apiFetchScanLogFile(timestamp)
+    } catch (err: any) {
+      toast.error(err.message || "Failed to download scan log file")
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return {
     loading,
     getSessions,
@@ -125,5 +170,9 @@ export function useApi() {
     getUser,
     triggerUpdate,
     getUpdateStatus,
+    // new scan log hooks
+    getScanLogs,
+    getScanLogDetail,
+    downloadScanLogFile,
   }
 }
