@@ -1,7 +1,6 @@
 import { Navbar } from "flowbite-react"
 
 import Link from "next/link"
-import LogoTextWithSub from "@/components/icons/LogoTextWithSub"
 import { cn } from "@/libs/utils"
 
 export default function MainNavbar() {
