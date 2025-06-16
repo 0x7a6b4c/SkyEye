@@ -10,7 +10,7 @@ resource "aws_iam_user_policy" "inline" {
 }
 
 resource "aws_iam_user_policy_attachment" "managed" {
-  for_each = toset(var.managed_policies)
-  user     = aws_iam_user.this.name
+  for_each   = var.managed_policy_arns
+  user       = aws_iam_user.this.name
   policy_arn = each.value
 }

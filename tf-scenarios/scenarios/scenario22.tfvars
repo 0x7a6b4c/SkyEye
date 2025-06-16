@@ -1,33 +1,34 @@
 managed_policies = {
-  "S7_AMP_PolicyA" = {
-    description = "IoT DeleteThing & bedrock DeleteGuardrail"
+  "S22_AMP_PolicyA" = {
+    description = "SageMaker DescribeAction & DescribeApp"
     policy = {
       Version = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "iot:DeleteThing",
-          "bedrock:DeleteGuardrail"
+          "sagemaker:DescribeAction",
+          "sagemaker:DescribeApp"
         ]
         Resource = "*"
       }]
     }
   }
-  "S7_AMP_PolicyB" = {
-    description = "bedrock InvokeAgent & UpdateFlow"
+  "S22_AMP_PolicyB" = {
+    description = "EC2 DescribeAddresses/BundleTasks/Instances"
     policy = {
       Version = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "bedrock:InvokeAgent",
-          "bedrock:UpdateFlow"
+          "ec2:DescribeAddresses",
+          "ec2:DescribeBundleTasks",
+          "ec2:DescribeInstances"
         ]
         Resource = "*"
       }]
     }
   }
-  "S7_AMP_PolicyC" = {
+  "S22_AMP_PolicyC" = {
     description = "S3 ListBuckets & EC2 DescribeInstances"
     policy = {
       Version = "2012-10-17"
@@ -41,19 +42,15 @@ managed_policies = {
       }]
     }
   }
-  "S7_AMP_PolicyD" = {
-    description = "Various IAM enumeration actions"
+  "S22_AMP_PolicyD" = {
+    description = "Glue ListSessions & ListStatements"
     policy = {
       Version = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "iam:GetGroupPolicy",
-          "iam:ListGroupPolicies",
-          "iam:ListPolicyVersions",
-          "iam:ListRolePolicies",
-          "iam:GetPolicyVersions",
-          "iam:ListAttachedRolePolicies"
+          "glue:ListSessions",
+          "glue:ListStatements"
         ]
         Resource = "*"
       }]
@@ -62,75 +59,68 @@ managed_policies = {
 }
 
 users = {
-  "S7_UserA" = {
+  "S22_UserA" = {
     inline_policies = {
-      "S7_IP_UserA" = {
+      "S22_IP_UserA" = {
         Version = "2012-10-17"
         Statement = [{
           Effect   = "Allow"
           Action   = [
-            "aiops:CreateInvestigation",
-            "iot:CreateThing"
+            "s3:DescribeJob",
+            "s3:ListJobs"
           ]
           Resource = "*"
         }]
       }
     }
     managed_policies = [
-      "S7_AMP_PolicyA",
-      "S7_AMP_PolicyB"
+      "S22_AMP_PolicyA",
+      "S22_AMP_PolicyB"
     ]
   }
 }
 
 groups = {
-  "S7_GroupA" = {
-    users = ["S7_UserA"]
+  "S22_GroupA" = {
+    users = ["S22_UserA"]
     inline_policies = {
-      "S7_IP_GroupA" = {
+      "S22_IP_GroupA" = {
         Version = "2012-10-17"
         Statement = [{
           Effect   = "Allow"
           Action   = [
-            "iam:ListRoles",
-            "s3:CreateBucket",
-            "lambda:CreateFunction",
-            "ec2:CreateInstances"
+            "lambda:ListLayers",
+            "lambda:ListFunctions"
           ]
           Resource = "*"
         }]
       }
     }
     managed_policies = [
-      "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
-      "S7_AMP_PolicyC"
+      "S22_AMP_PolicyC"
     ]
   }
 }
 
 roles = {
-  "S7_RoleA" = {
-    assume_users    = ["S7_UserA"]
+  "S22_RoleA" = {
+    assume_users    = ["S22_UserA"]
     assume_roles    = []
     inline_policies = {
-      "S7_IP_RoleA" = {
+      "S22_IP_RoleA" = {
         Version = "2012-10-17"
         Statement = [{
           Effect   = "Allow"
           Action   = [
-            "iam:ListGroupsForUser",
-            "iam:ListAttachedUserPolicies",
-            "iam:GetUserPolicy",
-            "iam:ListUserPolicies",
-            "iam:ListAttachedGroupPolicies",
-            "iam:GetRolePolicy"
+            "s3:ListBuckets",
+            "mgh:DescribeApplicationState"
           ]
           Resource = "*"
         }]
       }
     }
     managed_policies = [
-      "S7_AMP_PolicyD"
+      "S22_AMP_PolicyD"
     ]
   }
 }

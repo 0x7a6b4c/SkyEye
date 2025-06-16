@@ -1,55 +1,109 @@
+managed_policies = {
+  "S10_AMP_PolicyA" = {
+    description = "CreateInvestigation & CreateThing"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect   = "Allow"
+        Action   = [
+          "aiops:CreateInvestigation",
+          "iot:CreateThing"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+  "S10_AMP_PolicyB" = {
+    description = "InvokeAgent, UpdateFlow & ListRoles"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect   = "Allow"
+        Action   = [
+          "bedrock:InvokeAgent",
+          "bedrock:UpdateFlow",
+          "iam:ListRoles"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+  "S10_AMP_PolicyC" = {
+    description = "S3 CreateBucket, Lambda CreateFunction, EC2 CreateInstances"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect   = "Allow"
+        Action   = [
+          "s3:CreateBucket",
+          "lambda:CreateFunction",
+          "ec2:CreateInstances"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+}
+
 users = {
   "S10_UserA" = {
     inline_policies = {
-      "S10_IP_UserA" = jsonencode({
-        Version = "2012-10-17",
-        Statement = [ { Effect = "Allow", Action = ["tax:GetExemptions","s3-object-lambda:GetObjectAcl"], Resource = "*" } ]
-      })
+      "S10_IP_UserA" = {
+        Version = "2012-10-17"
+        Statement = [{
+          Effect   = "Allow"
+          Action   = [
+            "tax:GetExemptions",
+            "s3-object-lambda:GetObjectAcl"
+          ]
+          Resource = "*"
+        }]
+      }
     }
-    managed_policies = [ module.iam_policies["S10_AMP_PolicyA"].arn ]
+    managed_policies = ["S10_AMP_PolicyA"]
   }
 }
 
 groups = {
   "S10_GroupA" = {
-    users = ["S10_UserA"]
+    users           = ["S10_UserA"]
     inline_policies = {
-      "S10_IP_GroupA" = jsonencode({
-        Version = "2012-10-17",
-        Statement = [ { Effect = "Allow", Action = ["iot:DeleteThing","bedrock:DeleteGuardrail","iam:ListRoles"], Resource = "*" } ]
-      })
+      "S10_IP_GroupA" = {
+        Version = "2012-10-17"
+        Statement = [{
+          Effect   = "Allow"
+          Action   = [
+            "iot:DeleteThing",
+            "bedrock:DeleteGuardrail"
+          ]
+          Resource = "*"
+        }]
+      }
     }
     managed_policies = [
       "arn:aws:iam::aws:policy/AmazonKinesisFullAccess",
-      module.iam_policies["S10_AMP_PolicyB"].arn
+      "S10_AMP_PolicyB"
     ]
   }
 }
 
 roles = {
   "S10_RoleA" = {
-    assume_role_policy = jsonencode({
-      Version = "2012-10-17",
-      Statement = [ { Effect = "Allow", Principal = { AWS = aws_iam_user.S10_UserA.arn }, Action = "sts:AssumeRole" } ]
-    })
+    assume_users    = ["S10_UserA"]
+    assume_roles    = []
     inline_policies = {
-      "S10_IP_RoleA" = jsonencode({
-        Version = "2012-10-17",
-        Statement = [ { Effect = "Allow", Action = ["iam:GetAccountAuthorizationDetails"], Resource = "*" } ]
-      })
+      "S10_IP_RoleA" = {
+        Version = "2012-10-17"
+        Statement = [{
+          Effect   = "Allow"
+          Action   = ["iam:GetAccountAuthorizationDetails"]
+          Resource = "*"
+        }]
+      }
     }
     managed_policies = [
       "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
-      module.iam_policies["S10_AMP_PolicyC"].arn
+      "S10_AMP_PolicyC"
     ]
   }
 }
-
-managed_policies = merge(
-  var.managed_policies,
-  {
-    "S10_AMP_PolicyA" = { description="", policy=jsonencode({Version="2012-10-17",Statement=[{Effect="Allow",Action=["aiops:CreateInvestigation","iot:CreateThing"],Resource="*"}]} )},
-    "S10_AMP_PolicyB" = { description="", policy=jsonencode({Version="2012-10-17",Statement=[{Effect="Allow",Action=["bedrock:InvokeAgent","bedrock:UpdateFlow","iam:ListRoles"],Resource="*"}]} )},
-    "S10_AMP_PolicyC" = { description="", policy=jsonencode({Version="2012-10-17",Statement=[{Effect="Allow",Action=["s3:CreateBucket","lambda:CreateFunction","ec2:CreateInstances"],Resource="*"}]} )}
-  }
-)

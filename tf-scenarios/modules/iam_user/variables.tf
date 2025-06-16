@@ -3,11 +3,13 @@ variable "name" {
 }
 
 variable "inline_policies" {
-  type = map(any)
-  default = {}
+  description = "Map of inline policy name to JSON-like policy document"
+  type        = map(any)
+  default     = {}
 }
 
-variable "managed_policies" {
-  type = list(string)
-  default = []
+variable "managed_policy_arns" {
+  description = "Map of managed policy name to its ARN"
+  type        = map(string)
+  default     = {}
 }
