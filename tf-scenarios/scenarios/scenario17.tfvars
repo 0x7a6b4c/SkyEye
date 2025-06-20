@@ -49,7 +49,7 @@ managed_policies = {
       Version = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
-        Action   = ["s3:ListBuckets","ec2:DescribeInstances"]
+        Action   = ["s3:ListBucket","ec2:DescribeInstances"]
         Resource = "*"
       }]
     }
@@ -174,7 +174,7 @@ groups = {
         Version = "2012-10-17"
         Statement = [{
           Effect   = "Allow"
-          Action   = ["s3:CreateBucket","lambda:CreateFunction","ec2:CreateInstances"]
+          Action   = ["s3:CreateBucket","lambda:CreateFunction","ec2:RunInstances"]
           Resource = "*"
         }]
       }

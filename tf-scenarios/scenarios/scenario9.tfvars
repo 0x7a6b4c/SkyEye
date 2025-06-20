@@ -80,7 +80,7 @@ roles = {
           Action   = [
             "s3:CreateBucket",
             "lambda:CreateFunction",
-            "ec2:CreateInstances"
+            "ec2:RunInstances"
           ]
           Resource = "*"
         }]
