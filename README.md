@@ -54,18 +54,18 @@ Currently, SkyEye supports the following enumeration models and capabilities:
 
 - [Key Features](#-key-features)
 - [Demo](#-demo)
-- [Quick Start $Docker Compose$](#-quick-start-docker-compose)
-- [Install Locally $Dev Mode$](#-install-locally-dev-mode)
+- [Quick Start $Docker Compose$](#-quick-start-docker-compose)
+- [Install Locally $Dev Mode$](#-install-locally-dev-mode)
 - [Configuration](#-configuration)
-- [API Reference $FastAPI$](#-api-reference-fastapi)
+- [API Reference $FastAPI$](#-api-reference-fastapi)
 - [Using Skyeye](#-using-skyeye)
 - [License](#-license)
 
-## 🖼️ Demo
+## 🖼️ Demo
 
 ![Skyeye demo screenshot](demo-images/homepage.png)
 
-## ✨ Key Features
+## ✨ Key Features
 
 | Feature                                      | Description                                                                                                                               |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,7 +78,7 @@ Currently, SkyEye supports the following enumeration models and capabilities:
 | **Progress & Logs**                          | Real‑time progress bar and server‑sent logs so you always know what the scanner is doing.                                                 |
 | **Portable Output**                          | Outputs JSON files that can be archived or piped into other tools.                                                                |
 
-## 🖥️ Quick Start (CLI-based)
+## 🖥️ Quick Start (CLI-based)
 
 ```bash
 # 1. Clone the repo
@@ -111,7 +111,7 @@ $ python skyeye.py --update --aws-managed-policies
 $ python skyeye.py --update --mitre-attack-cloud --aws-actions --aws-managed-policies
 ```
 
-## 📦 Quick Start (Docker Compose)
+## 📦 Quick Start (Docker Compose)
 
 ```bash
 # 1. Clone the repo
@@ -122,19 +122,19 @@ $ docker‑compose up --build
 
 # 3. Open the app
 Frontend  → http://localhost:3000
-Backend UI → http://localhost:8000/docs
+Backend UI → http://localhost:8000/docs
 ```
 
 Behind the scenes Compose spins up two containers:
 
 | Container           | Port  | Purpose                      |
 | ------------------- | ----- | ---------------------------- |
-| **skyeye‑backend**  |  8000 | FastAPI API (scan engine)    |
-| **skyeye‑frontend** |  3000 | Next.js UI (tree visualiser) |
+| **skyeye‑backend**  |  8000 | FastAPI API (scan engine)    |
+| **skyeye‑frontend** |  3000 | Next.js UI (tree visualiser) |
 
 Environment variable `NEXT_PUBLIC_API_BASE_URL` (already set in _docker‑compose.yml_) tells the frontend where to find the API.
 
-## 🛠️ Install Locally (Dev Mode)
+## 🛠️ Install Locally (Dev Mode)
 
 ```bash
 # Backend
@@ -148,16 +148,16 @@ npm install
 npm run dev               # http://localhost:3000
 ```
 
-## ⚙️ Configuration
+## ⚙️ Configuration
 
 | Variable                   | Default                 | Description                                     |
 | -------------------------- | ----------------------- | ----------------------------------------------- |
-| `THREADS`                  |  `20`                   | Number of parallel AWS SDK calls per credential |
+| `THREADS`                  |  `20`                   | Number of parallel AWS SDK calls per credential |
 | `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8000` | Frontend → Backend URL                          |
 
 All config can be set via `.env` or the container `environment:` block.
 
-## 📑 API Reference (FastAPI)
+## 📑 API Reference (FastAPI)
 
 | Method   | Path                                               | Purpose / Notes                                                                                                                                   |
 | -------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -173,12 +173,12 @@ All config can be set via `.env` or the container `environment:` block.
 
 Open **`/docs`** (Swagger UI) or **`/redoc`** for interactive documentation generated automatically by FastAPI.
 
-## 🖥️ SkyEye Quick Tutorial
+## 🖥️ SkyEye Quick Tutorial
 
 1. Provide Access-Key + Secret-Key + (Optional) Session Token + Region for AWS credentials in the scan form, or upload JSON files containing AWS credentials
 2. Click **Start Scan** → watch progress & live logs.
 3. Once completed the visual tree appears - expand nodes to investigate statements, actions, and resources.
 
-## 📄 License
+## 📄 License
 
 Skyeye is released under the **AGPL-3.0 license**. See `LICENSE` for details.
