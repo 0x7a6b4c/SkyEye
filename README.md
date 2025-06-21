@@ -433,7 +433,7 @@ Let's star this repo together 🚀
 
 ```tex
 @misc{SkyEye,
-      title={{SkyEye: When Your Vision Reaches Beyong IAM Boundary Scope}},
+      title={{SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope}},
       author={Minh Hoang NGUYEN, Anh Minh HO, Bao Son TO},
       year={2025},
       eprint={...},
