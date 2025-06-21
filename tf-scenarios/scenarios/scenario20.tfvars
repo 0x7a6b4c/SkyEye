@@ -90,7 +90,7 @@ managed_policies = {
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "s3:ListBuckets",
+          "s3:ListBucket",
           "ec2:DescribeInstances"
         ]
         Resource = "*"
@@ -271,7 +271,7 @@ groups = {
             "iam:ListRoles",
             "s3:CreateBucket",
             "lambda:CreateFunction",
-            "ec2:CreateInstances"
+            "ec2:RunInstances"
           ]
           Resource = "*"
         }]
