@@ -415,7 +415,7 @@ For the Scenario-based benchmark, you can run the following command to ...
 A more detailed documentation is now available at the [Documentation](https://skyeye.gitbook.io/docs) page.
 
 ## Misc
-Let's star this repo together 😊
+Let's star this repo together 🚀
 
 <div align="center">
 
