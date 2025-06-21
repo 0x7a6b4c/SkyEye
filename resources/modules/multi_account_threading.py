@@ -35,8 +35,8 @@ def multiAccountThreading(output_folder, account_id, credential_list):
 
     importlib.reload(resources.threads_config)
     
-    # (1) process_credential_set_cross ("default")
-    logging.info("Attempting to initialize IAM cross-entity scanning model across multiple users...")
+    # process_credential_set_cross ("default")
+    logging.info("Attempting to initialize IAM cross-principal scanning model across multiple users...")
     with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
         futures = [
             sub_executor.submit(
@@ -60,7 +60,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
     if stop_event.is_set():
         return
 
-    # (2) Re-scan environment entities
+    # Re-scan environment entities
     reScanEnvEntities = enumerateEnvEntities(envData)
     if not stop_event.is_set():
         if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
@@ -72,7 +72,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                 logging.info("Identified missing IAM component at ['Role'] entity level!")
             if reScanEnvEntities.get("Policies"):
                 logging.info("Identified missing IAM component at ['Policy'] entity level!")
-            logging.info("Attempting to re-initialize IAM cross-entity scanning model to complement...")
+            logging.info("Attempting to re-initialize IAM cross-principal scanning model to complement...")
             with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
                 futures = [
                     sub_executor.submit(envEntitiesComplement, 
@@ -89,9 +89,9 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                     future.result()
             if stop_event.is_set():
                 return
-            logging.info("Completed IAM cross-entity scanning model!")
+            logging.info("Completed IAM cross-principal scanning model!")
     
-    # (3) Re-scan by Reverse Approach - ListIdentitiesForPolicy - ListPolicies
+    # Re-scan by Reverse Approach - ListIdentitiesForPolicy - ListPolicies
     envPolicies, reScanNamePolicies = filteringListIdentitiesForPolicy(envData.users, envData.groups, envData.roles)
     if reScanNamePolicies.get("Users") or reScanNamePolicies.get("Groups") or reScanNamePolicies.get("Roles"):
         condition_LIFP = False
@@ -127,8 +127,8 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                     return
             logging.info("Completed IAM [ListPolicies / ListIdentityForPolicies] method !")
 
-    # (4) Re-initialize Cross-entity scanning model  
-    logging.info("Attempting to re-intialize IAM cross-entity scanning model across multiple users...")
+    # Re-initialize cross-principal scanning model  
+    logging.info("Attempting to re-intialize IAM cross-principal scanning model across multiple users...")
     logging.disable(logging.INFO)
     with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
         futures = [
@@ -154,7 +154,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
     if stop_event.is_set():
         return
 
-    # (5) Re-scan by rotating through Roles to perform AssumeRole and Cross-Entity Scanning Model
+    # Re-scan by rotating through Roles to perform AssumeRole and cross-principal Scanning Model
     reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
     if not stop_event.is_set():
         if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
@@ -166,7 +166,7 @@ def multiAccountThreading(output_folder, account_id, credential_list):
                 logging.info("Identified missing IAM component at ['Role'] entity level!")
             if reScanEnvEntities.get("Policies"):
                 logging.info("Identified missing IAM component at ['Policy'] entity level!")
-            logging.info("Attempting to initialize IAM [AssumedRole] rotated scanning model to complement...")
+            logging.info("Attempting to initialize IAM [AssumedRole] transitive cross-role enumeration model to complement...")
             if not stop_event.is_set():
                 assume_roles_enumeration(envData, reScanEnvEntities, sts_caller_identity_list, session_list, accountDir, stop_event)
     
@@ -193,13 +193,13 @@ def multiAccountThreading(output_folder, account_id, credential_list):
     reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
     if not stop_event.is_set():
         if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
-            logging.info("Attempting to re-initialize IAM [AssumedRole] rotated scanning model to complement...")
+            logging.info("Attempting to re-initialize IAM [AssumedRole] transitive cross-role enumeration model to complement...")
             if not stop_event.is_set():
                 logging.disable(logging.INFO)
                 assume_roles_enumeration(envData, reScanEnvEntities, sts_caller_identity_list, session_list, accountDir, stop_event)
                 logging.disable(logging.NOTSET)
     
-    # (6) End-of-the-road: process_credential_set_cross ("extract")
+    # process_credential_set_cross ("extract")
     with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as sub_executor:
         futures = [
             sub_executor.submit(
