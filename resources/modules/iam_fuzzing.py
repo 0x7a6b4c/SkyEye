@@ -148,7 +148,7 @@ def process_batch(iam_client, arn, batch_num, action_batch, max_retries=5):
             retry_count += 1
             if retry_count < max_retries:
                 wait_time = 2 ** retry_count
-                print(f"Retry {retry_count} for batch {batch_num} after {wait_time} seconds...")
+                logging.error(f"Retry {retry_count} for batch {batch_num} after {wait_time} seconds...")
                 time.sleep(wait_time)
     
     return {
@@ -298,14 +298,14 @@ def core_simulate_principal_policy(iam_client, arn, batch_size=100):
                 else:
                     all_results[f"batch_{batch_num}"] = {"error": result['error']}
                     failed_batches.append((batch_num, result['actions']))
-                print(f"Completed batch {batch_num} - {'Success' if result['success'] else 'Failed'}")
+                logging.info(f"Completed batch {batch_num} - {'Success' if result['success'] else 'Failed'}")
             except Exception as e:
-                print(f"Unexpected error processing batch {batch_num}: {str(e)}")
+                logging.error(f"Unexpected error processing batch {batch_num}: {str(e)}")
                 all_results[f"batch_{batch_num}"] = {"error": str(e)}
     
     # Retry failed batches
     if failed_batches:
-        print(f"Retrying {len(failed_batches)} failed batches sequentially...")
+        logging.error(f"Retrying {len(failed_batches)} failed batches sequentially...")
         for batch_num, action_batch in failed_batches:
             result = process_batch(iam_client, arn, batch_num, action_batch)
             if result['success']:

@@ -51,7 +51,7 @@ def process_credential_set(session, sts_caller_identity, output_folder):
                     if reScanEnvEntities.get("Policies"):
                         logging.info("Identified missing IAM component at ['Policy'] entity level!")
                     logging.info("Attempting to intialize IAM [AssumedRole] transitive cross-role enumeration model to complement...")
-                    assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
+                    assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)    
             # Transitive Cross-Role Enumeration Model - Re-run 2
             reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
             if envData.roles:
