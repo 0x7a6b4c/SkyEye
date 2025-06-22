@@ -293,14 +293,14 @@ $ git clone https://github.com/0x7a6b4c/skyeye.git && cd skyeye
 $ pip install -r requirements.txt
 
 # 3. IAM Enumeration mode
-# 3.1 Cross-Principal mode
-$ python skyeye.py --json-file --mode cross-entity --thread [?]
+# 3.1 Multiple Users - Cross-Principal mode
+$ python skyeye.py --json-file credentials.json --mode cross-entity --thread THREAD_NUMBER
 
-# 3.2 Separate-Principal mode
-$ python skyeye.py --json-file --mode separate-entity --thread [?]
+# 3.2 Multiple Users - Separate-Principal mode
+$ python skyeye.py --json-file credentials.json --mode separate-entity --thread THREAD_NUMBER
 
 # 3.3 Single-Principal mode
-$ python skyeye.py --access-key ACCESS_KEY --secret-key SECRET_KEY --session-token OPTIONAL_SESSION_TOKEN --region REGION --thread [?]
+$ python skyeye.py --access-key ACCESS_KEY --secret-key SECRET_KEY --session-token OPTIONAL_SESSION_TOKEN --region REGION --thread THREAD_NUMBER
 
 # 4. Update libraries
 # 4.1 MITRE ATT&CK only
@@ -317,7 +317,7 @@ $ python skyeye.py --update --mitre-attack-cloud --aws-actions --aws-managed-pol
 ```
 
 #### 📦 2. SkyEye Platform (WebApp) - Docker Container
-We also support Docker to containerize the entire SkyEye environment. So please install [Docker](https://www.docker.com/) first.
+We also support Docker to containerize the entire SkyEye environment. Install [Docker](https://www.docker.com/) first to faciliate the installation process.
 
 ```bash
 # 1. Clone the repo

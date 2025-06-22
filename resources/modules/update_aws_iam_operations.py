@@ -294,6 +294,11 @@ IAM_RISK_OPERATIONS = {
   "workdocs:AddUserToGroup": "high"
 }
 
+def merge_single_letter_between_underscores(s):
+    s1 = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s)
+    s2 = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1_\2', s1)
+    return s2.lower()
+
 def update_iam_operations():
     logging.info("Updating [Resource] AWS Boto3 IAM Read-Only Operations...")
     logging.info("Updating [Resource] AWS Boto3 IAM Full Operations...")
@@ -313,11 +318,18 @@ def update_iam_operations():
 
     for service in aws_operations['serviceMap'].values():
         if service['StringPrefix'] not in IAM_BOTO3_READ_OPERATION_LIST:
-            IAM_BOTO3_READ_OPERATION_LIST[service['StringPrefix']] = [re.sub(r'(?<!^)(?=[A-Z])', '_', item).lower() for item in service['Actions'] if item.startswith(("List", "Get", "Describe"))]
+            IAM_BOTO3_READ_OPERATION_LIST[service['StringPrefix']] = [
+                merge_single_letter_between_underscores(item)
+                for item in service['Actions']
+                if item.startswith(("List", "Get", "Describe"))
+            ]
             
     for service in aws_operations['serviceMap'].values():
         if service['StringPrefix'] not in IAM_BOTO3_FULL_OPERATION_LIST:
-            IAM_BOTO3_FULL_OPERATION_LIST[service['StringPrefix']] = [re.sub(r'(?<!^)(?=[A-Z])', '_', item).lower() for item in service['Actions']]
+            IAM_BOTO3_FULL_OPERATION_LIST[service['StringPrefix']] = [
+                merge_single_letter_between_underscores(item)
+                for item in service['Actions']
+            ]
 
     if IAM_BOTO3_READ_OPERATION_LIST:
         merged_library_filename = os.path.join("resources/libraries", boto3_read_file_name)
