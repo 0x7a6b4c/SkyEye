@@ -35,7 +35,7 @@ import {
 } from "@/libs/helpers/graph-fuzzing-helpers"
 import { useRouter } from "next/router"
 
-type ServiceOption = { value: string; label: string }
+export type ServiceOption = { value: string; label: string }
 interface PolicyTreeProps {
   iamData: IAMData
 }
