@@ -4821,7 +4821,7 @@ IAM_BOTO3_READ_OPERATION_LIST = {
         "list_access_points",
         "list_access_points_for_object_lambda",
         "list_all_my_buckets",
-        "list_bucket",
+        "list_buckets",
         "list_bucket_multipart_uploads",
         "list_bucket_versions",
         "list_caller_access_grants",

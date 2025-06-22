@@ -17784,7 +17784,7 @@ IAM_BOTO3_FULL_OPERATION_LIST = {
         "get_object_version",
         "get_object_version_acl",
         "get_object_version_tagging",
-        "list_bucket",
+        "list_buckets",
         "list_bucket_multipart_uploads",
         "list_bucket_versions",
         "list_multipart_upload_parts",
