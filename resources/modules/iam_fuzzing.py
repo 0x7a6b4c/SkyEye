@@ -269,7 +269,7 @@ def filter_allowed_actions(all_results, mode="default"):
 
     return structured_results
 
-def core_simulate_principal_policy(iam_client, arn, batch_size=100):
+def core_simulate_principal_policy(iam_client, arn, max_workers=10, batch_size=100):
     all_results = {}
     failed_batches = []
     
@@ -281,8 +281,7 @@ def core_simulate_principal_policy(iam_client, arn, batch_size=100):
         batches.append((batch_num, action_batch))
     
     # Process batches
-    importlib.reload(resources.threads_config)
-    with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         process_func = partial(process_batch, iam_client, arn)
         future_to_batch = {
             executor.submit(process_func, batch_num, action_batch): batch_num
