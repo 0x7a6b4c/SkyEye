@@ -11,7 +11,7 @@ import { CustomFileExplorer } from "@/components/ui/Sidebar/CustomFileExplorer"
 import { CustomSidebarSection } from "@/components/ui/Sidebar/CustomSidebarSection"
 import { useScanHistory } from "@/libs/context/ScanHistoryContext"
 import { useMemo, useState } from "react"
-import { FaHome } from "react-icons/fa"
+import { FaBook, FaHome } from "react-icons/fa"
 import { RiScan2Line } from "react-icons/ri"
 import { SidebarTrigger } from "@/components/ui/Sidebar/SidebarTrigger"
 import { cn } from "@/libs/utils"
@@ -40,6 +40,13 @@ const navigationItems = [
     type: "link" as const,
     url: "/aws/scan-logs",
     icon: <VscTerminalCmd color="gray" className="w-5 h-5" />,
+  },
+  {
+    id: "nav-4",
+    title: "Action Dictionary",
+    type: "link" as const,
+    url: "/aws/action-dictionary",
+    icon: <FaBook color="gray" className="w-5 h-5" />,
   },
 ]
 
