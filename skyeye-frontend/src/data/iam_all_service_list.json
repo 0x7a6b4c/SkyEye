@@ -1,0 +1,1684 @@
+{
+    "services": [
+        {
+            "value": "aiops",
+            "label": "aiops"
+        },
+        {
+            "value": "qapps",
+            "label": "qapps"
+        },
+        {
+            "value": "iot",
+            "label": "iot"
+        },
+        {
+            "value": "fis",
+            "label": "fis"
+        },
+        {
+            "value": "private-networks",
+            "label": "private-networks"
+        },
+        {
+            "value": "controlcatalog",
+            "label": "controlcatalog"
+        },
+        {
+            "value": "auditmanager",
+            "label": "auditmanager"
+        },
+        {
+            "value": "eks-auth",
+            "label": "eks-auth"
+        },
+        {
+            "value": "finspace-api",
+            "label": "finspace-api"
+        },
+        {
+            "value": "codeguru-security",
+            "label": "codeguru-security"
+        },
+        {
+            "value": "ram",
+            "label": "ram"
+        },
+        {
+            "value": "scn",
+            "label": "scn"
+        },
+        {
+            "value": "redshift-data",
+            "label": "redshift-data"
+        },
+        {
+            "value": "globalaccelerator",
+            "label": "globalaccelerator"
+        },
+        {
+            "value": "profile",
+            "label": "profile"
+        },
+        {
+            "value": "cloudtrail-data",
+            "label": "cloudtrail-data"
+        },
+        {
+            "value": "mediatailor",
+            "label": "mediatailor"
+        },
+        {
+            "value": "route53",
+            "label": "route53"
+        },
+        {
+            "value": "sdb",
+            "label": "sdb"
+        },
+        {
+            "value": "resiliencehub",
+            "label": "resiliencehub"
+        },
+        {
+            "value": "inspector-scan",
+            "label": "inspector-scan"
+        },
+        {
+            "value": "ssm-guiconnect",
+            "label": "ssm-guiconnect"
+        },
+        {
+            "value": "aws-marketplace",
+            "label": "aws-marketplace"
+        },
+        {
+            "value": "networkmanager-chat",
+            "label": "networkmanager-chat"
+        },
+        {
+            "value": "codecatalyst",
+            "label": "codecatalyst"
+        },
+        {
+            "value": "identitystore",
+            "label": "identitystore"
+        },
+        {
+            "value": "freertos",
+            "label": "freertos"
+        },
+        {
+            "value": "identitystore-auth",
+            "label": "identitystore-auth"
+        },
+        {
+            "value": "codedeploy",
+            "label": "codedeploy"
+        },
+        {
+            "value": "route53resolver",
+            "label": "route53resolver"
+        },
+        {
+            "value": "codebuild",
+            "label": "codebuild"
+        },
+        {
+            "value": "deadline",
+            "label": "deadline"
+        },
+        {
+            "value": "iotanalytics",
+            "label": "iotanalytics"
+        },
+        {
+            "value": "connect",
+            "label": "connect"
+        },
+        {
+            "value": "ses",
+            "label": "ses"
+        },
+        {
+            "value": "ce",
+            "label": "ce"
+        },
+        {
+            "value": "refactor-spaces",
+            "label": "refactor-spaces"
+        },
+        {
+            "value": "application-signals",
+            "label": "application-signals"
+        },
+        {
+            "value": "inspector2",
+            "label": "inspector2"
+        },
+        {
+            "value": "q",
+            "label": "q"
+        },
+        {
+            "value": "sso-directory",
+            "label": "sso-directory"
+        },
+        {
+            "value": "docdb-elastic",
+            "label": "docdb-elastic"
+        },
+        {
+            "value": "vpc-lattice-svcs",
+            "label": "vpc-lattice-svcs"
+        },
+        {
+            "value": "b2bi",
+            "label": "b2bi"
+        },
+        {
+            "value": "trustedadvisor",
+            "label": "trustedadvisor"
+        },
+        {
+            "value": "config",
+            "label": "config"
+        },
+        {
+            "value": "rds",
+            "label": "rds"
+        },
+        {
+            "value": "entityresolution",
+            "label": "entityresolution"
+        },
+        {
+            "value": "appsync",
+            "label": "appsync"
+        },
+        {
+            "value": "acm",
+            "label": "acm"
+        },
+        {
+            "value": "xray",
+            "label": "xray"
+        },
+        {
+            "value": "notifications-contacts",
+            "label": "notifications-contacts"
+        },
+        {
+            "value": "cloudfront",
+            "label": "cloudfront"
+        },
+        {
+            "value": "eks",
+            "label": "eks"
+        },
+        {
+            "value": "identity-sync",
+            "label": "identity-sync"
+        },
+        {
+            "value": "fms",
+            "label": "fms"
+        },
+        {
+            "value": "kinesis",
+            "label": "kinesis"
+        },
+        {
+            "value": "ds",
+            "label": "ds"
+        },
+        {
+            "value": "codestar-notifications",
+            "label": "codestar-notifications"
+        },
+        {
+            "value": "frauddetector",
+            "label": "frauddetector"
+        },
+        {
+            "value": "worklink",
+            "label": "worklink"
+        },
+        {
+            "value": "supportapp",
+            "label": "supportapp"
+        },
+        {
+            "value": "application-transformation",
+            "label": "application-transformation"
+        },
+        {
+            "value": "chime",
+            "label": "chime"
+        },
+        {
+            "value": "iotwireless",
+            "label": "iotwireless"
+        },
+        {
+            "value": "cloudfront-keyvaluestore",
+            "label": "cloudfront-keyvaluestore"
+        },
+        {
+            "value": "elasticmapreduce",
+            "label": "elasticmapreduce"
+        },
+        {
+            "value": "route53-recovery-cluster",
+            "label": "route53-recovery-cluster"
+        },
+        {
+            "value": "iotevents",
+            "label": "iotevents"
+        },
+        {
+            "value": "billingconductor",
+            "label": "billingconductor"
+        },
+        {
+            "value": "vpce",
+            "label": "vpce"
+        },
+        {
+            "value": "dynamodb",
+            "label": "dynamodb"
+        },
+        {
+            "value": "es",
+            "label": "es"
+        },
+        {
+            "value": "deepracer",
+            "label": "deepracer"
+        },
+        {
+            "value": "voiceid",
+            "label": "voiceid"
+        },
+        {
+            "value": "emr-containers",
+            "label": "emr-containers"
+        },
+        {
+            "value": "budgets",
+            "label": "budgets"
+        },
+        {
+            "value": "schemas",
+            "label": "schemas"
+        },
+        {
+            "value": "networkmanager",
+            "label": "networkmanager"
+        },
+        {
+            "value": "cognito-identity",
+            "label": "cognito-identity"
+        },
+        {
+            "value": "cleanrooms",
+            "label": "cleanrooms"
+        },
+        {
+            "value": "appconfig",
+            "label": "appconfig"
+        },
+        {
+            "value": "customer-verification",
+            "label": "customer-verification"
+        },
+        {
+            "value": "states",
+            "label": "states"
+        },
+        {
+            "value": "wisdom",
+            "label": "wisdom"
+        },
+        {
+            "value": "ec2messages",
+            "label": "ec2messages"
+        },
+        {
+            "value": "greengrass",
+            "label": "greengrass"
+        },
+        {
+            "value": "redshift",
+            "label": "redshift"
+        },
+        {
+            "value": "aws-marketplace-management",
+            "label": "aws-marketplace-management"
+        },
+        {
+            "value": "repostspace",
+            "label": "repostspace"
+        },
+        {
+            "value": "oam",
+            "label": "oam"
+        },
+        {
+            "value": "deepcomposer",
+            "label": "deepcomposer"
+        },
+        {
+            "value": "managedblockchain",
+            "label": "managedblockchain"
+        },
+        {
+            "value": "appstream",
+            "label": "appstream"
+        },
+        {
+            "value": "pcs",
+            "label": "pcs"
+        },
+        {
+            "value": "datazone",
+            "label": "datazone"
+        },
+        {
+            "value": "wafv2",
+            "label": "wafv2"
+        },
+        {
+            "value": "bcm-pricing-calculator",
+            "label": "bcm-pricing-calculator"
+        },
+        {
+            "value": "dlm",
+            "label": "dlm"
+        },
+        {
+            "value": "ivs",
+            "label": "ivs"
+        },
+        {
+            "value": "backup-storage",
+            "label": "backup-storage"
+        },
+        {
+            "value": "pca-connector-ad",
+            "label": "pca-connector-ad"
+        },
+        {
+            "value": "elastictranscoder",
+            "label": "elastictranscoder"
+        },
+        {
+            "value": "invoicing",
+            "label": "invoicing"
+        },
+        {
+            "value": "securitylake",
+            "label": "securitylake"
+        },
+        {
+            "value": "backup",
+            "label": "backup"
+        },
+        {
+            "value": "mobileanalytics",
+            "label": "mobileanalytics"
+        },
+        {
+            "value": "databrew",
+            "label": "databrew"
+        },
+        {
+            "value": "vpc-lattice",
+            "label": "vpc-lattice"
+        },
+        {
+            "value": "iot-device-tester",
+            "label": "iot-device-tester"
+        },
+        {
+            "value": "dms",
+            "label": "dms"
+        },
+        {
+            "value": "network-firewall",
+            "label": "network-firewall"
+        },
+        {
+            "value": "ssm-contacts",
+            "label": "ssm-contacts"
+        },
+        {
+            "value": "transcribe",
+            "label": "transcribe"
+        },
+        {
+            "value": "iq-permission",
+            "label": "iq-permission"
+        },
+        {
+            "value": "cleanrooms-ml",
+            "label": "cleanrooms-ml"
+        },
+        {
+            "value": "geo-maps",
+            "label": "geo-maps"
+        },
+        {
+            "value": "mediapackage-vod",
+            "label": "mediapackage-vod"
+        },
+        {
+            "value": "devicefarm",
+            "label": "devicefarm"
+        },
+        {
+            "value": "groundstation",
+            "label": "groundstation"
+        },
+        {
+            "value": "devops-guru",
+            "label": "devops-guru"
+        },
+        {
+            "value": "signer",
+            "label": "signer"
+        },
+        {
+            "value": "resource-groups",
+            "label": "resource-groups"
+        },
+        {
+            "value": "iq",
+            "label": "iq"
+        },
+        {
+            "value": "tnb",
+            "label": "tnb"
+        },
+        {
+            "value": "ecr-public",
+            "label": "ecr-public"
+        },
+        {
+            "value": "managedblockchain-query",
+            "label": "managedblockchain-query"
+        },
+        {
+            "value": "rolesanywhere",
+            "label": "rolesanywhere"
+        },
+        {
+            "value": "codewhisperer",
+            "label": "codewhisperer"
+        },
+        {
+            "value": "elemental-activations",
+            "label": "elemental-activations"
+        },
+        {
+            "value": "grafana",
+            "label": "grafana"
+        },
+        {
+            "value": "dbqms",
+            "label": "dbqms"
+        },
+        {
+            "value": "kafka",
+            "label": "kafka"
+        },
+        {
+            "value": "cloudwatch",
+            "label": "cloudwatch"
+        },
+        {
+            "value": "autoscaling",
+            "label": "autoscaling"
+        },
+        {
+            "value": "shield",
+            "label": "shield"
+        },
+        {
+            "value": "secretsmanager",
+            "label": "secretsmanager"
+        },
+        {
+            "value": "payments",
+            "label": "payments"
+        },
+        {
+            "value": "application-autoscaling",
+            "label": "application-autoscaling"
+        },
+        {
+            "value": "fsx",
+            "label": "fsx"
+        },
+        {
+            "value": "amplify",
+            "label": "amplify"
+        },
+        {
+            "value": "medialive",
+            "label": "medialive"
+        },
+        {
+            "value": "sagemaker-groundtruth-synthetic",
+            "label": "sagemaker-groundtruth-synthetic"
+        },
+        {
+            "value": "bedrock",
+            "label": "bedrock"
+        },
+        {
+            "value": "serviceextract",
+            "label": "serviceextract"
+        },
+        {
+            "value": "datapipeline",
+            "label": "datapipeline"
+        },
+        {
+            "value": "sms",
+            "label": "sms"
+        },
+        {
+            "value": "monitron",
+            "label": "monitron"
+        },
+        {
+            "value": "cloudformation",
+            "label": "cloudformation"
+        },
+        {
+            "value": "iotmanagedintegrations",
+            "label": "iotmanagedintegrations"
+        },
+        {
+            "value": "observabilityadmin",
+            "label": "observabilityadmin"
+        },
+        {
+            "value": "macie2",
+            "label": "macie2"
+        },
+        {
+            "value": "m2",
+            "label": "m2"
+        },
+        {
+            "value": "health",
+            "label": "health"
+        },
+        {
+            "value": "outposts",
+            "label": "outposts"
+        },
+        {
+            "value": "iotfleethub",
+            "label": "iotfleethub"
+        },
+        {
+            "value": "route53-recovery-control-config",
+            "label": "route53-recovery-control-config"
+        },
+        {
+            "value": "timestream",
+            "label": "timestream"
+        },
+        {
+            "value": "ec2-instance-connect",
+            "label": "ec2-instance-connect"
+        },
+        {
+            "value": "rds-db",
+            "label": "rds-db"
+        },
+        {
+            "value": "discovery",
+            "label": "discovery"
+        },
+        {
+            "value": "codecommit",
+            "label": "codecommit"
+        },
+        {
+            "value": "codeguru-profiler",
+            "label": "codeguru-profiler"
+        },
+        {
+            "value": "iotdeviceadvisor",
+            "label": "iotdeviceadvisor"
+        },
+        {
+            "value": "sns",
+            "label": "sns"
+        },
+        {
+            "value": "cognito-idp",
+            "label": "cognito-idp"
+        },
+        {
+            "value": "elasticbeanstalk",
+            "label": "elasticbeanstalk"
+        },
+        {
+            "value": "supportrecommendations",
+            "label": "supportrecommendations"
+        },
+        {
+            "value": "applicationinsights",
+            "label": "applicationinsights"
+        },
+        {
+            "value": "elasticloadbalancing",
+            "label": "elasticloadbalancing"
+        },
+        {
+            "value": "mediaimport",
+            "label": "mediaimport"
+        },
+        {
+            "value": "lookoutequipment",
+            "label": "lookoutequipment"
+        },
+        {
+            "value": "lookoutmetrics",
+            "label": "lookoutmetrics"
+        },
+        {
+            "value": "marketplacecommerceanalytics",
+            "label": "marketplacecommerceanalytics"
+        },
+        {
+            "value": "sagemaker-data-science-assistant",
+            "label": "sagemaker-data-science-assistant"
+        },
+        {
+            "value": "signin",
+            "label": "signin"
+        },
+        {
+            "value": "logs",
+            "label": "logs"
+        },
+        {
+            "value": "drs",
+            "label": "drs"
+        },
+        {
+            "value": "mq",
+            "label": "mq"
+        },
+        {
+            "value": "verified-access",
+            "label": "verified-access"
+        },
+        {
+            "value": "airflow",
+            "label": "airflow"
+        },
+        {
+            "value": "sustainability",
+            "label": "sustainability"
+        },
+        {
+            "value": "personalize",
+            "label": "personalize"
+        },
+        {
+            "value": "social-messaging",
+            "label": "social-messaging"
+        },
+        {
+            "value": "panorama",
+            "label": "panorama"
+        },
+        {
+            "value": "omics",
+            "label": "omics"
+        },
+        {
+            "value": "textract",
+            "label": "textract"
+        },
+        {
+            "value": "activate",
+            "label": "activate"
+        },
+        {
+            "value": "geo-routes",
+            "label": "geo-routes"
+        },
+        {
+            "value": "iot1click",
+            "label": "iot1click"
+        },
+        {
+            "value": "networkflowmonitor",
+            "label": "networkflowmonitor"
+        },
+        {
+            "value": "codepipeline",
+            "label": "codepipeline"
+        },
+        {
+            "value": "securityhub",
+            "label": "securityhub"
+        },
+        {
+            "value": "transform",
+            "label": "transform"
+        },
+        {
+            "value": "sqs",
+            "label": "sqs"
+        },
+        {
+            "value": "thinclient",
+            "label": "thinclient"
+        },
+        {
+            "value": "servicediscovery",
+            "label": "servicediscovery"
+        },
+        {
+            "value": "tiros",
+            "label": "tiros"
+        },
+        {
+            "value": "compute-optimizer",
+            "label": "compute-optimizer"
+        },
+        {
+            "value": "launchwizard",
+            "label": "launchwizard"
+        },
+        {
+            "value": "qdeveloper",
+            "label": "qdeveloper"
+        },
+        {
+            "value": "ssm-sap",
+            "label": "ssm-sap"
+        },
+        {
+            "value": "inspector",
+            "label": "inspector"
+        },
+        {
+            "value": "codestar",
+            "label": "codestar"
+        },
+        {
+            "value": "codeartifact",
+            "label": "codeartifact"
+        },
+        {
+            "value": "neptune-db",
+            "label": "neptune-db"
+        },
+        {
+            "value": "license-manager-user-subscriptions",
+            "label": "license-manager-user-subscriptions"
+        },
+        {
+            "value": "pi",
+            "label": "pi"
+        },
+        {
+            "value": "comprehend",
+            "label": "comprehend"
+        },
+        {
+            "value": "partnercentral-account-management",
+            "label": "partnercentral-account-management"
+        },
+        {
+            "value": "elasticfilesystem",
+            "label": "elasticfilesystem"
+        },
+        {
+            "value": "glue",
+            "label": "glue"
+        },
+        {
+            "value": "bcm-data-exports",
+            "label": "bcm-data-exports"
+        },
+        {
+            "value": "evidently",
+            "label": "evidently"
+        },
+        {
+            "value": "savingsplans",
+            "label": "savingsplans"
+        },
+        {
+            "value": "ssm",
+            "label": "ssm"
+        },
+        {
+            "value": "sso",
+            "label": "sso"
+        },
+        {
+            "value": "mgh",
+            "label": "mgh"
+        },
+        {
+            "value": "lambda",
+            "label": "lambda"
+        },
+        {
+            "value": "freetier",
+            "label": "freetier"
+        },
+        {
+            "value": "mgn",
+            "label": "mgn"
+        },
+        {
+            "value": "dataexchange",
+            "label": "dataexchange"
+        },
+        {
+            "value": "machinelearning",
+            "label": "machinelearning"
+        },
+        {
+            "value": "guardduty",
+            "label": "guardduty"
+        },
+        {
+            "value": "events",
+            "label": "events"
+        },
+        {
+            "value": "lex",
+            "label": "lex"
+        },
+        {
+            "value": "proton",
+            "label": "proton"
+        },
+        {
+            "value": "mediaconnect",
+            "label": "mediaconnect"
+        },
+        {
+            "value": "s3",
+            "label": "s3"
+        },
+        {
+            "value": "sagemaker",
+            "label": "sagemaker"
+        },
+        {
+            "value": "verifiedpermissions",
+            "label": "verifiedpermissions"
+        },
+        {
+            "value": "lakeformation",
+            "label": "lakeformation"
+        },
+        {
+            "value": "aps",
+            "label": "aps"
+        },
+        {
+            "value": "internetmonitor",
+            "label": "internetmonitor"
+        },
+        {
+            "value": "serverlessrepo",
+            "label": "serverlessrepo"
+        },
+        {
+            "value": "forecast",
+            "label": "forecast"
+        },
+        {
+            "value": "clouddirectory",
+            "label": "clouddirectory"
+        },
+        {
+            "value": "sts",
+            "label": "sts"
+        },
+        {
+            "value": "mediapackage",
+            "label": "mediapackage"
+        },
+        {
+            "value": "cassandra",
+            "label": "cassandra"
+        },
+        {
+            "value": "athena",
+            "label": "athena"
+        },
+        {
+            "value": "osis",
+            "label": "osis"
+        },
+        {
+            "value": "mobiletargeting",
+            "label": "mobiletargeting"
+        },
+        {
+            "value": "autoscaling-plans",
+            "label": "autoscaling-plans"
+        },
+        {
+            "value": "cur",
+            "label": "cur"
+        },
+        {
+            "value": "elemental-support-cases",
+            "label": "elemental-support-cases"
+        },
+        {
+            "value": "route53domains",
+            "label": "route53domains"
+        },
+        {
+            "value": "wickr",
+            "label": "wickr"
+        },
+        {
+            "value": "partnercentral",
+            "label": "partnercentral"
+        },
+        {
+            "value": "opsworks",
+            "label": "opsworks"
+        },
+        {
+            "value": "mediapackagev2",
+            "label": "mediapackagev2"
+        },
+        {
+            "value": "iam",
+            "label": "iam"
+        },
+        {
+            "value": "workmail",
+            "label": "workmail"
+        },
+        {
+            "value": "route53-recovery-readiness",
+            "label": "route53-recovery-readiness"
+        },
+        {
+            "value": "amplifybackend",
+            "label": "amplifybackend"
+        },
+        {
+            "value": "synthetics",
+            "label": "synthetics"
+        },
+        {
+            "value": "one",
+            "label": "one"
+        },
+        {
+            "value": "application-cost-profiler",
+            "label": "application-cost-profiler"
+        },
+        {
+            "value": "rds-data",
+            "label": "rds-data"
+        },
+        {
+            "value": "sqlworkbench",
+            "label": "sqlworkbench"
+        },
+        {
+            "value": "iotjobsdata",
+            "label": "iotjobsdata"
+        },
+        {
+            "value": "appflow",
+            "label": "appflow"
+        },
+        {
+            "value": "ts",
+            "label": "ts"
+        },
+        {
+            "value": "swf",
+            "label": "swf"
+        },
+        {
+            "value": "apptest",
+            "label": "apptest"
+        },
+        {
+            "value": "ssm-incidents",
+            "label": "ssm-incidents"
+        },
+        {
+            "value": "rum",
+            "label": "rum"
+        },
+        {
+            "value": "aws-portal",
+            "label": "aws-portal"
+        },
+        {
+            "value": "iotsitewise",
+            "label": "iotsitewise"
+        },
+        {
+            "value": "a2c",
+            "label": "a2c"
+        },
+        {
+            "value": "sso-oauth",
+            "label": "sso-oauth"
+        },
+        {
+            "value": "codestar-connections",
+            "label": "codestar-connections"
+        },
+        {
+            "value": "workspaces",
+            "label": "workspaces"
+        },
+        {
+            "value": "lookoutvision",
+            "label": "lookoutvision"
+        },
+        {
+            "value": "elasticache",
+            "label": "elasticache"
+        },
+        {
+            "value": "firehose",
+            "label": "firehose"
+        },
+        {
+            "value": "mechanicalturk",
+            "label": "mechanicalturk"
+        },
+        {
+            "value": "storagegateway",
+            "label": "storagegateway"
+        },
+        {
+            "value": "consoleapp",
+            "label": "consoleapp"
+        },
+        {
+            "value": "batch",
+            "label": "batch"
+        },
+        {
+            "value": "connect-campaigns",
+            "label": "connect-campaigns"
+        },
+        {
+            "value": "cloudtrail",
+            "label": "cloudtrail"
+        },
+        {
+            "value": "geo-places",
+            "label": "geo-places"
+        },
+        {
+            "value": "security-ir",
+            "label": "security-ir"
+        },
+        {
+            "value": "mapcredits",
+            "label": "mapcredits"
+        },
+        {
+            "value": "appfabric",
+            "label": "appfabric"
+        },
+        {
+            "value": "gameliftstreams",
+            "label": "gameliftstreams"
+        },
+        {
+            "value": "support",
+            "label": "support"
+        },
+        {
+            "value": "polly",
+            "label": "polly"
+        },
+        {
+            "value": "dsql",
+            "label": "dsql"
+        },
+        {
+            "value": "apprunner",
+            "label": "apprunner"
+        },
+        {
+            "value": "license-manager",
+            "label": "license-manager"
+        },
+        {
+            "value": "a4b",
+            "label": "a4b"
+        },
+        {
+            "value": "acm-pca",
+            "label": "acm-pca"
+        },
+        {
+            "value": "scheduler",
+            "label": "scheduler"
+        },
+        {
+            "value": "workdocs",
+            "label": "workdocs"
+        },
+        {
+            "value": "sagemaker-mlflow",
+            "label": "sagemaker-mlflow"
+        },
+        {
+            "value": "comprehendmedical",
+            "label": "comprehendmedical"
+        },
+        {
+            "value": "elemental-support-content",
+            "label": "elemental-support-content"
+        },
+        {
+            "value": "waf",
+            "label": "waf"
+        },
+        {
+            "value": "pipes",
+            "label": "pipes"
+        },
+        {
+            "value": "quicksight",
+            "label": "quicksight"
+        },
+        {
+            "value": "wam",
+            "label": "wam"
+        },
+        {
+            "value": "cases",
+            "label": "cases"
+        },
+        {
+            "value": "wellarchitected",
+            "label": "wellarchitected"
+        },
+        {
+            "value": "awsconnector",
+            "label": "awsconnector"
+        },
+        {
+            "value": "kendra",
+            "label": "kendra"
+        },
+        {
+            "value": "qbusiness",
+            "label": "qbusiness"
+        },
+        {
+            "value": "lightsail",
+            "label": "lightsail"
+        },
+        {
+            "value": "cognito-sync",
+            "label": "cognito-sync"
+        },
+        {
+            "value": "cloudsearch",
+            "label": "cloudsearch"
+        },
+        {
+            "value": "emr-serverless",
+            "label": "emr-serverless"
+        },
+        {
+            "value": "arc-zonal-shift",
+            "label": "arc-zonal-shift"
+        },
+        {
+            "value": "opensearch",
+            "label": "opensearch"
+        },
+        {
+            "value": "consolidatedbilling",
+            "label": "consolidatedbilling"
+        },
+        {
+            "value": "ds-data",
+            "label": "ds-data"
+        },
+        {
+            "value": "iotfleetwise",
+            "label": "iotfleetwise"
+        },
+        {
+            "value": "pricing",
+            "label": "pricing"
+        },
+        {
+            "value": "rhelkb",
+            "label": "rhelkb"
+        },
+        {
+            "value": "route53profiles",
+            "label": "route53profiles"
+        },
+        {
+            "value": "braket",
+            "label": "braket"
+        },
+        {
+            "value": "ssmmessages",
+            "label": "ssmmessages"
+        },
+        {
+            "value": "billing",
+            "label": "billing"
+        },
+        {
+            "value": "artifact",
+            "label": "artifact"
+        },
+        {
+            "value": "timestream-influxdb",
+            "label": "timestream-influxdb"
+        },
+        {
+            "value": "payment-cryptography",
+            "label": "payment-cryptography"
+        },
+        {
+            "value": "purchase-orders",
+            "label": "purchase-orders"
+        },
+        {
+            "value": "aoss",
+            "label": "aoss"
+        },
+        {
+            "value": "cost-optimization-hub",
+            "label": "cost-optimization-hub"
+        },
+        {
+            "value": "honeycode",
+            "label": "honeycode"
+        },
+        {
+            "value": "supportplans",
+            "label": "supportplans"
+        },
+        {
+            "value": "amplifyuibuilder",
+            "label": "amplifyuibuilder"
+        },
+        {
+            "value": "workspaces-web",
+            "label": "workspaces-web"
+        },
+        {
+            "value": "snow-device-management",
+            "label": "snow-device-management"
+        },
+        {
+            "value": "apigateway",
+            "label": "apigateway"
+        },
+        {
+            "value": "kafka-cluster",
+            "label": "kafka-cluster"
+        },
+        {
+            "value": "appstudio",
+            "label": "appstudio"
+        },
+        {
+            "value": "appmesh",
+            "label": "appmesh"
+        },
+        {
+            "value": "codeguru-reviewer",
+            "label": "codeguru-reviewer"
+        },
+        {
+            "value": "codedeploy-commands-secure",
+            "label": "codedeploy-commands-secure"
+        },
+        {
+            "value": "memorydb",
+            "label": "memorydb"
+        },
+        {
+            "value": "sms-voice",
+            "label": "sms-voice"
+        },
+        {
+            "value": "simspaceweaver",
+            "label": "simspaceweaver"
+        },
+        {
+            "value": "snowball",
+            "label": "snowball"
+        },
+        {
+            "value": "notifications",
+            "label": "notifications"
+        },
+        {
+            "value": "iottwinmaker",
+            "label": "iottwinmaker"
+        },
+        {
+            "value": "appmesh-preview",
+            "label": "appmesh-preview"
+        },
+        {
+            "value": "kinesisvideo",
+            "label": "kinesisvideo"
+        },
+        {
+            "value": "execute-api",
+            "label": "execute-api"
+        },
+        {
+            "value": "migrationhub-strategy",
+            "label": "migrationhub-strategy"
+        },
+        {
+            "value": "cloudshell",
+            "label": "cloudshell"
+        },
+        {
+            "value": "geo",
+            "label": "geo"
+        },
+        {
+            "value": "kms",
+            "label": "kms"
+        },
+        {
+            "value": "cloudhsm",
+            "label": "cloudhsm"
+        },
+        {
+            "value": "codeguru",
+            "label": "codeguru"
+        },
+        {
+            "value": "pca-connector-scep",
+            "label": "pca-connector-scep"
+        },
+        {
+            "value": "ec2",
+            "label": "ec2"
+        },
+        {
+            "value": "importexport",
+            "label": "importexport"
+        },
+        {
+            "value": "sagemaker-geospatial",
+            "label": "sagemaker-geospatial"
+        },
+        {
+            "value": "codeconnections",
+            "label": "codeconnections"
+        },
+        {
+            "value": "workmailmessageflow",
+            "label": "workmailmessageflow"
+        },
+        {
+            "value": "rbin",
+            "label": "rbin"
+        },
+        {
+            "value": "chatbot",
+            "label": "chatbot"
+        },
+        {
+            "value": "migrationhub-orchestrator",
+            "label": "migrationhub-orchestrator"
+        },
+        {
+            "value": "gamelift",
+            "label": "gamelift"
+        },
+        {
+            "value": "opsworks-cm",
+            "label": "opsworks-cm"
+        },
+        {
+            "value": "ivschat",
+            "label": "ivschat"
+        },
+        {
+            "value": "ebs",
+            "label": "ebs"
+        },
+        {
+            "value": "vendor-insights",
+            "label": "vendor-insights"
+        },
+        {
+            "value": "resource-explorer",
+            "label": "resource-explorer"
+        },
+        {
+            "value": "networkmonitor",
+            "label": "networkmonitor"
+        },
+        {
+            "value": "translate",
+            "label": "translate"
+        },
+        {
+            "value": "waf-regional",
+            "label": "waf-regional"
+        },
+        {
+            "value": "ecs",
+            "label": "ecs"
+        },
+        {
+            "value": "ecr",
+            "label": "ecr"
+        },
+        {
+            "value": "dax",
+            "label": "dax"
+        },
+        {
+            "value": "tag",
+            "label": "tag"
+        },
+        {
+            "value": "redshift-serverless",
+            "label": "redshift-serverless"
+        },
+        {
+            "value": "backup-gateway",
+            "label": "backup-gateway"
+        },
+        {
+            "value": "servicecatalog",
+            "label": "servicecatalog"
+        },
+        {
+            "value": "controltower",
+            "label": "controltower"
+        },
+        {
+            "value": "nimble",
+            "label": "nimble"
+        },
+        {
+            "value": "tax",
+            "label": "tax"
+        },
+        {
+            "value": "s3-object-lambda",
+            "label": "s3-object-lambda"
+        },
+        {
+            "value": "cloud9",
+            "label": "cloud9"
+        },
+        {
+            "value": "elemental-appliances-software",
+            "label": "elemental-appliances-software"
+        },
+        {
+            "value": "detective",
+            "label": "detective"
+        },
+        {
+            "value": "transfer",
+            "label": "transfer"
+        },
+        {
+            "value": "access-analyzer",
+            "label": "access-analyzer"
+        },
+        {
+            "value": "medical-imaging",
+            "label": "medical-imaging"
+        },
+        {
+            "value": "kendra-ranking",
+            "label": "kendra-ranking"
+        },
+        {
+            "value": "app-integrations",
+            "label": "app-integrations"
+        },
+        {
+            "value": "arsenal",
+            "label": "arsenal"
+        },
+        {
+            "value": "finspace",
+            "label": "finspace"
+        },
+        {
+            "value": "groundtruthlabeling",
+            "label": "groundtruthlabeling"
+        },
+        {
+            "value": "s3-outposts",
+            "label": "s3-outposts"
+        },
+        {
+            "value": "mediastore",
+            "label": "mediastore"
+        },
+        {
+            "value": "s3express",
+            "label": "s3express"
+        },
+        {
+            "value": "backup-search",
+            "label": "backup-search"
+        },
+        {
+            "value": "bugbust",
+            "label": "bugbust"
+        },
+        {
+            "value": "healthlake",
+            "label": "healthlake"
+        },
+        {
+            "value": "resource-explorer-2",
+            "label": "resource-explorer-2"
+        },
+        {
+            "value": "kafkaconnect",
+            "label": "kafkaconnect"
+        },
+        {
+            "value": "neptune-graph",
+            "label": "neptune-graph"
+        },
+        {
+            "value": "imagebuilder",
+            "label": "imagebuilder"
+        },
+        {
+            "value": "user-subscriptions",
+            "label": "user-subscriptions"
+        },
+        {
+            "value": "glacier",
+            "label": "glacier"
+        },
+        {
+            "value": "rekognition",
+            "label": "rekognition"
+        },
+        {
+            "value": "license-manager-linux-subscriptions",
+            "label": "license-manager-linux-subscriptions"
+        },
+        {
+            "value": "mediaconvert",
+            "label": "mediaconvert"
+        },
+        {
+            "value": "servicequotas",
+            "label": "servicequotas"
+        },
+        {
+            "value": "robomaker",
+            "label": "robomaker"
+        },
+        {
+            "value": "qldb",
+            "label": "qldb"
+        },
+        {
+            "value": "directconnect",
+            "label": "directconnect"
+        },
+        {
+            "value": "datasync",
+            "label": "datasync"
+        },
+        {
+            "value": "ssm-quicksetup",
+            "label": "ssm-quicksetup"
+        },
+        {
+            "value": "organizations",
+            "label": "organizations"
+        },
+        {
+            "value": "s3tables",
+            "label": "s3tables"
+        },
+        {
+            "value": "kinesisanalytics",
+            "label": "kinesisanalytics"
+        },
+        {
+            "value": "account",
+            "label": "account"
+        }
+    ]
+}

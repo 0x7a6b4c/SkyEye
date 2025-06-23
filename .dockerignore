@@ -1,0 +1,12 @@
+# ignore node_modules and build artifacts of front-end\
+
+# .dockerignore
+
+skyeye-frontend/
+.git/
+**pycache**/
+\*.pyc
+Dockerfile.backend
+Dockerfile.frontend
+docker-compose.yml
+.dockerignore

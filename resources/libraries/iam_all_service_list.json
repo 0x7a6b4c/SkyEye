@@ -61,6 +61,10 @@
             "label": "profile"
         },
         {
+            "value": "workspaces-instances",
+            "label": "workspaces-instances"
+        },
+        {
             "value": "cloudtrail-data",
             "label": "cloudtrail-data"
         },
@@ -179,6 +183,10 @@
         {
             "value": "trustedadvisor",
             "label": "trustedadvisor"
+        },
+        {
+            "value": "support-console",
+            "label": "support-console"
         },
         {
             "value": "config",
@@ -569,10 +577,6 @@
             "label": "medialive"
         },
         {
-            "value": "sagemaker-groundtruth-synthetic",
-            "label": "sagemaker-groundtruth-synthetic"
-        },
-        {
             "value": "bedrock",
             "label": "bedrock"
         },
@@ -807,6 +811,10 @@
         {
             "value": "ssm-sap",
             "label": "ssm-sap"
+        },
+        {
+            "value": "evs",
+            "label": "evs"
         },
         {
             "value": "inspector",
@@ -1303,6 +1311,10 @@
         {
             "value": "payment-cryptography",
             "label": "payment-cryptography"
+        },
+        {
+            "value": "mpa",
+            "label": "mpa"
         },
         {
             "value": "purchase-orders",

@@ -148,7 +148,7 @@ def process_batch(iam_client, arn, batch_num, action_batch, max_retries=5):
             retry_count += 1
             if retry_count < max_retries:
                 wait_time = 2 ** retry_count
-                print(f"Retry {retry_count} for batch {batch_num} after {wait_time} seconds...")
+                logging.error(f"Retry {retry_count} for batch {batch_num} after {wait_time} seconds...")
                 time.sleep(wait_time)
     
     return {
@@ -269,7 +269,7 @@ def filter_allowed_actions(all_results, mode="default"):
 
     return structured_results
 
-def core_simulate_principal_policy(iam_client, arn, batch_size=100):
+def core_simulate_principal_policy(iam_client, arn, max_workers=10, batch_size=100):
     all_results = {}
     failed_batches = []
     
@@ -281,8 +281,7 @@ def core_simulate_principal_policy(iam_client, arn, batch_size=100):
         batches.append((batch_num, action_batch))
     
     # Process batches
-    importlib.reload(resources.threads_config)
-    with ThreadPoolExecutor(max_workers=resources.threads_config.MAX_THREADS) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         process_func = partial(process_batch, iam_client, arn)
         future_to_batch = {
             executor.submit(process_func, batch_num, action_batch): batch_num
@@ -298,14 +297,14 @@ def core_simulate_principal_policy(iam_client, arn, batch_size=100):
                 else:
                     all_results[f"batch_{batch_num}"] = {"error": result['error']}
                     failed_batches.append((batch_num, result['actions']))
-                print(f"Completed batch {batch_num} - {'Success' if result['success'] else 'Failed'}")
+                logging.info(f"Completed batch {batch_num} - {'Success' if result['success'] else 'Failed'}")
             except Exception as e:
-                print(f"Unexpected error processing batch {batch_num}: {str(e)}")
+                logging.error(f"Unexpected error processing batch {batch_num}: {str(e)}")
                 all_results[f"batch_{batch_num}"] = {"error": str(e)}
     
     # Retry failed batches
     if failed_batches:
-        print(f"Retrying {len(failed_batches)} failed batches sequentially...")
+        logging.error(f"Retrying {len(failed_batches)} failed batches sequentially...")
         for batch_num, action_batch in failed_batches:
             result = process_batch(iam_client, arn, batch_num, action_batch)
             if result['success']:

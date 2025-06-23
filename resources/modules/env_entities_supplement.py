@@ -33,14 +33,14 @@ def envEntitiesComplement(session, reScanEnvEntities, envData, targetUserArns=li
                     iam_groups = list_groups_for_user(iam_client, entity['UserName'], envData.groupsAll)
                     if isinstance(iam_groups, list):
                         entity['GroupList'] = iam_groups
-                        unmatching_groups = [group for group in entity['GroupList'] if any(group['GroupName'] != groupJson['GroupName'] for groupJson in envData.groups)]
+                        unmatching_groups = [group for group in entity['GroupList'] if group['GroupName'] not in {r['GroupName'] for r in envData.groups}]
                         for group in entity['GroupList']:
                             group = envGroupsCollection(iam_client, group, unmatching_groups, envData)
                 if not entity.get("RoleList", []):
                     iam_roles = filter_roles_by_principal(iam_client, entity['Arn'], envData.roles)
                     if isinstance(iam_roles, list):
                         entity['RoleList'] = iam_roles
-                        unmatching_roles = [role for role in entity['RoleList'] if any(role['RoleName'] != roleJson['RoleName'] for roleJson in envData.roles)]
+                        unmatching_roles = [role for role in entity['RoleList'] if role['RoleName'] not in {r['RoleName'] for r in envData.roles}]
                         for role in entity['RoleList']:
                             role = envRolesCollection(iam_client, role, unmatching_roles, envData)
 
