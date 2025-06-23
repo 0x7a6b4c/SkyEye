@@ -3,17 +3,18 @@
 <div align="center">
   <img src="./assets/SkyEye_logo.svg" alt="Logo" width="400">
   <h1 align="center">SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope </h1>
+  <p><strong>A First Collaborative IAM Enumeration Framework for AWS Cloud</strong></p>
 </div>
 
 <div align="center">
   <a href="https://arxiv.org/abs/..."><img src="https://img.shields.io/badge/Paper%20on%20Arxiv-000?logoColor=FFE165&logo=arxiv&style=for-the-badge" alt="Paper"></a>
-  <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&color=FFE165&logo=homepage&logoColor=white" alt="Credits"></a>
+  <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&color=FFE165&logo=homepage&logoColor=white" alt="GitHub Page"></a>
   <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/Documentation-000?logo=googledocs&logoColor=FFE165&style=for-the-badge" alt="Check out the documentation"></a>
   <hr>
 </div>
 
 
-Welcome to **SkyEye**! SkyEye is a cutting-edge IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
+Welcome to **SkyEye**! SkyEye is a cutting-edge collaborative IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
 
 **SkyEye** is developed with the ultimate goal of re-inventing prior-art IAM enumeration models from the black-box approach, aiming to efficiently minimize false negatives and enhance overall accuracy in discovery.
 
@@ -21,20 +22,20 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge IAM enumeration framework design
 
 ## ✨Key Features
 
-* 🏆 Cross-Principal IAM Enumeration Model (CPIEM)
+* 🏆 **Cross-Principal IAM Enumeration Model (CPIEM)**
 </br>SkyEye equipped with CPIEM, introducing a new concept of collaborative IAM enumeration between multiple principals, re-inventing the approach in enumerating authorization of user principals in AWS. It will correlate simultaneously the sessions of multiple valid AWS credentials to continually expose the complete IAM visibility of each user principal.
 
-* 📚 Supplement IAM Enumeration Mode:
+* 📚 **Supplement IAM Enumeration Mode**
 </br> Apart from the core enumeration models of SkyEye framework, SkyEye integrated the separate-principal and single-principal IAM enumeration mode to demonstrate how CPIEM differs from those.
     * **Separate-Principal IAM Enumeration**: Multiple-principal IAM enumeration, but without collaborative- or cross-principal IAM enumeration capability.
     * **Single-Principal IAM Enumeration**: Only supports single valid AWS credentials. Fuzzing and permissions simulation capability are integrated in this mode only, to avoid a huge amount of time due to a large number of AWS actions.
         * Integrating with Permissions Simulation Capability for User Principal and In-Scope IAM Roles
         * Integrating with Fuzzing Capability
 
-* 📚 Transitive Cross-Role Enumeration Model (TCREM)
+* 📚 **Transitive Cross-Role Enumeration Model (TCREM)**
 </br>SkyEye equipped with the TCREM, introducing a new methodology in collaborating role's temporary sessions in improving the overall accuracy of IAM vision discovery. TCREM has been seamlessly integrated into all enumeration modes of SkyEye framework.
 
-* ✨ IAM Deep Enumeration Capabilities
+* ✨ **IAM Deep Enumeration Capabilities**
 </br> SkyEye supports a comprehensive enumeration capabilities of IAM entities relevant to user principals involved in the enumeration session. These capabilities have been seamlessly integrated into all enumeration modes of SkyEye framework:
     * Retrieval of In-Scope IAM Groups and In-Scope IAM Roles for User Principals
     * Retrieval of Inline Policies for User Principals
@@ -47,23 +48,24 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge IAM enumeration framework design
     * Alternative Comprehensive Enumeration by `iam:GetAccountAuthorizationDetails`
     * Inverse Enumeration Approach for Attached Managed Policy by `iam:ListEntitiesForPolicy`
 
-* 🌐 Deep Comparison Model for Policy Documents of Active Version and Historical Versions
+* ⚖️ **Deep Comparison Model for Policy Documents of Active Version and Historical Versions**
 </br>SkyEye automatically discovers and retrieves the policy documents between current active version of customer-managed policy, and utilize its deep comparsion model to differentiate the changes between the current version with historical versions. 
 
-* 🔀 The Mapping with MITRE ATT&CK Matrix - Cloud
+* 🔀 **The Mapping with MITRE ATT&CK Matrix - Cloud**
 </br>SkyEye presents the dataset of mapping nearly ~20,000 AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands.
 
-* 🤖 The Integration of Risk Classification
-</br>SkyEye provides the integration of risk classification for ~20,000 AWS actions, ranging from `Low`, `Medium`, `High`, and `Critical`, to those specifically denoted as `PrivEsc-Vector`, represents a pivotal advancement in threat exposure.
+* 📊 **The Integration of Severity-level Classification**
+</br>SkyEye provides the integration of severity-level classification for ~20,000 AWS actions, ranging from `Low`, `Medium`, `High`, and `Critical`, to those specifically denoted as `PrivEsc-Vector`, represents a pivotal advancement in threat exposure.
 
-* 🤖 Logs & Portable Output: Real‑time server‑sent logs to understand what SkyEye is doing. The Output format as the JSON files that can be archived or integrated into other platforms.
+* 📇 **Logs & Portable Output**
+</br>Real‑time server‑sent logs to understand what SkyEye is doing. The Output format as the JSON files that can be archived or integrated into other platforms.
 
 🚀 Unlock the Future of Collaborative IAM Enumeration in Cloud. Try 🔥SkyEye🔥 Now!
 
 <div align="center">
   <figure>
-    <img src="./assets/SkyEye_homepage.png" alt="Logo" style="max-width: 100%; height: auto;">
-    <figcaption><em>Quick Overview of SkyEye.</em></figcaption>
+    <img src="./assets/skyeye_platform/skyeye_homepage.png" alt="Logo" style="max-width: 100%; height: auto;">
+    <figcaption><em>Quick Overview of SkyEye</em></figcaption>
   </figure>
 </div>
 
@@ -73,7 +75,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge IAM enumeration framework design
 
 <div class="scrollable">
     <ul>
-      <li><strong>[2025, 23 June]</strong>: &nbsp;🎉🎉We've released <b>SkyEye!</b>, including framework, evaluation code, CLI and platform! Check our <a href="...">paper</a> for more details.</li>
+      <li><strong>[2025, 23 June]</strong>: &nbsp;🎉🎉We've released <b>SkyEye!</b>, including framework, proposed models, CLI and platform! Check our <a href="...">paper</a> for more details.</li>
     </ul>
 </div>
 
@@ -138,8 +140,6 @@ The term In-scope IAM Roles in `Transitive Cross-Role Enumeration Model (TCREM)`
 <span id='skyeye-platform'/>
 
 ### 1. `SkyEye Platform`
-
-![Skyeye DashBoard](assets/skyeye_platform/skyeye_homepage.png)
 
 <table>
 <tr align="center">
@@ -415,7 +415,7 @@ For the Scenario-based benchmark, you can run the following command to ...
 A more detailed documentation is now available at the [Documentation](https://skyeye.gitbook.io/docs) page.
 
 ## Misc
-Let's star this repo together 🚀
+Your star is a signficant contribution to our breakfast 🚀
 
 <div align="center">
 
@@ -433,8 +433,8 @@ Let's star this repo together 🚀
 
 ```tex
 @misc{SkyEye,
-      title={{SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope}},
-      author={Minh Hoang NGUYEN, Anh Minh HO, Bao Son TO},
+      title={{SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope in AWS Cloud}},
+      author={Minh Hoang nGUYEN, Anh Minh Ho, Bao Son To},
       year={2025},
       eprint={...},
       archivePrefix={arXiv},
