@@ -3,7 +3,7 @@
 <div align="center">
   <img src="./assets/SkyEye_logo.svg" alt="Logo" width="400">
   <h1 align="center">SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope </h1>
-  <p><strong>A First Collaborative IAM Enumeration Framework for AWS Cloud</strong></p>
+  <p><strong>The First Collaborative IAM Enumeration Framework for AWS Cloud</strong></p>
 </div>
 
 <div align="center">
