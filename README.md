@@ -3,7 +3,7 @@
 <div align="center">
   <img src="./assets/SkyEye_logo.svg" alt="Logo" width="400">
   <h1 align="center">SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope </h1>
-  <p><strong>The First Collaborative IAM Enumeration Framework for AWS Cloud</strong></p>
+  <p><strong>The First Cooperative Multi-Principal IAM Enumeration Framework for AWS Cloud</strong></p>
 </div>
 
 <div align="center">
@@ -14,7 +14,7 @@
 </div>
 
 
-Welcome to **SkyEye**! SkyEye is a cutting-edge collaborative IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
+Welcome to **SkyEye**! SkyEye is a cutting-edge ooperative multi-principal IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
 
 **SkyEye** is developed with the ultimate goal of re-inventing prior-art IAM enumeration models from the black-box approach, aiming to efficiently minimize false negatives and enhance overall accuracy in discovery.
 
@@ -23,11 +23,11 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge collaborative IAM enumeration fr
 ## ✨Key Features
 
 * 🏆 **Cross-Principal IAM Enumeration Model (CPIEM)**
-</br>SkyEye equipped with CPIEM, introducing a new concept of collaborative IAM enumeration between multiple principals, re-inventing the approach in enumerating authorization of user principals in AWS. It will correlate simultaneously the sessions of multiple valid AWS credentials to continually expose the complete IAM visibility of each user principal.
+</br>SkyEye equipped with CPIEM, introducing a new concept of cooperative IAM enumeration between multiple principals, re-inventing the approach in enumerating authorization of user principals in AWS. It will correlate simultaneously the sessions of multiple valid AWS credentials to continually expose the complete IAM visibility of each user principal.
 
 * 📚 **Supplement IAM Enumeration Mode**
 </br> Apart from the core enumeration models of SkyEye framework, SkyEye integrated the separate-principal and single-principal IAM enumeration mode to demonstrate how CPIEM differs from those.
-    * **Separate-Principal IAM Enumeration**: Multiple-principal IAM enumeration, but without collaborative- or cross-principal IAM enumeration capability.
+    * **Separate-Principal IAM Enumeration**: Multiple-principal IAM enumeration, but without cooperative multi-principal IAM enumeration capability.
     * **Single-Principal IAM Enumeration**: Only supports single valid AWS credentials. Fuzzing and permissions simulation capability are integrated in this mode only, to avoid a huge amount of time due to a large number of AWS actions.
         * Integrating with Permissions Simulation Capability for User Principal and In-Scope IAM Roles
         * Integrating with Fuzzing Capability
