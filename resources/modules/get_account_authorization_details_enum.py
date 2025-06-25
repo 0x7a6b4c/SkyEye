@@ -15,11 +15,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import botocore, json, logging
+import botocore, json
 from ..utils import remove_metadata, json_encoder
-from . import (AWS_POLICIES, enumerate_iam_to_json, enumerate_iam_to_json_cross, list_groups_all, list_policies_all,
-               filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy, 
-               all_iam_json_enum)
+from . import (enumerate_iam_to_json, enumerate_iam_to_json_cross, list_groups_all, list_policies_all, all_iam_json_enum)
 
 def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData):
     policy_json = {}
@@ -73,23 +71,6 @@ def getAccountAuthorizationDetailsEnum(iam_client, sts_caller_identity, envData)
         envGroups[:] = output.get('GroupList', [])
     with envData.roles_context() as envRoles:
         envRoles[:] = output.get('RoleList', [])
-    
-    total_policies, reScanNamePolicies = filteringListIdentitiesForPolicy(envData.users, envData.groups, envData.roles)
-    with envData.policies_context() as envPolicies:
-        envPolicies[:] = total_policies
-    if reScanNamePolicies.get("Users") or reScanNamePolicies.get("Groups") or reScanNamePolicies.get("Roles"):
-        if checkingLIFPPermission(iam_client):
-            if reScanNamePolicies.get("Users"):
-                logging.info("Identified missing IAM AttachedManagedPolicies component at ['User'] entity level!")
-            if reScanNamePolicies.get("Groups"):
-                logging.info("Identified missing IAM AttachedManagedPolicies component at ['Group'] entity level!")
-            if reScanNamePolicies.get("Roles"):
-                logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
-            logging.info("Identified permitted [ListIdentityForPolicies] action!")
-            logging.info("Attempting to perform IAM [ListPolicies / ListIdentityForPolicies] method to complement...")
-            scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
-            logging.info("Completed IAM [ListPolicies / ListIdentityForPolicies] method !")
-
     return output
 
 def getAccountAuthorizationDetailsEnumCross(iam_client, sts_caller_identity, targetUserArns, stop_event, envData, mode):

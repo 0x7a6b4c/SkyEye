@@ -20,7 +20,7 @@ from copy import deepcopy
 from . import (AWS_POLICIES, remove_metadata, json_encoder, 
                list_groups_for_user, filter_roles_by_principal, list_groups_all, list_policies_all,
                envUsersCollection, envGroupsCollection, envRolesCollection, 
-               filteringListIdentitiesForPolicy, checkingLIFPPermission, scanningListIdentitiesForPolicy, 
+               filteringListEntitiesForPolicy, checkingLEFPPermission, scanningListEntitiesForPolicy, 
                get_attached_policies, all_iam_json_enum)
 
 def envEntitiesComplement(session, reScanEnvEntities, envData, targetUserArns=list(), mode="default"):
@@ -135,7 +135,7 @@ def envEntitiesComplement(session, reScanEnvEntities, envData, targetUserArns=li
                         envAll.append(all_iamJson[next((i for i, d in enumerate(all_iam['UserDetailList']) if d["Arn"] == targetUserArn), -1)])
                     return
         
-        total_policies, reScanNamePolicies = filteringListIdentitiesForPolicy(envData.users, envData.groups, envData.roles)
+        total_policies, reScanNamePolicies = filteringListEntitiesForPolicy(envData.users, envData.groups, envData.roles)
         if reScanNamePolicies.get("Users") or reScanNamePolicies.get("Groups") or reScanNamePolicies.get("Roles"):
-            if checkingLIFPPermission(iam_client):
-                scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
+            if checkingLEFPPermission(iam_client):
+                scanningListEntitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)

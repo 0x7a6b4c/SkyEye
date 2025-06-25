@@ -21,8 +21,26 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from . import remove_metadata, version_checking, statement_filterings
 
 # ListEntitiesForPolicy
+# with envData.users_context() as envUsers:
+#     for user in envUsers:
+#         user['AttachedManagedPolicies'] = user.get("AttachedManagedPolicies", [])
+# with envData.groups_context() as envGroups:
+#     for group in envGroups:
+#         group['AttachedManagedPolicies'] = group.get("AttachedManagedPolicies", [])
+# with envData.roles_context() as envRoles:
+#     for role in envRoles:
+#         role['AttachedManagedPolicies'] = role.get("AttachedManagedPolicies", [])
 
-def filteringListIdentitiesForPolicy(envUsers, envGroups, envRoles):
+def populateAMPforPoliciesAllCase(envData):
+    with envData.users_context() as envUsers:
+        for user in envUsers:
+            user['AttachedManagedPolicies'] = user.get("AttachedManagedPolicies", [])
+            for group in user['GroupList']:
+                group['AttachedManagedPolicies'] = group.get("AttachedManagedPolicies", [])
+            for role in user['RoleList']:
+                role['AttachedManagedPolicies'] = role.get("AttachedManagedPolicies", [])
+
+def filteringListEntitiesForPolicy(envUsers, envGroups, envRoles):
     envPolicies = []
     reScanArnPolicies = {
         "Users":[],
@@ -47,7 +65,7 @@ def filteringListIdentitiesForPolicy(envUsers, envGroups, envRoles):
     envUniquePolicies = list({policy["PolicyName"]: policy for policy in envPolicies}.values())
     return envUniquePolicies, reScanArnPolicies
 
-def checkingLIFPPermission(iam_client):
+def checkingLEFPPermission(iam_client):
     try:
         checkCondition = iam_client.list_entities_for_policy(PolicyArn="arn:aws:iam::aws:policy/SkyEye")
     except botocore.exceptions.ClientError as error:
@@ -102,7 +120,7 @@ def versionToStatement(iam_client, policy, envData):
                     envPolicies.append(policy)
     return policy
     
-def scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, core_mode):
+def scanningListEntitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, core_mode):
     for entity in reScanNamePolicies[f"{core_mode}"]:
         if entity['Name'] in entities[f"Policy{core_mode}"]:
             if mode == "newScan":
@@ -117,22 +135,22 @@ def scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNam
                 with envData.roles_context() as envRoles:
                     envRoles[entity['Index']]['AttachedManagedPolicies'] = envRoles[entity['Index']].get('AttachedManagedPolicies',[]) + [policy]
     
-def scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, mode):
+def scanningListEntitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, mode):
     entities = listEntitiesForPolicy(iam_client, policy['PolicyArn'])
     if entities:
         if entities.get("PolicyUsers", []):
-            scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Users")
+            scanningListEntitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Users")
         if entities.get("PolicyGroups", []):
-            scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Groups")
+            scanningListEntitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Groups")
         if entities.get("PolicyRoles", []):
-            scanningListIdentitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Roles")
+            scanningListEntitiesForPolicyCoreStatement(iam_client, entities, reScanNamePolicies, policy, envData, mode, "Roles")
 
-def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData):
+def scanningListEntitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData):
     keys_to_exclude = ["PolicyId","Path","AttachmentCount","PermissionsBoundaryUsageCount","IsAttachable","CreateDate","UpdateDate"]
     envPoliciesAll = deepcopy(envData.policiesAll)
     if envPoliciesAll:
         for policy in envPoliciesAll:
-            scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")
+            scanningListEntitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")
     else:
         try:
             policies = iam_client.list_policies(Scope='All', OnlyAttached=True, PolicyUsageFilter='PermissionsPolicy')['Policies']
@@ -143,11 +161,11 @@ def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES
                     acquired_policies.remove(policy)
 
             for policy in acquired_policies:
-                scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
+                scanningListEntitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "reScan")
         
             with ThreadPoolExecutor(max_workers=10) as sub_executor:
                 futures = [
-                    sub_executor.submit(scanningListIdentitiesForPolicyCore, 
+                    sub_executor.submit(scanningListEntitiesForPolicyCore, 
                         iam_client, 
                         reScanNamePolicies,
                         policy,
@@ -163,4 +181,4 @@ def scanningListIdentitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES
                 for removed_key in keys_to_exclude:
                     del policy[removed_key]
                 policy['PolicyArn'] = policy.pop('Arn')
-                scanningListIdentitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")
+                scanningListEntitiesForPolicyCore(iam_client, reScanNamePolicies, policy, envData, "newScan")

@@ -17,8 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging, threading
 from copy import deepcopy
-from . import (envIAMData, remove_metadata, save_output_to_file, 
-               getAccountAuthorizationDetailsEnum, getAccountAuthorizationDetailsEnumCross, 
+from . import (envIAMData, AWS_POLICIES, remove_metadata, save_output_to_file, 
+               getAccountAuthorizationDetailsEnum, getAccountAuthorizationDetailsEnumCross, filteringListEntitiesForPolicy, checkingLEFPPermission, scanningListEntitiesForPolicy, populateAMPforPoliciesAllCase, 
                assume_roles_enumeration, enumerateEnvEntities)
 
 def process_credential_set(session, sts_caller_identity, output_folder):
@@ -52,17 +52,25 @@ def process_credential_set(session, sts_caller_identity, output_folder):
                         logging.info("Identified missing IAM component at ['Policy'] entity level!")
                     logging.info("Attempting to intialize IAM [AssumedRole] transitive cross-role enumeration model to complement...")
                     assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
+            total_policies, reScanNamePolicies = filteringListEntitiesForPolicy(envData.users, envData.groups, envData.roles)
+            with envData.policies_context() as envPolicies:
+                envPolicies[:] = total_policies
+            if reScanNamePolicies.get("Users") or reScanNamePolicies.get("Groups") or reScanNamePolicies.get("Roles"):
+                if checkingLEFPPermission(iam_client):
+                    if reScanNamePolicies.get("Users"):
+                        logging.info("Identified missing IAM AttachedManagedPolicies component at ['User'] entity level!")
+                    if reScanNamePolicies.get("Groups"):
+                        logging.info("Identified missing IAM AttachedManagedPolicies component at ['Group'] entity level!")
+                    if reScanNamePolicies.get("Roles"):
+                        logging.info("Identified missing IAM AttachedManagedPolicies component at ['Role'] entity level!")
+                    logging.info("Identified permitted [ListEntitiesForPolicy] action!")
+                    logging.info("Attempting to intialize IAM [ListPolicies / ListEntitiesForPolicy] Inverse Enumeration Model to complement...")
+                    scanningListEntitiesForPolicy(iam_client, reScanNamePolicies, AWS_POLICIES, envData)
+                    logging.info("Completed IAM [ListPolicies / ListEntitiesForPolicy] Inverse Enumeration Model !")
+            if envData.policiesAll:
+                populateAMPforPoliciesAllCase(envData)
             if not envData.all:
                 # Transitive Cross-Role Enumeration Model - Re-run 2
-                reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
-                if envData.roles:
-                    if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
-                        stop_event = threading.Event()
-                        logging.info("Attempting to re-initialize IAM [AssumedRole] transitive cross-role enumeration model to complement...")
-                        logging.disable(logging.INFO)
-                        assume_roles_enumeration(envData, reScanEnvEntities, [sts_caller_identity], [session], output_folder, stop_event)
-                        logging.disable(logging.NOTSET)
-                # Transitive Cross-Role Enumeration Model - Re-run 3
                 reScanEnvEntities = enumerateEnvEntities(envData, "assumed-role")
                 if envData.roles:
                     if reScanEnvEntities.get("Users") or reScanEnvEntities.get("Groups") or reScanEnvEntities.get("Roles") or reScanEnvEntities.get("Policies"):
