@@ -402,10 +402,23 @@ Open **`/docs`** (Swagger UI) or **`/redoc`** for interactive documentation gene
 ## 🔬 How To Reproduce the Results in the Paper
 
 ### Scenario-based Benchmark
-For the Scenario-based benchmark, you can run the following command to ...
+For the Scenario-based benchmark, you can run the following command to generate the credentials based on the scenarios you wanted. we have created 22 based scenarios for user to test out. 
+
+However, you would need to perform aws cli configure on your own account with relevant permissions together with having terraform installed on your workstation
 
 ```bash
-...bash
+aws cli config
+
+# initialize terraform
+terraform init
+
+# Apply terraform
+terrafrom apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
+# Please run terraform output to create a json format of the created users from the given scenario
+terraform output -json user_credentials > credentials.json
+
+# Destsroy terraform after use
+terraform destroy -auto-approve
 ```
 
 <span id='documentation'/>
