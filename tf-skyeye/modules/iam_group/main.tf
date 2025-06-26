@@ -15,8 +15,10 @@ resource "aws_iam_group_policy_attachment" "managed" {
   group      = aws_iam_group.this.name
 }
 
-resource "aws_iam_group_membership" "this" {
-  name  = "${var.name}-membership"
-  group = aws_iam_group.this.name
-  users = var.users
-}
+
+# resource "aws_iam_group_membership" "this" {
+#   name  = "${var.name}-membership"
+#   group = aws_iam_group.this.name
+#   users = var.users
+
+# }

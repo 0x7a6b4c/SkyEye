@@ -13,5 +13,5 @@ resource "aws_iam_role_policy" "inline" {
 resource "aws_iam_role_policy_attachment" "managed" {
   for_each   = var.managed_policies
   policy_arn = each.value
-    role       = aws_iam_role.this.name
+  role       = aws_iam_role.this.name
 }

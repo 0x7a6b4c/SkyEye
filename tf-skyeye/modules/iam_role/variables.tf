@@ -14,7 +14,7 @@ variable "inline_policies" {
 }
 
 variable "managed_policies" {
-  description = "Map of managed policy name to its ARN"
+  description = "Map of policy name to ARN"
   type        = map(string)
   default     = {}
 }

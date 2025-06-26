@@ -20,8 +20,8 @@ module "iam_users" {
   managed_policies   = {
     for p in try(each.value.managed_policies, []) :
     p => contains(keys(var.managed_policies), p)
-      ? module.iam_policies[p].arn
-      : "arn:aws:iam::aws:policy/${p}"
+          ? module.iam_policies[p].arn
+          : (startswith(p, "arn:aws:") ? p : "arn:aws:iam::aws:policy/${p}")
   }
   create_access_key  = lookup(each.value, "create_access_key", false)
 }
@@ -32,14 +32,32 @@ module "iam_groups" {
   for_each       = var.groups
 
   name               = each.key
-  users              = try(each.value.users, [])
   inline_policies    = { for k, v in try(each.value.inline_policies, {}) : k => jsonencode(v) }
   managed_policies   = {
     for p in try(each.value.managed_policies, []) :
     p => contains(keys(var.managed_policies), p)
-      ? module.iam_policies[p].arn
-      : "arn:aws:iam::aws:policy/${p}"
+          ? module.iam_policies[p].arn
+          : (startswith(p, "arn:aws:") ? p : "arn:aws:iam::aws:policy/${p}")
   }
+}
+
+resource "aws_iam_group_membership" "all" {
+  for_each = {
+    for group_name, group in var.groups :
+    group_name => {
+      users = try(group.users, [])
+    }
+    if length(try(group.users, [])) > 0
+  }
+
+  name  = "${each.key}-membership"
+  group = each.key
+  users = each.value.users
+
+  depends_on = [
+    module.iam_users,
+    module.iam_groups
+  ]
 }
 
 # 4) Roles
@@ -69,11 +87,12 @@ module "iam_roles" {
     )
   })
 
-  inline_policies  = { for k, v in try(each.value.inline_policies, {}) : k => jsonencode(v) }
+  inline_policies = { for k, v in try(each.value.inline_policies, {}) : k => jsonencode(v) }
+
   managed_policies = {
     for p in try(each.value.managed_policies, []) :
     p => contains(keys(var.managed_policies), p)
       ? module.iam_policies[p].arn
-      : "arn:aws:iam::aws:policy/${p}"
+      : (startswith(p, "arn:aws:") ? p : "arn:aws:iam::aws:policy/${p}")
   }
 }

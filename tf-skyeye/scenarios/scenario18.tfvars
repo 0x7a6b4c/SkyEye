@@ -142,6 +142,20 @@ managed_policies = {
       }]
     }
   }
+  "S18_AMP_PolicyE" = {
+    description = "Allows listing S3 buckets and describing EC2 instances"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket",
+          "ec2:DescribeInstances"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {

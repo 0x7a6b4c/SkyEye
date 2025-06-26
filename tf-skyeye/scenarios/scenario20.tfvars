@@ -113,14 +113,14 @@ managed_policies = {
     }
   }
   "S20_AMP_PolicyG" = {
-    description = "ListRolePolicies & GetPolicyVersion"
+    description = "CloudFront CreatePublicKey & CopyDistribution"
     policy = {
       Version   = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "iam:ListRolePolicies",
-          "iam:GetPolicyVersion"
+          "cloudfront:CreatePublicKey",
+          "cloudfront:CopyDistribution"
         ]
         Resource = "*"
       }]
@@ -177,6 +177,19 @@ managed_policies = {
         Action   = [
           "elasticbeanstalk:DeletePlatformVersion",
           "elasticbeanstalk:DescribeEvents"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+  "S20_AMP_PolicyO" = {
+    description = "RAM CreateResourceShare"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "ram:CreateResourceShare"
         ]
         Resource = "*"
       }]
