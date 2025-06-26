@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-  <a href="https://arxiv.org/abs/..."><img src="https://img.shields.io/badge/Paper%20on%20Arxiv-000?logoColor=FFE165&logo=arxiv&style=for-the-badge" alt="Paper"></a>
+  <a href="https://arxiv.org/abs/..."><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=FFE165&logo=zenodo&style=for-the-badge" alt="Paper"></a>
   <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&color=FFE165&logo=homepage&logoColor=white" alt="GitHub Page"></a>
   <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/Documentation-000?logo=googledocs&logoColor=FFE165&style=for-the-badge" alt="Check out the documentation"></a>
   <hr>
@@ -165,7 +165,7 @@ The term In-scope IAM Roles in `Transitive Cross-Role Enumeration Model (TCREM)`
     <td width="33%">
         <img src="./assets/skyeye_platform/scan_log_2.png"  alt="scanlog2" width="100%"/>
         <br>
-        <em>SkyEye - Logs Hisory of Scanning Session</em>
+        <em>SkyEye - Logs History of Scanning Session</em>
     </td>
     <td width="33%">
         <img src="./assets/skyeye_platform/scan_log_1.png"  alt="scanlog1" width="100%"/>
@@ -434,12 +434,11 @@ Your star is a signficant contribution to our breakfast 🚀
 ```tex
 @misc{SkyEye,
       title={{SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope in AWS Cloud}},
-      author={Minh Hoang nGUYEN, Anh Minh Ho, Bao Son To},
+      author={Minh Hoang Nguyen, Anh Minh Ho, Bao Son To},
       year={2025},
-      eprint={...},
-      archivePrefix={arXiv},
-      primaryClass={...},
-      url={...},
+      eprint={15739726},
+      archivePrefix={Zenodo},
+      url={https://doi.org/10.5281/zenodo.15739726},
 }
 ```
 
