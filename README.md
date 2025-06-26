@@ -428,7 +428,7 @@ terraform destroy -auto-approve
 A more detailed documentation is now available at the [Documentation](https://skyeye.gitbook.io/docs) page.
 
 ## Misc
-Your star is a signficant contribution to our breakfast 🚀
+Your star is a signficant contribution to croissant in our breakfast 🚀
 
 <div align="center">
 
