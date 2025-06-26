@@ -62,12 +62,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
 
 🚀 Unlock the Future of Cooperative Multi-Principal IAM Enumeration in Cloud. Try 🔥SkyEye🔥 Now!
 
-<div align="center">
-  <figure>
-    <img src="./assets/skyeye_platform/skyeye_homepage.png" alt="Logo" style="max-width: 100%; height: auto;">
-    <figcaption><em>Quick Overview of SkyEye</em></figcaption>
-  </figure>
-</div>
+[![Watch the video](https://img.youtube.com/vi/rMJFZGR3CyI/maxresdefault.jpg)](https://youtu.be/rMJFZGR3CyI)
 
 <span id='news'/>
 
