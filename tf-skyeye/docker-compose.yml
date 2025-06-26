@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  cloudfox:
+    build: ./docker/cloudfox
+    env_file: .env
+  cloudpeass:
+    build: ./docker/cloudpeass
+    env_file: .env
+  enumerate-iam:
+    build: ./docker/enumerate-iam
+    env_file: .env
+  scoutsuite:
+    build: ./docker/scoutsuite
+    env_file: .env
+  # pacu:
+  #   build: ./docker/pacu
+  #   env_file: .env

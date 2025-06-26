@@ -64,3 +64,36 @@ error.log
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local .terraform directories (where modules & providers are installed)
+**/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Crash log (if Terraform crashes)
+crash.log
+
+# Ignore override files (can contain sensitive overrides)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI config (usually in your home dir)
+.terraformrc
+terraform.rc
+
+# Ignore variable definitions (often contain secrets)
+# *.tfvars
+*.tfvars.json
+
+# Terraform plan output (if you save it to a file)
+*.tfplan
+
+# Backup files
+*.backup
+
+# Terraform lock
+.terraform.lock.hcl
