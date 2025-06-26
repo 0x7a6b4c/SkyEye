@@ -60,7 +60,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
 * 📇 **Logs & Portable Output**
 </br>Real‑time server‑sent logs to understand what SkyEye is doing. The Output format as the JSON files that can be archived or integrated into other platforms.
 
-🚀 Unlock the Future of Collaborative IAM Enumeration in Cloud. Try 🔥SkyEye🔥 Now!
+🚀 Unlock the Future of Cooperative Multi-Principal IAM Enumeration in Cloud. Try 🔥SkyEye🔥 Now!
 
 <div align="center">
   <figure>
