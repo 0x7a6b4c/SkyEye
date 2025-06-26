@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-  <a href="https://arxiv.org/abs/..."><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=FFE165&logo=zenodo&style=for-the-badge" alt="Paper"></a>
+  <a href="https://doi.org/10.5281/zenodo.15739726"><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=FFE165&logo=zenodo&style=for-the-badge" alt="Paper"></a>
   <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&color=FFE165&logo=homepage&logoColor=white" alt="GitHub Page"></a>
   <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/Documentation-000?logo=googledocs&logoColor=FFE165&style=for-the-badge" alt="Check out the documentation"></a>
   <hr>
@@ -75,7 +75,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge ooperative multi-principal IAM e
 
 <div class="scrollable">
     <ul>
-      <li><strong>[2025, 23 June]</strong>: &nbsp;🎉🎉We've released <b>SkyEye!</b>, including framework, proposed models, CLI and platform! Check our <a href="...">paper</a> for more details.</li>
+      <li><strong>[2025, 26 June]</strong>: &nbsp;🎉🎉We've released <b>SkyEye!</b>, including framework, proposed models, CLI and platform! Check our <a href="https://doi.org/10.5281/zenodo.15739726">paper</a> for more details.</li>
     </ul>
 </div>
 
