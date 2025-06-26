@@ -405,15 +405,20 @@ For the Scenario-based benchmark, you can run the following command to generate 
 However, you would need to perform aws cli configure on your own account with relevant permissions together with having terraform installed on your workstation
 
 ```bash
+# Configure aws account for testing
 aws cli config
+
+# Move to folder contain terraffrom files
+cd tf-skyeye
 
 # initialize terraform
 terraform init
 
 # Apply terraform
 terrafrom apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
-# Please run terraform output to create a json format of the created users from the given scenario
-terraform output -json user_credentials > credentials.json
+
+# Beautify the terraform output to pass in skyeye (output will be informat in format of json file - skyeye/credentials.json)
+python generate_cred.py 
 
 # Destsroy terraform after use
 terraform destroy -auto-approve

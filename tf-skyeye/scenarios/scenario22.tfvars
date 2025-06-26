@@ -1,13 +1,13 @@
 managed_policies = {
   "S22_AMP_PolicyA" = {
-    description = "SageMaker DescribeAction & DescribeApp"
+    description = "RDS DescribeDBInstances & DescribeDBClusters"
     policy = {
       Version   = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
-          "sagemaker:DescribeAction",
-          "sagemaker:DescribeApp"
+          "rds:DescribeDBInstances",
+          "rds:DescribeDBClusters"
         ]
         Resource = "*"
       }]
@@ -29,14 +29,14 @@ managed_policies = {
     }
   }
   "S22_AMP_PolicyC" = {
-    description = "S3 ListBucket & EC2 DescribeInstances"
+    description = "S3 ListBucket & CloudFormation ListStacks"
     policy = {
       Version   = "2012-10-17"
       Statement = [{
         Effect   = "Allow"
         Action   = [
           "s3:ListBucket",
-          "ec2:DescribeInstances"
+          "cloudformation:ListStacks"
         ]
         Resource = "*"
       }]
@@ -66,8 +66,8 @@ users = {
         Statement = [{
           Effect   = "Allow"
           Action   = [
-            "s3:DescribeJob",
-            "s3:ListJobs"
+            "rds:DescribeDBSnapshots",
+            "rds:DescribeDBSecurityGroups"
           ]
           Resource = "*"
         }]
