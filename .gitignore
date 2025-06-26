@@ -97,3 +97,6 @@ terraform.rc
 
 # Terraform lock
 .terraform.lock.hcl
+
+# removing .zip file
+.zip
