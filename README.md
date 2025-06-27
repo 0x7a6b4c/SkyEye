@@ -24,7 +24,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
 * 🏆 **Cross-Principal IAM Enumeration Model (CPIEM)**
 </br>SkyEye equipped with CPIEM, introducing a new concept of cooperative IAM enumeration between multiple principals, re-inventing the approach in enumerating authorization of user principals in AWS. It will correlate simultaneously the sessions of multiple valid AWS credentials to continually expose the complete IAM visibility of each user principal.
 
-* 📚 **Supplement IAM Enumeration Mode**
+* 📚 **Additional IAM Enumeration Mode**
 </br> Apart from the core enumeration models of SkyEye framework, SkyEye integrated the separate-principal and single-principal IAM enumeration mode to demonstrate how CPIEM differs from those.
     * **Separate-Principal IAM Enumeration**: Multiple-principal IAM enumeration, but without cooperative multi-principal IAM enumeration capability.
     * **Single-Principal IAM Enumeration**: Only supports single valid AWS credentials. Fuzzing and permissions simulation capability are integrated in this mode only, to avoid a huge amount of time due to a large number of AWS actions.
