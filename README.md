@@ -31,7 +31,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
         * Integrating with Permissions Simulation Capability for User Principal and In-Scope IAM Roles
         * Integrating with Fuzzing Capability
 
-* 📚 **Transitive Cross-Role Enumeration Model (TCREM)**
+* 🔑 **Transitive Cross-Role Enumeration Model (TCREM)**
 </br>SkyEye equipped with the TCREM, introducing a new methodology in collaborating role's temporary sessions in improving the overall accuracy of IAM vision discovery. TCREM has been seamlessly integrated into all enumeration modes of SkyEye framework.
 
 * ✨ **IAM Deep Enumeration Capabilities**
