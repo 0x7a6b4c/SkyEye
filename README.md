@@ -13,7 +13,6 @@
   <hr>
 </div>
 
-
 Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
 
 **SkyEye** is developed with the ultimate goal of re-inventing prior-art IAM enumeration models from the black-box approach, aiming to efficiently minimize false negatives and enhance overall accuracy in discovery.
