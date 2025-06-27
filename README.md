@@ -399,6 +399,8 @@ Open **`/docs`** (Swagger UI) or **`/redoc`** for interactive documentation gene
 
 ## 🔬 How To Reproduce the Results in the Paper
 
+SkyEye was benchmarked by 22 scenarios in total, ranging from the most ideal situations to the least ideal situations, and has proven a significant superiority in enumeration over relevant frameworks. This benchmarking is documented in Chapter 5 of the SkyEye paper. The detail description and structure of scenarios are documented in the Appendix.
+
 ### Scenario-based Benchmark
 For the Scenario-based benchmark, you can run the following command to generate the credentials based on the scenarios you wanted. we have created 22 based scenarios for user to test out. 
 
