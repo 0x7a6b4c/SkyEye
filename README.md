@@ -43,12 +43,13 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
     * Retrieval of Attached Managed Policies for User Principals
     * Retrieval of Attached Managed Policies for In-Scope IAM Groups
     * Retrieval of Attached Managed Policies for In-Scope IAM Roles
-    * Versions Fuzzing Algorithm to identify Available Policy Versions
+    * Versions Fuzzing Algorithm to identify available Policy Versions for Customer-Managed Policy
+      * As an alternative solution if principals are lacking of `iam:ListPolicyVersions` or `iam:GetPolicy`
     * Alternative Comprehensive Enumeration by `iam:GetAccountAuthorizationDetails`
     * Inverse Enumeration Approach for Attached Managed Policy by `iam:ListEntitiesForPolicy`
 
 * ⚖️ **Deep Comparison Model for Policy Documents of Active Version and Historical Versions**
-</br>SkyEye automatically discovers and retrieves the policy documents between current active version of customer-managed policy, and utilize its deep comparsion model to differentiate the changes between the current version with historical versions. 
+</br>SkyEye automatically discovers and retrieves the policy documents between `DefaultPolicyVersionId` and historical verions of customer-managed policy, and utilize its deep comparsion model to differentiate the changes between the current version with historical versions. The insight will support the penetration tester to have an insight about the permissions they can gain or lose if they decide to use `iam:SetDefaultPolicyVersion` to switch the `DefaultPolicyVersionId` of the Customer-Managed Policy that their in-scope IAM entities were attached to.
 
 * 🔀 **The Mapping with MITRE ATT&CK Matrix - Cloud**
 </br>SkyEye presents the dataset of mapping nearly ~20,000 AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands.
