@@ -35,10 +35,12 @@ def populateAMPforPoliciesAllCase(envData):
     with envData.users_context() as envUsers:
         for user in envUsers:
             user['AttachedManagedPolicies'] = user.get("AttachedManagedPolicies", [])
-            for group in user['GroupList']:
-                group['AttachedManagedPolicies'] = group.get("AttachedManagedPolicies", [])
-            for role in user['RoleList']:
-                role['AttachedManagedPolicies'] = role.get("AttachedManagedPolicies", [])
+            if user.get('GroupList', []):
+                for group in user['GroupList']:
+                    group['AttachedManagedPolicies'] = group.get("AttachedManagedPolicies", [])
+            if user.get('RoleList', []):
+                for role in user['RoleList']:
+                    role['AttachedManagedPolicies'] = role.get("AttachedManagedPolicies", [])
 
 def filteringListEntitiesForPolicy(envUsers, envGroups, envRoles):
     envPolicies = []
