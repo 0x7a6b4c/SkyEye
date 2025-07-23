@@ -49,14 +49,14 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
     * Inverse Enumeration Approach for Attached Managed Policy by `iam:ListEntitiesForPolicy`
 
 * ⚖️ **Deep Comparison Model for Policy Documents of Active Version and Historical Versions**
-</br>SkyEye automatically discovers and retrieves the policy documents between `DefaultPolicyVersionId` and historical verions of customer-managed policy, and utilize its deep comparsion model to differentiate the changes between the current version with historical versions. The insight will support the penetration tester to have an insight about the permissions they can gain or lose if they decide to use `iam:SetDefaultPolicyVersion` to switch the `DefaultPolicyVersionId` of the Customer-Managed Policy that their in-scope IAM entities were attached to.
+</br>SkyEye automatically discovers and retrieves the policy documents between `DefaultPolicyVersionId` and historical verions of customer-managed policy, and utilize its deep comparison model to differentiate the changes between the current version and historical versions. The insight will support the penetration tester to have a deep understanding about the authorizations they can retrieve or lose if they decide to use `iam:SetDefaultPolicyVersion` to switch the `DefaultPolicyVersionId` of the Customer-Managed Policy that their in-scope IAM entities were attached to.
 
 * 🔀 **The Mapping with MITRE ATT&CK Matrix - Cloud**
-</br>SkyEye presents the dataset of mapping nearly ~20,000 AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands.
+</br>SkyEye presents the extensible dataset of mapping nearly AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands.
 </br> 📑 [mitre_attack_aws_actions.json](https://github.com/0x7a6b4c/SkyEye/blob/main/resources/mitre_attack_libraries/mitre_attack_aws_actions.json)
 
 * 📊 **The Integration of Severity-level Classification**
-</br>SkyEye provides the integration of severity-level classification for ~20,000 AWS actions, ranging from `Low`, `Medium`, `High`, and `Critical`, to those specifically denoted as `PrivEsc-Vector`, represents a pivotal advancement in threat exposure.
+</br>SkyEye provides the integration of severity-level classification for AWS actions, ranging from `Low`, `Medium`, `High`, and `Critical`, to those specifically denoted as `PrivEsc-Vector`, represents a pivotal advancement in threat exposure.
 </br> 📑 [iam_sensitive_operations.json](https://github.com/0x7a6b4c/SkyEye/blob/main/resources/libraries/iam_sensitive_operations.json)
 
 * 📇 **Logs & Portable Output**
@@ -439,9 +439,9 @@ Your star is a signficant contribution to croissant in our breakfast 🚀
 
 <div align="center">
 
-[![Stargazers repo roster for @0x7a6b4c/SkyEye](https://reporoster.com/stars/0x7a6b4c/SkyEye)](https://github.com/0x7a6b4c/SkyEye/stargazers)
+[![Stargazers repo roster for @0x7a6b4c/SkyEye](https://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?user=0x7a6b4c&repo=SkyEye)](https://github.com/0x7a6b4c/SkyEye/stargazers)
 
-[![Forkers repo roster for @0x7a6b4c/SkyEye](https://reporoster.com/forks/0x7a6b4c/SkyEye)](https://github.com/0x7a6b4c/SkyEye/network/members)
+[![Forkers repo roster for @0x7a6b4c/SkyEye](https://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?user=0x7a6b4c&repo=SkyEye)](https://github.com/0x7a6b4c/SkyEye/network/members)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0x7a6b4c/SkyEye&type=Date)](https://star-history.com/#0x7a6b4c/SkyEye&Date)
 
