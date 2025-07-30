@@ -7,9 +7,11 @@
 </div>
 
 <div align="center">
-  <a href="https://doi.org/10.5281/zenodo.15739726"><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=FFE165&logo=zenodo&style=for-the-badge" alt="Paper"></a>
-  <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&color=FFE165&logo=homepage&logoColor=white" alt="GitHub Page"></a>
-  <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/Documentation-000?logo=googledocs&logoColor=FFE165&style=for-the-badge" alt="Check out the documentation"></a>
+  <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/GitHub-Page-blue?style=for-the-badge&color=5271FF&logo=github&logoColor=white" alt="GitHub Page"></a>
+  <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/GitBook-Page-blue?style=for-the-badge&color=5271FF&logo=gitbook&logoColor=white" alt="GitBook Page"></a>
+  <a href="
+https://doi.org/10.48550/arXiv.2507.21094"><img src="https://img.shields.io/badge/Paper%20on%20Arxiv-000?logoColor=5271FF&logo=arxiv&style=for-the-badge" alt="Paper"></a>
+  <a href="https://doi.org/10.5281/zenodo.15739726"><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=5271FF&logo=zenodo&style=for-the-badge" alt="Paper"></a>
   <hr>
 </div>
 
@@ -438,10 +440,6 @@ A more detailed documentation is now available at the [Documentation](https://sk
 Your star is a signficant contribution to croissant in our breakfast 🚀
 
 <div align="center">
-
-[![Stargazers repo roster for @0x7a6b4c/SkyEye](https://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?user=0x7a6b4c&repo=SkyEye)](https://github.com/0x7a6b4c/SkyEye/stargazers)
-
-[![Forkers repo roster for @0x7a6b4c/SkyEye](https://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?user=0x7a6b4c&repo=SkyEye)](https://github.com/0x7a6b4c/SkyEye/network/members)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0x7a6b4c/SkyEye&type=Date)](https://star-history.com/#0x7a6b4c/SkyEye&Date)
 
