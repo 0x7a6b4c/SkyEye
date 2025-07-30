@@ -8,9 +8,9 @@
 
 <div align="center">
   <a href="https://github.com/0x7a6b4c/SkyEye"><img src="https://img.shields.io/badge/GitHub-Page-blue?style=for-the-badge&color=5271FF&logo=github&logoColor=white" alt="GitHub Page"></a>
-  <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/GitBook-Page-blue?style=for-the-badge&color=5271FF&logo=gitbook&logoColor=white" alt="GitBook Page"></a>
   <a href="https://doi.org/10.48550/arXiv.2507.21094"><img src="https://img.shields.io/badge/Paper%20on%20Arxiv-000?logoColor=5271FF&logo=arxiv&style=for-the-badge" alt="Paper"></a>
   <a href="https://doi.org/10.5281/zenodo.15739726"><img src="https://img.shields.io/badge/Paper%20on%20Zenodo-000?logoColor=5271FF&logo=zenodo&style=for-the-badge" alt="Paper"></a>
+  <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/GitBook-Page-blue?style=for-the-badge&color=5271FF&logo=gitbook&logoColor=white" alt="GitBook Page"></a>
   <hr>
 </div>
 
