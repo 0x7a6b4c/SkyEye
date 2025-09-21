@@ -3,7 +3,7 @@
 <div align="center">
   <img src="./assets/SkyEye_logo.svg" alt="Logo" width="400">
   <h1 align="center">SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope </h1>
-  <p><strong>The First Cooperative Multi-Principal IAM Enumeration Framework for AWS Cloud</strong></p>
+  <p><strong>The First <ins>Cooperative Multi-Principal</ins> IAM Enumeration Framework for AWS Cloud</strong></p>
 </div>
 
 <div align="center">
@@ -13,6 +13,12 @@
   <a href="https://skyeye.gitbook.io/docs"><img src="https://img.shields.io/badge/GitBook-Page-blue?style=for-the-badge&color=5271FF&logo=gitbook&logoColor=white" alt="GitBook Page"></a>
   <hr>
 </div>
+
+* **Released at:** <a href="https://www.blackhat.com/eu-25/arsenal/schedule/index.html#skyeye-when-your-vision-reaches-beyond-iam-boundary-scope-in-the-cloud-48364">Black Hat Europe 2025</a>
+
+* **Authors:** <a href="https://www.linkedin.com/in/nguyen-minh-hoang">Minh-Hoang Nguyen</a> & <a href="https://www.linkedin.com/in/to-bao-son-986781203">Bao-Son To</a> & <a href="https://www.linkedin.com/in/ho-anh-minh">Anh-Minh Ho</a>
+
+<hr>
 
 Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM enumeration framework designed specifically for the cloud environment with current support for AWS cloud.
 
@@ -453,9 +459,9 @@ Your star is a signficant contribution to croissant in our breakfast 🚀
       title={{SkyEye: When Your Vision Reaches Beyond IAM Boundary Scope in AWS Cloud}},
       author={Minh Hoang Nguyen, Anh Minh Ho, Bao Son To},
       year={2025},
-      eprint={15739726},
-      archivePrefix={Zenodo},
-      url={https://doi.org/10.5281/zenodo.15739726},
+      eprint={2507.21094},
+      archivePrefix={arXiv},
+      url={https://arxiv.org/abs/2507.21094},
 }
 ```
 
