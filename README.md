@@ -14,7 +14,7 @@
   <hr>
 </div>
 
-* **Released at:** <a href="https://www.blackhat.com/eu-25/arsenal/schedule/index.html#skyeye-when-your-vision-reaches-beyond-iam-boundary-scope-in-the-cloud-48364">Black Hat Europe 2025</a>
+* <a href="https://www.blackhat.com/eu-25/arsenal/schedule/index.html#skyeye-when-your-vision-reaches-beyond-iam-boundary-scope-in-the-cloud-48364">Black Hat Europe 2025</a>
 
 * **Authors:** <a href="https://www.linkedin.com/in/nguyen-minh-hoang">Minh-Hoang Nguyen</a> & <a href="https://www.linkedin.com/in/to-bao-son-986781203">Bao-Son To</a> & <a href="https://www.linkedin.com/in/ho-anh-minh">Anh-Minh Ho</a>
 
