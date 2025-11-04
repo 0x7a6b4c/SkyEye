@@ -59,7 +59,8 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
 </br>SkyEye automatically discovers and retrieves the policy documents between `DefaultPolicyVersionId` and historical verions of customer-managed policy, and utilize its deep comparison model to differentiate the changes between the current version and historical versions. The insight will support the penetration tester to have a deep understanding about the authorizations they can retrieve or lose if they decide to use `iam:SetDefaultPolicyVersion` to switch the `DefaultPolicyVersionId` of the Customer-Managed Policy that their in-scope IAM entities were attached to.
 
 * 🔀 **The Mapping with MITRE ATT&CK Matrix - Cloud**
-</br>SkyEye presents the extensible dataset of mapping nearly AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands.
+</br>SkyEye presents the extensible dataset of mapping nearly all AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands. 
+</br>We has perfomed the Stage 2 of vetting process - If you saw somethings going wrong, please open an issue to notify us to improve it soon.<br>
 </br> 📑 [mitre_attack_aws_actions.json](https://github.com/0x7a6b4c/SkyEye/blob/main/resources/mitre_attack_libraries/mitre_attack_aws_actions.json)
 
 * 📊 **The Integration of Severity-level Classification**
