@@ -60,7 +60,7 @@ Welcome to **SkyEye**! SkyEye is a cutting-edge cooperative multi-principal IAM 
 
 * 🔀 **The Mapping with MITRE ATT&CK Matrix - Cloud**
 </br>SkyEye presents the extensible dataset of mapping nearly all AWS actions to MITRE ATT&CK tactics, techniques, and sub-techniques, with detail description about abuse methodology by threat actors, and the sample AWS CLI commands. 
-</br>We has perfomed the Stage 2 of vetting process - If you saw somethings going wrong, please open an issue to notify us to improve it soon.<br>
+Our team has completed Stage 2 of the vetting process. If you notice any issues, please open an issue to let us know so we can improve it promptly.
 </br> 📑 [mitre_attack_aws_actions.json](https://github.com/0x7a6b4c/SkyEye/blob/main/resources/mitre_attack_libraries/mitre_attack_aws_actions.json)
 
 * 📊 **The Integration of Severity-level Classification**
