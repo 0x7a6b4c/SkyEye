@@ -35,6 +35,8 @@ def process_credential_set(session, sts_caller_identity, output_folder):
         if envData.all:
             logging.info(f"Identified get_account_authorization_details permissions at [{sts_caller_identity['Arn']}]!")
             file_name = f"scanningOutputCredentialSet_{sts_caller_identity['AccessKey']}.json"
+            with envData.all_context() as envAll:
+                envAll[0]["AccessKey"] = sts_caller_identity['AccessKey']
             save_output_to_file(remove_metadata(envData.all[0]), output_folder, file_name)
         else:
             # Transitive Cross-Role Enumeration Model - Run 1
