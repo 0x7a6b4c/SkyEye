@@ -360,7 +360,7 @@ roles = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
+      "S15_AMP_PolicyF",
       "S15_AMP_PolicyE"
     ]
   }

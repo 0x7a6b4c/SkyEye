@@ -373,7 +373,7 @@ roles = {
         }]
       }
     }
-    managed_policies = ["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+    managed_policies = ["S20_AMP_PolicyF"]
   }
   "S20_UserB_RoleA" = {
     assume_users    = ["S20_UserB"]
@@ -410,7 +410,7 @@ roles = {
         }]
       }
     }
-    managed_policies = ["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+    managed_policies = ["S20_AMP_PolicyG"]
   }
   "S20_UserB_RoleC" = {
     assume_users    = []

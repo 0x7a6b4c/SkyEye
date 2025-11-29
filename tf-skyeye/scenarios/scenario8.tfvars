@@ -182,7 +182,7 @@ roles = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
+      "S8_AMP_PolicyF",
       "S8_AMP_PolicyE"
     ]
   }

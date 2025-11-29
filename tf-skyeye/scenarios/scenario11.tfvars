@@ -146,8 +146,8 @@ roles = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
-      "S11_AMP_PolicyC"
+      "S11_AMP_PolicyC",
+      "S11_AMP_PolicyG"
     ]
   }
 
@@ -168,8 +168,8 @@ roles = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
-      "S11_AMP_PolicyE"
+      "S11_AMP_PolicyE",
+      "S11_AMP_PolicyF"
     ]
   }
 

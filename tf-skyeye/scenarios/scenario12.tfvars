@@ -99,8 +99,8 @@ groups = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
-      "S12_AMP_PolicyC"
+      "S12_AMP_PolicyC",
+      "S12_AMP_PolicyD"
     ]
   }
 }

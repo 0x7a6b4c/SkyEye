@@ -101,7 +101,7 @@ groups = {
       }
     }
     managed_policies = [
-      "AmazonEKSServicePolicy",
+      "S7_AMP_PolicyD",
       "S7_AMP_PolicyC"
     ]
   }

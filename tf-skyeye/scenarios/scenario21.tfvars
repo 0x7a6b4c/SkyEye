@@ -157,7 +157,7 @@ roles = {
       }
     }
     managed_policies = [
-      "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+      "S21_AMP_PolicyD",
       "S21_AMP_PolicyE"
     ]
   }

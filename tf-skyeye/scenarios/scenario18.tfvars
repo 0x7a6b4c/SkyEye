@@ -316,7 +316,7 @@ roles = {
         }]
       }
     }
-    managed_policies = ["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+    managed_policies = ["S18_AMP_PolicyF"]
   }
 
   "S18_UserB_RoleA" = {
@@ -348,7 +348,7 @@ roles = {
         }]
       }
     }
-    managed_policies = ["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+    managed_policies = ["S18_AMP_PolicyG"]
   }
 
   "S18_UserB_RoleC" = {
@@ -463,7 +463,7 @@ roles = {
         }]
       }
     }
-    managed_policies = ["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+    managed_policies = ["S18_AMP_PolicyU"]
   }
 
   "S18_UserD_RoleD" = {
