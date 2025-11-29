@@ -133,7 +133,7 @@ groups = {
     managed_policies = [
       "S6_AMP_PolicyC",
       "S6_AMP_PolicyD",
-      "AmazonMQFullAccess"
+      "S6_AMP_PolicyA"
     ]
   }
 }
