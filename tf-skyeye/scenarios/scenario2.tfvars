@@ -58,6 +58,23 @@ managed_policies = {
       }]
     }
   }
+  "S2_AMP_PolicyE" = {
+    description = "S3/Lambda/EC2 provisioning actions"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "s3:CreateBucket",
+          "lambda:CreateFunction",
+          "ec2:RunInstances",
+          "s3:ListBucket",
+          "ec2:DescribeInstances"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {
@@ -122,6 +139,6 @@ roles = {
         }]
       }
     }
-    managed_policies = ["AmazonS3TablesFullAccess"]
+    managed_policies = ["S2_AMP_PolicyE"]
   }
 }

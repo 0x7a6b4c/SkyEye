@@ -58,6 +58,21 @@ managed_policies = {
       }]
     }
   }
+  "S4_AMP_PolicyE" = {
+    description = "Route53 read-only operations"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "route53:ListHostedZones",
+          "route53:ListResourceRecordSets",
+          "route53:GetHostedZone"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {
@@ -119,6 +134,6 @@ roles = {
         }]
       }
     }
-    managed_policies = ["AmazonRoute53ReadOnlyAccess"]
+    managed_policies = ["S4_AMP_PolicyE"]
   }
 }
