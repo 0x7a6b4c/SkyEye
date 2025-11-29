@@ -83,6 +83,37 @@ managed_policies = {
       }]
     }
   }
+  "S6_AMP_PolicyG" = {
+    description = "Route53 read-only visibility"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "route53:ListHostedZones",
+          "route53:GetHostedZone",
+          "route53:ListResourceRecordSets"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+  "S6_AMP_PolicyH" = {
+    description = "Kinesis read/query access"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "kinesis:DescribeStream",
+          "kinesis:GetRecords",
+          "kinesis:GetShardIterator",
+          "kinesis:ListStreams"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {
@@ -159,8 +190,8 @@ roles = {
       }
     }
     managed_policies = [
-      "AmazonRoute53ReadOnlyAccess",
-      "AmazonKinesisFullAccess",
+      "S6_AMP_PolicyG",
+      "S6_AMP_PolicyH",
       "S6_AMP_PolicyE",
       "S6_AMP_PolicyF"
     ]

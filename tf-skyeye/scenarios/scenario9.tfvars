@@ -27,6 +27,37 @@ managed_policies = {
       }]
     }
   }
+  "S9_AMP_PolicyC" = {
+    description = "Kinesis read/query access"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "kinesis:DescribeStream",
+          "kinesis:GetRecords",
+          "kinesis:GetShardIterator",
+          "kinesis:ListStreams"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
+  "S9_AMP_PolicyD" = {
+    description = "EKS cluster discovery"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "eks:DescribeCluster",
+          "eks:ListClusters",
+          "eks:ListUpdates"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {
@@ -64,7 +95,7 @@ groups = {
       }
     }
     managed_policies = [
-      "AmazonKinesisFullAccess",
+      "S9_AMP_PolicyC",
       "S9_AMP_PolicyB"
     ]
   }
@@ -88,6 +119,6 @@ roles = {
         }]
       }
     }
-    managed_policies = ["AmazonEKSServicePolicy"]
+    managed_policies = ["S9_AMP_PolicyD"]
   }
 }

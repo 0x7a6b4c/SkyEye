@@ -82,6 +82,22 @@ managed_policies = {
       }]
     }
   }
+  "S11_AMP_PolicyH" = {
+    description = "Kinesis read/query access"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [{
+        Effect = "Allow"
+        Action = [
+          "kinesis:DescribeStream",
+          "kinesis:GetRecords",
+          "kinesis:GetShardIterator",
+          "kinesis:ListStreams"
+        ]
+        Resource = "*"
+      }]
+    }
+  }
 }
 
 users = {
@@ -122,7 +138,7 @@ groups = {
       }
     }
     managed_policies = [
-      "AmazonKinesisFullAccess",
+      "S11_AMP_PolicyH",
       "S11_AMP_PolicyB"
     ]
   }
