@@ -73,15 +73,25 @@ module "iam_roles" {
       [
         for u in try(each.value.assume_users, []) : {
           Effect    = "Allow"
-          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:user/${u}" }
+          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:root" }
           Action    = "sts:AssumeRole"
+          Condition = {
+            ArnEquals = {
+              "aws:PrincipalArn" = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:user/${u}"
+            }
+          }
         }
       ],
       [
         for r in try(each.value.assume_roles, []) : {
           Effect    = "Allow"
-          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:role/${r}" }
+          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:root" }
           Action    = "sts:AssumeRole"
+          Condition = {
+            ArnEquals = {
+              "aws:PrincipalArn" = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:role/${r}"
+            }
+          }
         }
       ]
     )

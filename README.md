@@ -427,7 +427,7 @@ cd tf-skyeye
 terraform init
 
 # Apply terraform
-terrafrom apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
+terraform apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
 
 # Beautify the terraform output to pass in skyeye (output will be informat in format of json file - skyeye/credentials.json)
 python generate_cred.py 
