@@ -18,6 +18,37 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import json
 from . import remove_metadata, json_encoder, version_statement_diff, statement_filterings
 
+
+def _principal_arns_from_statement(statement):
+    """Extract all AWS principal ARNs referenced by a statement, including conditional matches."""
+    principals = []
+    principal_block = statement.get('Principal')
+    aws_principal = None
+    if isinstance(principal_block, dict):
+        aws_principal = principal_block.get('AWS')
+    elif principal_block:
+        aws_principal = principal_block
+
+    if aws_principal:
+        if isinstance(aws_principal, list):
+            principals.extend(aws_principal)
+        else:
+            principals.append(aws_principal)
+
+    # Support terraform-generated trust policies that gate principals via aws:PrincipalArn conditions.
+    condition_block = statement.get('Condition', {}) or {}
+    for condition_values in condition_block.values():
+        if not isinstance(condition_values, dict):
+            continue
+        principal_arn_condition = condition_values.get('aws:PrincipalArn')
+        if principal_arn_condition:
+            if isinstance(principal_arn_condition, list):
+                principals.extend(principal_arn_condition)
+            else:
+                principals.append(principal_arn_condition)
+
+    return principals
+
 def assumeRoleIterationFilter(userArnList, roleListAll, policy_dict=None):
     roleList = list()
     while True:
@@ -38,20 +69,20 @@ def assumeRoleIterationFilter(userArnList, roleListAll, policy_dict=None):
                         if statement['Action'] == "sts:AssumeRole":
                             action = True
                     if action:
-                        for key, value in statement['Principal'].items():
-                            if key == "AWS" and (value in targetArnList):
-                                if policy_dict:
-                                    iRole = filter_roles(json.loads(json.dumps(remove_metadata(role), default=json_encoder)), policy_dict)
-                                else:
-                                    iRole = {
-                                        "RoleName": role["RoleName"],
-                                        "RoleId": role["RoleId"],
-                                        "Arn": role["Arn"],
-                                        "AssumeRolePolicyStatement": role["AssumeRolePolicyDocument"]['Statement']
-                                    }
-                                roleList.append(iRole)
-                                roleListAll.remove(role)
-                                break
+                        principal_arns = _principal_arns_from_statement(statement)
+                        if any(principal in targetArnList for principal in principal_arns):
+                            if policy_dict:
+                                iRole = filter_roles(json.loads(json.dumps(remove_metadata(role), default=json_encoder)), policy_dict)
+                            else:
+                                iRole = {
+                                    "RoleName": role["RoleName"],
+                                    "RoleId": role["RoleId"],
+                                    "Arn": role["Arn"],
+                                    "AssumeRolePolicyStatement": role["AssumeRolePolicyDocument"]['Statement']
+                                }
+                            roleList.append(iRole)
+                            roleListAll.remove(role)
+                            break
                         if iRole:
                             break
         if not iRole:
