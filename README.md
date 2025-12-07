@@ -420,14 +420,14 @@ However, you would need to perform aws cli configure on your own account with re
 # Configure aws account for testing
 aws cli config
 
-# Move to folder contain terraffrom files
+# Move to folder contain terrafform files
 cd tf-skyeye
 
 # initialize terraform
 terraform init
 
 # Apply terraform
-terrafrom apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
+terraform apply -auto-approve -input=false -var-file="tf-skyeye/scenarios/<scenario_numer>.tfvars"
 
 # Beautify the terraform output to pass in skyeye (output will be informat in format of json file - skyeye/credentials.json)
 python generate_cred.py 
