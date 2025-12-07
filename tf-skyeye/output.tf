@@ -28,7 +28,13 @@ output "group_names" {
 
 output "role_names" {
   description = "All IAM role names created"
-  value       = keys(module.iam_roles)
+  value = distinct(concat(
+    keys(module.iam_roles_level0),
+    keys(module.iam_roles_level1),
+    keys(module.iam_roles_level2),
+    keys(module.iam_roles_level3),
+    keys(module.iam_roles_level4)
+  ))
 }
 
 output "region" {

@@ -60,39 +60,154 @@ resource "aws_iam_group_membership" "all" {
   ]
 }
 
-# 4) Roles
-module "iam_roles" {
+locals {
+  role_configs = {
+    for name, role in var.roles :
+    name => {
+      assume_role_policy = jsonencode({
+        Version   = "2012-10-17"
+        Statement = concat(
+          [
+            for u in try(role.assume_users, []) : {
+              Effect    = "Allow"
+              Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:user/${u}" }
+              Action    = "sts:AssumeRole"
+            }
+          ],
+          [
+            for r in try(role.assume_roles, []) : {
+              Effect    = "Allow"
+              Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:role/${r}" }
+              Action    = "sts:AssumeRole"
+            }
+          ]
+        )
+      })
+
+      inline_policies = { for k, v in try(role.inline_policies, {}) : k => jsonencode(v) }
+
+      managed_policies = {
+        for p in try(role.managed_policies, []) :
+        p => contains(keys(var.managed_policies), p)
+          ? module.iam_policies[p].arn
+          : (startswith(p, "arn:aws:") ? p : "arn:aws:iam::aws:policy/${p}")
+      }
+    }
+  }
+
+  role_parents = {
+    for name, role in var.roles :
+    name => toset(try(role.assume_roles, []))
+  }
+
+  role_level0 = {
+    for name, role in var.roles : name => role
+    if length(local.role_parents[name]) == 0
+  }
+  role_keys_level0 = keys(local.role_level0)
+
+  role_level1 = {
+    for name, role in var.roles : name => role
+    if length(local.role_parents[name]) > 0
+      && !contains(local.role_keys_level0, name)
+      && alltrue([for parent in local.role_parents[name] : contains(local.role_keys_level0, parent)])
+  }
+  role_keys_level1 = distinct(concat(local.role_keys_level0, keys(local.role_level1)))
+
+  role_level2 = {
+    for name, role in var.roles : name => role
+    if length(local.role_parents[name]) > 0
+      && !contains(local.role_keys_level1, name)
+      && alltrue([for parent in local.role_parents[name] : contains(local.role_keys_level1, parent)])
+  }
+  role_keys_level2 = distinct(concat(local.role_keys_level1, keys(local.role_level2)))
+
+  role_level3 = {
+    for name, role in var.roles : name => role
+    if length(local.role_parents[name]) > 0
+      && !contains(local.role_keys_level2, name)
+      && alltrue([for parent in local.role_parents[name] : contains(local.role_keys_level2, parent)])
+  }
+  role_keys_level3 = distinct(concat(local.role_keys_level2, keys(local.role_level3)))
+
+  role_level4 = {
+    for name, role in var.roles : name => role
+    if length(local.role_parents[name]) > 0
+      && !contains(local.role_keys_level3, name)
+      && alltrue([for parent in local.role_parents[name] : contains(local.role_keys_level3, parent)])
+  }
+  role_keys_level4 = distinct(concat(local.role_keys_level3, keys(local.role_level4)))
+
+  roles_unassigned = setsubtract(keys(var.roles), local.role_keys_level4)
+}
+
+module "iam_roles_level0" {
   source   = "./modules/iam_role"
-  for_each = var.roles
+  for_each = local.role_level0
 
-  name = each.key
+  name               = each.key
+  assume_role_policy = local.role_configs[each.key].assume_role_policy
+  inline_policies    = local.role_configs[each.key].inline_policies
+  managed_policies   = local.role_configs[each.key].managed_policies
 
-  assume_role_policy = jsonencode({
-    Version   = "2012-10-17"
-    Statement = concat(
-      [
-        for u in try(each.value.assume_users, []) : {
-          Effect    = "Allow"
-          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:user/${u}" }
-          Action    = "sts:AssumeRole"
-        }
-      ],
-      [
-        for r in try(each.value.assume_roles, []) : {
-          Effect    = "Allow"
-          Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.me.account_id}:role/${r}" }
-          Action    = "sts:AssumeRole"
-        }
-      ]
-    )
-  })
+  depends_on = [
+    module.iam_users,
+    module.iam_groups,
+    aws_iam_group_membership.all
+  ]
+}
 
-  inline_policies = { for k, v in try(each.value.inline_policies, {}) : k => jsonencode(v) }
+module "iam_roles_level1" {
+  source   = "./modules/iam_role"
+  for_each = local.role_level1
 
-  managed_policies = {
-    for p in try(each.value.managed_policies, []) :
-    p => contains(keys(var.managed_policies), p)
-      ? module.iam_policies[p].arn
-      : (startswith(p, "arn:aws:") ? p : "arn:aws:iam::aws:policy/${p}")
+  name               = each.key
+  assume_role_policy = local.role_configs[each.key].assume_role_policy
+  inline_policies    = local.role_configs[each.key].inline_policies
+  managed_policies   = local.role_configs[each.key].managed_policies
+
+  depends_on = [module.iam_roles_level0]
+}
+
+module "iam_roles_level2" {
+  source   = "./modules/iam_role"
+  for_each = local.role_level2
+
+  name               = each.key
+  assume_role_policy = local.role_configs[each.key].assume_role_policy
+  inline_policies    = local.role_configs[each.key].inline_policies
+  managed_policies   = local.role_configs[each.key].managed_policies
+
+  depends_on = [module.iam_roles_level0, module.iam_roles_level1]
+}
+
+module "iam_roles_level3" {
+  source   = "./modules/iam_role"
+  for_each = local.role_level3
+
+  name               = each.key
+  assume_role_policy = local.role_configs[each.key].assume_role_policy
+  inline_policies    = local.role_configs[each.key].inline_policies
+  managed_policies   = local.role_configs[each.key].managed_policies
+
+  depends_on = [module.iam_roles_level0, module.iam_roles_level1, module.iam_roles_level2]
+}
+
+module "iam_roles_level4" {
+  source   = "./modules/iam_role"
+  for_each = local.role_level4
+
+  name               = each.key
+  assume_role_policy = local.role_configs[each.key].assume_role_policy
+  inline_policies    = local.role_configs[each.key].inline_policies
+  managed_policies   = local.role_configs[each.key].managed_policies
+
+  depends_on = [module.iam_roles_level0, module.iam_roles_level1, module.iam_roles_level2, module.iam_roles_level3]
+}
+
+check "role_dependency_resolution" {
+  assert {
+    condition     = length(local.roles_unassigned) == 0
+    error_message = "Unable to determine dependency order for roles: ${join(", ", local.roles_unassigned)}"
   }
 }
